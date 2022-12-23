@@ -1,8 +1,7 @@
 using UnityEngine;
 
-namespace LSB
-{
-public class Map : MonoBehaviour {
-	
-}
+namespace LSB.Components.Core {
+	public class Map : MonoBehaviour {
+		
+	}
 }

@@ -1,17 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Attacking : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+namespace LSB.Classes.State {
+    public class Attacking : MonoBehaviour
     {
         
     }

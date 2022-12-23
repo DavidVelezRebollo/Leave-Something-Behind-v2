@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Sound : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
+namespace LSB.Classes.Sound {
+    public class Sound : MonoBehaviour {
+        public string ClipName;
+        public AudioType Type;
+        public AudioClip Clip;
+        public bool IsLoop;
+        public bool PlayOnAwake;
+        [Range(0, 1)] public float Volume;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [HideInInspector] public AudioSource Source;
     }
 }
