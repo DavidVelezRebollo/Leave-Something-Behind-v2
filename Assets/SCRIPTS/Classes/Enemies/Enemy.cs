@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace LSB
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class Enemy
     {
-        
-    }
+        private IMove _movement;
+        private IAttack _attack;
+        public IState State;
+        private Stats _attributes;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void takeDamage(float ammount) { }
     }
 }

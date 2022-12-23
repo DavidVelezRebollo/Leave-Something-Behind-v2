@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+namespace LSB
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class Item : MonoBehaviour
     {
-        
-    }
+        private ItemInfo _item;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public virtual void UseItem() { }
+        public void DeleteItem() 
+        { 
+            //TODO-implent
+        }
+        public void AddToBackPack() 
+        { 
+            //TODO-implement
+        }
     }
 }
+

@@ -1,18 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : IAttack
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Attack()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

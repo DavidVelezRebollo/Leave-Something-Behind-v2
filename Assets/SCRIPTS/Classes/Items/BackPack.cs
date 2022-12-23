@@ -2,17 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackPack : MonoBehaviour
+namespace LSB
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BackPack : MonoBehaviour
     {
-        
-    }
+        private List<Item> _normalItems;
+        private List<Item> _narrativeItems;
+        private List<Item> _playerItems;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void DropItem(Sprite sprite)
+        {
+            //TODO- implement
+        }
+        public void FillBackPack()
+        {
+            //TODO- implement
+        }
+        public void ApplyItemFunction()
+        {
+            //TODO- implement
+        }
+        public void EmptyBackPack()
+        {
+            //TODO- implement
+        }
+        public void ClearItemFunction()
+        {
+            //TODO- implement
+        }
+
+        #region Getters&Setters
+        #endregion
+
     }
 }
+
