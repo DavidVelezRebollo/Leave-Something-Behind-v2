@@ -1,5 +1,6 @@
 using UnityEngine;
 using LSB.Classes.Items;
+using LSB.Shared;
 
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {

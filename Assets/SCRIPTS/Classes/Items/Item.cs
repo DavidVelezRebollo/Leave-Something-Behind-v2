@@ -1,7 +1,7 @@
-using UnityEngine;
+using LSB.Shared;
 
 namespace LSB.Classes.Items {
-    public abstract class Item : MonoBehaviour {
+    public abstract class Item {
         private ItemInfo _item;
 
         public virtual void UseItem() {

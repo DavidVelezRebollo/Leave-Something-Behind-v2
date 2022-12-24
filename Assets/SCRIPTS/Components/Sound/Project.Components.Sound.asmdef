@@ -2,7 +2,8 @@
     "name": "Project.Components.Sound",
     "rootNamespace": "",
     "references": [
-        "GUID:0c339c2fbaf8ac44e9caed1beda4425b"
+        "GUID:0c339c2fbaf8ac44e9caed1beda4425b",
+        "GUID:50fdd4a39f8219f41ab721d8ca0d2862"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

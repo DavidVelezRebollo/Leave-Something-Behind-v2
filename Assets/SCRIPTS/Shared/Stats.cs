@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LSB
+namespace LSB.Shared
 {
     public class Stats : ScriptableObject
     {

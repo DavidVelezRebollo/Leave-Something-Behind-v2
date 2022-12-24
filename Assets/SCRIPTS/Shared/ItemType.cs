@@ -1,5 +1,8 @@
-public enum ItemType
+namespace LSB.Shared
 {
-    Normal,
-    Narrative
+    public enum ItemType
+    {
+        Normal,
+        Narrative
+    }
 }

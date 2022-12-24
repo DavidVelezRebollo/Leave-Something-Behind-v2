@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LSB.Classes.Items {
-    public class BackPack : MonoBehaviour {
+    public class BackPack {
         private List<Item> _normalItems;
         private List<Item> _narrativeItems;
         private List<Item> _playerItems;

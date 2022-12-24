@@ -1,14 +1,23 @@
 using UnityEngine;
+using LSB.Shared;
 
 namespace LSB.Classes.Sound {
-    public class Sound : MonoBehaviour {
+    [System.Serializable]
+    public class Sound {
+        [Tooltip("Name of the sound clip.")]
         public string ClipName;
-        public AudioType Type;
-        public AudioClip Clip;
+        [Tooltip("Types of audio source")]
+        public SoundType AudioType;
+        [Tooltip("Source of the sound")]
+        public AudioClip AudioClip;
+        [Tooltip("If the sound loops.")]
         public bool IsLoop;
+        [Tooltip("If the sound plays when it's initialized.")]
         public bool PlayOnAwake;
-        [Range(0, 1)] public float Volume;
-        
+        [Tooltip("Volume of the sound.")]
+        [Range(0, 1)] public float Volume = 0.5f;
+
+        //Source of the sound clip.
         [HideInInspector] public AudioSource Source;
     }
 }

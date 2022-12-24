@@ -1,3 +1,5 @@
+using LSB.Shared;
+
 namespace LSB.Classes.Enemies {
     public abstract class Enemy
     {
