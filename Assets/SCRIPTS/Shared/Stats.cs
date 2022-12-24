@@ -1,11 +1,10 @@
 using UnityEngine;
 
-namespace LSB.Shared
-{
-    public class Stats : ScriptableObject
-    {
+namespace LSB.Shared {
+    [CreateAssetMenu(fileName = "Stat", menuName = "Game/Stats")]
+    public class Stats : ScriptableObject {
         public float Damage;
-        public float MaxHP;
+        public float MaxHp;
         public float Speed;
     }
 }

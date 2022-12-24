@@ -1,21 +1,41 @@
+using System;
 using UnityEngine;
 using LSB.Classes.Items;
+using LSB.Classes.Player;
 using LSB.Interfaces;
 using LSB.Shared;
+using UnityEngine.SceneManagement;
 
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {
-		private Stats _attributes;
+		[SerializeField] private Stats Attributes;
 		private IShoot _shoot;
 		private IMove _movement;
 		private BackPack _backPack;
 
+		private float _currentHp;
+
 		private void Start() {
-			
+			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
+			_currentHp = Attributes.MaxHp;
 		}
 
-		private void takeDamage(float ammount) {
-			// TODO Player takes damage
+		private void FixedUpdate() {
+			_movement.Move();
+		}
+
+		private void takeDamage(float amount) {
+			if (_currentHp <= 0) {
+				die();
+				return;
+			}
+			
+			_currentHp -= amount;
+		}
+
+		private void die() {
+			// TODO - Player Die
+			Debug.LogError("TODO - Player die");
 		}
 	}
 }

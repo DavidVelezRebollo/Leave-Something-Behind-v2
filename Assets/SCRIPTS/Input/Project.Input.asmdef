@@ -1,11 +1,8 @@
 {
-    "name": "Project.Components.Player",
+    "name": "Project.Input",
     "rootNamespace": "",
     "references": [
-        "GUID:50fdd4a39f8219f41ab721d8ca0d2862",
-        "GUID:9a803ff02a171cf4cad6ea33a3aef8ff",
-        "GUID:e96b040be1517084f87c403d77f42a0a",
-        "GUID:d9f9c0e3ac659774e88d29afcb273d0f"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
