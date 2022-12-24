@@ -87,7 +87,7 @@ public class Settings : MonoBehaviour
     /// Changes the screen mode.
     /// </summary>
     /// <param name="fullScreen">Wether the screen is on full screen mode.</param>
-    protected void SetFullScreen(bool fullScreen)
+    public void SetFullScreen(bool fullScreen)
     {
         Screen.SetResolution(Screen.width, Screen.height, fullScreen);
         SoundManager.Instance.Play("Button");

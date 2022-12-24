@@ -155,7 +155,14 @@ MonoBehaviour:
   GeneralMixerGroup: {fileID: 24300002, guid: 22b19c4974746d042a35adee15ef3dd4, type: 2}
   MusicMixerGroup: {fileID: 2006463667494314097, guid: 22b19c4974746d042a35adee15ef3dd4, type: 2}
   SoundEffectsMixerGroup: {fileID: -4434506356576798597, guid: 22b19c4974746d042a35adee15ef3dd4, type: 2}
-  Sounds: []
+  Sounds:
+  - ClipName: Button
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 9f3d6fa3fab250840a11f467d7369fb6, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.5
+    Source: {fileID: 0}
 --- !u!4 &449609773
 Transform:
   m_ObjectHideFlags: 0
