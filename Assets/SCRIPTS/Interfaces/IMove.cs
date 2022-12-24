@@ -1,4 +1,5 @@
-public interface IMove 
-{
-    public void Move();
+namespace LSB.Interfaces {
+    public interface IMove {
+        public void Move();
+    }
 }

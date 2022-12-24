@@ -1,4 +1,5 @@
-public interface IState 
-{
-    public void Handle();
+namespace LSB.Interfaces {
+    public interface IState {
+        public void Handle();
+    }
 }

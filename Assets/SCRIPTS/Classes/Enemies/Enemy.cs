@@ -1,3 +1,4 @@
+using LSB.Interfaces;
 using LSB.Shared;
 
 namespace LSB.Classes.Enemies {
