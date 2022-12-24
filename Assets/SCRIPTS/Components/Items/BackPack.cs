@@ -1,12 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using LSB.Components.Player;
 
-namespace LSB.Classes.Items {
-    public class BackPack {
+namespace LSB.Components.Items {
+    public class BackPack : MonoBehaviour {
+        public static BackPack Instance;
+        private PlayerManager _player;
         private List<Item> _normalItems;
         private List<Item> _narrativeItems;
         private List<Item> _playerItems;
 
+        private void Awake()
+        {
+            if (Instance != null) return;
+            Instance = this;
+        }
+        private void Start()
+        {
+            _player = FindObjectOfType<PlayerManager>();
+        }
         public void DropItem(Sprite sprite) {
             //TODO- implement DropItem
         }
@@ -24,6 +36,14 @@ namespace LSB.Classes.Items {
         }
 
         #region Getters&Setters
+        public void AddNormalItem(Item item)
+        {
+            _normalItems.Add(item);
+        }
+        public void AddNarrativeItem(Item item)
+        {
+            _narrativeItems.Add(item);
+        }
         #endregion
 
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LSB.Shared
 {
+    [CreateAssetMenu(fileName = "ItemInfo", menuName = "Game/ItemInfo")]
     public class ItemInfo : ScriptableObject
     {
         public Sprite Sprite;

@@ -75,16 +75,19 @@ namespace LSB.Components.Audio {
         /// </summary>
         private void Start()
         {
+            
             if (PlayerPrefs.HasKey("GeneralVolume") &&
                PlayerPrefs.HasKey("SoundEffectsVolume") &&
                PlayerPrefs.HasKey("MusicVolume"))
                 LoadVolume();
+            
             else
             {
                 PlayerPrefs.SetFloat("GeneralVolume", 0);
                 PlayerPrefs.SetFloat("SoundEffectsVolume", 0);
                 PlayerPrefs.SetFloat("MusicVolume", 0);
             }
+            
         }
 
         /// <summary>

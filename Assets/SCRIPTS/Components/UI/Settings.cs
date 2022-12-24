@@ -42,8 +42,13 @@ public class Settings : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        GeneralSlider.maxValue = _soundRange.x;
+        GeneralSlider.minValue = _soundRange.y;
+        MusicSlider.maxValue = _soundRange.x;
+        MusicSlider.minValue = _soundRange.y;
+        EffectsSlider.maxValue = _soundRange.x;
+        EffectsSlider.minValue = _soundRange.y;
         StartSounds();
-
     }
 
     private void Update()
@@ -66,9 +71,10 @@ public class Settings : MonoBehaviour
         AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
         AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
 
-        GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume") / (_soundRange.y + _soundRange.x - _soundRange.y);
-        MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume") / (_soundRange.y + _soundRange.x - _soundRange.y);
-        EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume") / (_soundRange.y + _soundRange.x - _soundRange.y);
+
+        GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
+        MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");
 
         UpdateText();
     }
@@ -78,9 +84,14 @@ public class Settings : MonoBehaviour
     /// </summary>
     protected void UpdateText()
     {
-        GeneralVolumeText.text = Mathf.FloorToInt((GeneralSlider.value * 100)).ToString();
-        MusicText.text = Mathf.FloorToInt((MusicSlider.value * 100)).ToString();
-        SoundEffectsText.text = Mathf.FloorToInt((EffectsSlider.value * 100)).ToString();
+        GeneralVolumeText.text = Mathf.FloorToInt(GetRange(GeneralSlider.maxValue, GeneralSlider.minValue, GeneralSlider.value)).ToString();
+        MusicText.text = Mathf.FloorToInt(GetRange(MusicSlider.maxValue, MusicSlider.minValue, MusicSlider.value)).ToString();
+        SoundEffectsText.text = Mathf.FloorToInt(GetRange(EffectsSlider.maxValue, EffectsSlider.minValue, EffectsSlider.value)).ToString();
+    }
+
+    private float GetRange(float max, float min, float value)
+    {
+        return Mathf.Abs(value - min) / (max - min) * 100;
     }
 
     /// <summary>
@@ -97,28 +108,28 @@ public class Settings : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="volume">New value of the general volume.</param>
-    protected void SetVolume(float volume)
+    public void SetVolume(float volume)
     {
-        AudioMixer.SetFloat("Volume", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
-        PlayerPrefs.SetFloat("GeneralVolume", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
+        AudioMixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("GeneralVolume", volume);
     }
     /// <summary>
     /// 
     /// </summary>
     /// <param name="volume">New value of the music volume.</param>
-    protected void SetMusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        AudioMixer.SetFloat("Music", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
-        PlayerPrefs.SetFloat("MusicVolume", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
+        AudioMixer.SetFloat("Music", volume);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     /// <summary>
     /// 
     /// </summary>
     /// <param name="volume">New value of the sound effects volume.</param>
-    protected void SetSoundEffectsVolume(float volume)
+    public void SetSoundEffectsVolume(float volume)
     {
-        AudioMixer.SetFloat("SoundEffects", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
-        PlayerPrefs.SetFloat("SoundEffectsVolume", (volume * (_soundRange.x - _soundRange.y)) + _soundRange.y);
+        AudioMixer.SetFloat("SoundEffects", volume);
+        PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
     }
 
 

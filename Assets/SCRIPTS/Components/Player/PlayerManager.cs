@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using LSB.Classes.Items;
 using LSB.Classes.Player;
 using LSB.Interfaces;
 using LSB.Shared;
@@ -11,7 +10,6 @@ namespace LSB.Components.Player {
 		[SerializeField] private Stats Attributes;
 		private IShoot _shoot;
 		private IMove _movement;
-		private BackPack _backPack;
 
 		private float _currentHp;
 

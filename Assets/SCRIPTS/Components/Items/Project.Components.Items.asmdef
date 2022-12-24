@@ -1,10 +1,10 @@
 {
-    "name": "Project.Components.Player",
+    "name": "Project.Components.Items",
     "rootNamespace": "",
     "references": [
         "GUID:50fdd4a39f8219f41ab721d8ca0d2862",
-        "GUID:e96b040be1517084f87c403d77f42a0a",
-        "GUID:d9f9c0e3ac659774e88d29afcb273d0f"
+        "GUID:6cb09e844b9f4a14eb097688931e0ba1",
+        "GUID:d60799ab2a985554ea1a39cd38695018"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

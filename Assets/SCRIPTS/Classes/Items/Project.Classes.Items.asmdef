@@ -1,9 +1,7 @@
 {
     "name": "Project.Classes.Items",
     "rootNamespace": "",
-    "references": [
-        "GUID:50fdd4a39f8219f41ab721d8ca0d2862"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
