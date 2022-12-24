@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 using LSB.Classes.Player;
 using LSB.Interfaces;
 using LSB.Shared;
-using UnityEngine.SceneManagement;
 
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {
 		[SerializeField] private Stats Attributes;
+		[SerializeField] private GameObject ArrowPrefab;
 		private IShoot _shoot;
 		private IMove _movement;
 
@@ -15,7 +14,12 @@ namespace LSB.Components.Player {
 
 		private void Start() {
 			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
+			_shoot = GetComponent<PlayerAttack>();
 			_currentHp = Attributes.MaxHp;
+		}
+
+		private void Update() {
+			_shoot.TickUpdate();
 		}
 
 		private void FixedUpdate() {

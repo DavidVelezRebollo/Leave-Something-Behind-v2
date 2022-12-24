@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b726b7274333ff4a8632bc5b2a0d9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCamera: {fileID: 235310460}
 --- !u!4 &1831162280
 Transform:
   m_ObjectHideFlags: 0
@@ -394,6 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108056578}
   - component: {fileID: 2108056575}
+  - component: {fileID: 2108056580}
   - component: {fileID: 2108056579}
   m_Layer: 0
   m_Name: Player
@@ -415,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attributes: {fileID: 11400000, guid: 5997594c06841324386d0d10a8fd2c3b, type: 2}
+  ArrowPrefab: {fileID: 0}
 --- !u!4 &2108056578
 Transform:
   m_ObjectHideFlags: 0
@@ -449,3 +452,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2108056580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108056574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8a729b7e00b724ab67faa208185942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowSpeed: 5
+  ArrowPrefab: {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
+  ShootCooldown: 0.5

@@ -35,6 +35,15 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InputShootPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""be24d9cf-ebfc-4da3-8d8d-f487cc2dea15"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,28 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""InputMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35518d89-9f17-48eb-a6f1-ba419f8682ba"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""InputShootPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7516d7b7-673b-4994-8044-728d83c5d293"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InputShootPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -173,12 +204,24 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""bindingGroup"": ""Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
         // InputCharacter
         m_InputCharacter = asset.FindActionMap("InputCharacter", throwIfNotFound: true);
         m_InputCharacter_InputMovement = m_InputCharacter.FindAction("InputMovement", throwIfNotFound: true);
+        m_InputCharacter_InputShootPosition = m_InputCharacter.FindAction("InputShootPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -239,11 +282,13 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_InputCharacter;
     private IInputCharacterActions m_InputCharacterActionsCallbackInterface;
     private readonly InputAction m_InputCharacter_InputMovement;
+    private readonly InputAction m_InputCharacter_InputShootPosition;
     public struct InputCharacterActions
     {
         private @GameInput m_Wrapper;
         public InputCharacterActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @InputMovement => m_Wrapper.m_InputCharacter_InputMovement;
+        public InputAction @InputShootPosition => m_Wrapper.m_InputCharacter_InputShootPosition;
         public InputActionMap Get() { return m_Wrapper.m_InputCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +301,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @InputMovement.started -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputMovement;
                 @InputMovement.performed -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputMovement;
                 @InputMovement.canceled -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputMovement;
+                @InputShootPosition.started -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
+                @InputShootPosition.performed -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
+                @InputShootPosition.canceled -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
             }
             m_Wrapper.m_InputCharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -263,6 +311,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @InputMovement.started += instance.OnInputMovement;
                 @InputMovement.performed += instance.OnInputMovement;
                 @InputMovement.canceled += instance.OnInputMovement;
+                @InputShootPosition.started += instance.OnInputShootPosition;
+                @InputShootPosition.performed += instance.OnInputShootPosition;
+                @InputShootPosition.canceled += instance.OnInputShootPosition;
             }
         }
     }
@@ -285,8 +336,18 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
+    private int m_MouseSchemeIndex = -1;
+    public InputControlScheme MouseScheme
+    {
+        get
+        {
+            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
+            return asset.controlSchemes[m_MouseSchemeIndex];
+        }
+    }
     public interface IInputCharacterActions
     {
         void OnInputMovement(InputAction.CallbackContext context);
+        void OnInputShootPosition(InputAction.CallbackContext context);
     }
 }
