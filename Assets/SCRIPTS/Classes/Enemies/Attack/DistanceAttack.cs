@@ -1,3 +1,5 @@
+using LSB.Interfaces;
+
 namespace LSB.Classes.Enemies {
     public class DistanceAttack : IAttack
     {
