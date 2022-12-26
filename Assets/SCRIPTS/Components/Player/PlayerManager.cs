@@ -8,7 +8,7 @@ namespace LSB.Components.Player {
 		[SerializeField] private Stats Attributes;
 		[SerializeField] private GameObject ArrowPrefab;
 		private IShoot _shoot;
-		private IMove _movement;
+		private PlayerMovement _movement;
 
 		private float _currentHp;
 

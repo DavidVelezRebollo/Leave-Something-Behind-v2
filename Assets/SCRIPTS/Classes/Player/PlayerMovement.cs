@@ -3,7 +3,7 @@ using LSB.Input;
 using UnityEngine;
 
 namespace LSB.Classes.Player {
-    public class PlayerMovement : IMove {
+    public class PlayerMovement {
         private readonly CharacterController _characterController;
         private readonly float _speed;
         private readonly InputHandler _input;

@@ -1,0 +1,19 @@
+{
+    "name": "Project.Components.Enemies",
+    "rootNamespace": "",
+    "references": [
+        "GUID:66e9c664c1b810d4f8cdc1f33faf6e15",
+        "GUID:6cb09e844b9f4a14eb097688931e0ba1",
+        "GUID:e96b040be1517084f87c403d77f42a0a",
+        "GUID:50fdd4a39f8219f41ab721d8ca0d2862"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
