@@ -9,6 +9,9 @@ namespace LSB.Classes.Enemies {
         
         public Chase(NavMeshAgent agent, float speed) {
             _agent = agent;
+            _agent.updateRotation = false;
+            _agent.updateUpAxis = false;
+            _agent.stoppingDistance = 0.5f;
 
             _agent.speed = speed;
         }
@@ -16,7 +19,7 @@ namespace LSB.Classes.Enemies {
         public void Move(Vector3 playerPosition) {
             _playerPosition = playerPosition;
             
-            _agent.Move(_playerPosition);
+            _agent.SetDestination(_playerPosition);
         }
     }
 }

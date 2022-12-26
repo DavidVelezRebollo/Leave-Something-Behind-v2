@@ -19,7 +19,7 @@ namespace LSB {
 			_movement = new Chase(_agent, OrcStats.Speed);
 			_attack = new MeleeAttack();
 
-			_enemy = new Enemy(_movement, _attack, null);
+			_enemy = new Enemy(_movement, _attack, OrcStats);
 			
 			_enemy.Start();
 		}

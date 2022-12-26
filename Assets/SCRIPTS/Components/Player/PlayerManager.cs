@@ -6,7 +6,6 @@ using LSB.Shared;
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {
 		[SerializeField] private Stats Attributes;
-		[SerializeField] private GameObject ArrowPrefab;
 		private IShoot _shoot;
 		private PlayerMovement _movement;
 

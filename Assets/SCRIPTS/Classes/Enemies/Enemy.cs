@@ -11,7 +11,6 @@ namespace LSB.Classes.Enemies {
         private Stats _attributes;
 
         private Transform _player;
-        private Vector3 _playerPosition;
 
         public Enemy(IEnemyMove movementType, IAttack attackType, Stats attributes) {
             _movement = movementType;
@@ -20,7 +19,7 @@ namespace LSB.Classes.Enemies {
         }
         
         public void Start() {
-            _player = GameObject.FindWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
         public void TakeDamage(float amount) {
@@ -28,9 +27,7 @@ namespace LSB.Classes.Enemies {
         }
 
         public void Move() {
-            _playerPosition = _player.position;
-            
-            _movement?.Move(_playerPosition);
+            _movement?.Move(_player.position);
         }
     }
 }
