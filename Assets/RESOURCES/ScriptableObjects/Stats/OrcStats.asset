@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: OrcStats
   m_EditorClassIdentifier: 
   Damage: 10
-  MaxHp: 100
+  MaxHp: 5
   Speed: 2

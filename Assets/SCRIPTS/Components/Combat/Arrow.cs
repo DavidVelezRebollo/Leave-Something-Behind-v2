@@ -2,7 +2,7 @@ using System;
 using LSB.Shared;
 using UnityEngine;
 
-namespace LSB {
+namespace LSB.Components.Combat {
 	public class Arrow : MonoBehaviour {
 		[SerializeField] private Projectile Stats;
 

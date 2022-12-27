@@ -30,14 +30,8 @@ namespace LSB {
 		}
 
 		private void OnCollisionEnter2D(Collision2D col) {
-			if (!col.collider.CompareTag("Bullets")) return;
-
-			if (!_enemy.TakeDamage(col.collider.GetComponent<Arrow>().GetDamage())) {
-				StartCoroutine(_enemy.ChangeColor(Color.red));
-				return;
-			}
-
-			_enemy.Die(gameObject);
+			StartCoroutine(_enemy.ChangeColor(Color.red));
+			_enemy.OnCollide(col, gameObject);
 		}
 	}
 }
