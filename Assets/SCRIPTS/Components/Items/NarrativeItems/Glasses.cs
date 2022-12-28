@@ -1,31 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-namespace LSB.Components.Items
-{
-    public class Glasses : Item
-    {
+namespace LSB.Components.Items {
+    public class Glasses : Item {
         private PostProcessVolume _postProcessVolume;
-        private void Start()
-        {
+
+        public override void UseItem() {
+            if (Camera.main == null) {
+                Debug.LogWarning("Main Camera null exception");
+                return;
+            }
+                
             _postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
-            AddToBackPack();
-        }
-        public override void UseItem()
-        {
-            //nothing
         }
 
-        public override void DeleteItem()
+        public override void UndoItem()
         {
             _postProcessVolume.weight = 1;
-        }
-
-        public override void AddToBackPack()
-        {
-            BackPack.Instance.AddNarrativeItem(this);
         }
     }
 }
