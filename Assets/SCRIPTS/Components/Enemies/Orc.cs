@@ -30,8 +30,7 @@ namespace LSB {
 		}
 
 		private void OnCollisionEnter2D(Collision2D col) {
-			StartCoroutine(_enemy.ChangeColor(Color.red));
-			_enemy.OnCollide(col, gameObject);
+			if(_enemy.OnCollide(col, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 	}
 }

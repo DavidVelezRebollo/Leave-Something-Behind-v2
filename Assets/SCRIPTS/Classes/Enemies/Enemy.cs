@@ -37,14 +37,16 @@ namespace LSB.Classes.Enemies {
             _movement?.Move(_player.position);
         }
 
-        public void OnCollide(Collision2D col, GameObject gameObject) {
-            if (!col.collider.CompareTag("Bullets")) return;
+        public bool OnCollide(Collision2D col, GameObject gameObject) {
+            if (!col.collider.CompareTag("Bullets")) return false;
 
             TakeDamage(col.collider.GetComponent<Arrow>().GetDamage());
 
-            if (_currentHp > 0) return;
+            if (_currentHp > 0) {
+                Die(gameObject);
+            }
 
-            Die(gameObject);
+            return true;
         }
 
         public void Die(GameObject enemy) {

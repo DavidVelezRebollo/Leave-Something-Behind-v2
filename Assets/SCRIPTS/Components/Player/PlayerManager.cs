@@ -18,7 +18,7 @@ namespace LSB.Components.Player {
 		}
 
 		private void Update() {
-			_shoot.TickUpdate();
+			//_shoot.TickUpdate();
 		}
 
 		private void FixedUpdate() {

@@ -40,9 +40,14 @@ namespace LSB.Components.Items {
         /// Fills the player's items with items
         /// </summary>
         private void fillBackPack() {
+            if (NormalItems.Count < _NORMAL_ITEMS_COUNT && NarrativeItems.Count < _NARRATIVE_ITEMS_COUNT) {
+                Debug.LogError("Not enough items to fill the backpack");
+                return;
+            }
+            
             // Add Normal Items to the player's items
             for (int i = 0; i < _NORMAL_ITEMS_COUNT; i++) {
-                int index = Random.Range(0, NormalItems.Count + 1);
+                int index = Random.Range(0, NormalItems.Count);
                 
                 _playerItems.Add(NormalItems[index]);
                 NormalItems[index].UseItem();
@@ -51,7 +56,7 @@ namespace LSB.Components.Items {
 
             // Add Narrative Items to the player's items
             for (int i = 0; i < _NARRATIVE_ITEMS_COUNT; i++) {
-                int index = Random.Range(0, NarrativeItems.Count + 1);
+                int index = Random.Range(0, NarrativeItems.Count);
                 
                 _playerItems.Add(NarrativeItems[index]);
                 NarrativeItems[index].UseItem();
