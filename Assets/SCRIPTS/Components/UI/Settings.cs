@@ -68,7 +68,8 @@ public class Settings : MonoBehaviour
     public void StartSounds()
     {
         AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-        AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
+        if (SoundManager.Instance.getMusicActive()) { AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); }
+        else { AudioMixer.SetFloat("Music", 0); }
         AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
 
 
@@ -119,8 +120,11 @@ public class Settings : MonoBehaviour
     /// <param name="volume">New value of the music volume.</param>
     public void SetMusicVolume(float volume)
     {
-        AudioMixer.SetFloat("Music", volume);
-        PlayerPrefs.SetFloat("MusicVolume", volume);
+        if (SoundManager.Instance.getMusicActive())
+        {
+            AudioMixer.SetFloat("Music", volume);
+            PlayerPrefs.SetFloat("MusicVolume", volume);
+        }
     }
     /// <summary>
     /// 

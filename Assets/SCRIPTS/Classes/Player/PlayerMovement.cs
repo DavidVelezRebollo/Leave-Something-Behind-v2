@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LSB.Classes.Player {
     public class PlayerMovement {
         private readonly CharacterController _characterController;
-        private readonly float _speed;
+        private float _speed;
         private readonly InputHandler _input;
         
         public PlayerMovement(CharacterController controller, float speed) {
@@ -17,6 +17,11 @@ namespace LSB.Classes.Player {
         
         public void Move() {
             _characterController.Move(new Vector3(_input.GetMovement().x, _input.GetMovement().y, 0) * (_speed * Time.fixedDeltaTime));
+        }
+
+        public void addSpeed(float speed)
+        {
+            _speed *= speed;
         }
     }
 }

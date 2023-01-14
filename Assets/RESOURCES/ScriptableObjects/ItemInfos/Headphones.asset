@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b75839a3f49da946b203e2b56ae4cbb, type: 3}
-  m_Name: Glasses
+  m_Name: Headphones
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 1a61f4a63878947448414c5395919ffa, type: 3}
-  Name: Gafas
-  Description: Las necesitas para ver.
-  TechnicDescription: Aumentan un 60% tu visibilidad.
+  Sprite: {fileID: 21300000, guid: a7a5969dd60a458449163476b1b9d754, type: 3}
+  Name: Auriculares
+  Description: Nada como un buen temazo mientras el mundo se cae a pedazos.
+  TechnicDescription: "Escuchas la m\xFAsica."
   Type: 1

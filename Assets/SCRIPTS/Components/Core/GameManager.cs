@@ -9,5 +9,6 @@ namespace LSB.Components.Core {
 			
 			Instance = this;
 		}
+
 	}
 }

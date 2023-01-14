@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
-using LSB.Classes.Sound;
 using LSB.Shared;
 
 namespace LSB.Components.Audio {
@@ -9,6 +8,7 @@ namespace LSB.Components.Audio {
         #region Instance
         [Tooltip("Instance of SoundManager, so it can be accessed from other classes.")]
         public static SoundManager Instance;
+        private bool isMusicActive = true;
         #endregion
 
         #region _privateVariables
@@ -90,6 +90,18 @@ namespace LSB.Components.Audio {
             
         }
 
+        public void setMusicVolume(float volume)
+        {
+            MusicMixerGroup.audioMixer.SetFloat("Music", volume);
+        }
+        public void setMusicActive(bool active)
+        {
+            isMusicActive = active;
+        }
+        public bool getMusicActive()
+        {
+            return isMusicActive;
+        }
         /// <summary>
         /// Loads the volume of the mixers.
         /// </summary>
@@ -97,7 +109,9 @@ namespace LSB.Components.Audio {
         {
             GeneralMixerGroup.audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
             SoundEffectsMixerGroup.audioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-            MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
+
+            if (isMusicActive) MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); 
+            else { MusicMixerGroup.audioMixer.SetFloat("Music", 0); }
         }
 
         /// <summary>

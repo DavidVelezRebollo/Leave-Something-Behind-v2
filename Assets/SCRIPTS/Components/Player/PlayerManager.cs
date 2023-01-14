@@ -5,6 +5,7 @@ using LSB.Shared;
 
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {
+		public static PlayerManager Instance;
 		[SerializeField] private Stats Attributes;
 		private IShoot _shoot;
 		private PlayerMovement _movement;
@@ -16,6 +17,11 @@ namespace LSB.Components.Player {
 			_shoot = GetComponent<PlayerAttack>();
 			_currentHp = Attributes.MaxHp;
 		}
+
+		public void setPlayerSpeed(float speed)
+        {
+			_movement.addSpeed(speed);
+        }
 
 		private void Update() {
 			//_shoot.TickUpdate();
