@@ -12,6 +12,13 @@ namespace LSB.Components.Player {
 
 		private float _currentHp;
 
+		private void Awake()
+		{
+			if (Instance != null) return;
+
+			Instance = this;
+		}
+
 		private void Start() {
 			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
 			_shoot = GetComponent<PlayerAttack>();
@@ -24,7 +31,7 @@ namespace LSB.Components.Player {
         }
 
 		private void Update() {
-			//_shoot.TickUpdate();
+			_shoot.TickUpdate();
 		}
 
 		private void FixedUpdate() {

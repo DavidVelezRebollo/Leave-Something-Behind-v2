@@ -8,7 +8,7 @@ namespace LSB.Components.Items {
         private float speedPercentage = 1.15f;
 
         public override void UseItem() {
-            PlayerManager.Instance.SetPlayerSpeed(speedPercentage);
+            //PlayerManager.Instance.SetPlayerSpeed(speedPercentage);
         }
 
         public override void UndoItem()
