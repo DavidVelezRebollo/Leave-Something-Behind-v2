@@ -18,9 +18,9 @@ namespace LSB.Components.Player {
 			_currentHp = Attributes.MaxHp;
 		}
 
-		public void setPlayerSpeed(float speed)
+		public void SetPlayerSpeed(float speed)
         {
-			_movement.addSpeed(speed);
+			_movement.AddSpeed(speed);
         }
 
 		private void Update() {

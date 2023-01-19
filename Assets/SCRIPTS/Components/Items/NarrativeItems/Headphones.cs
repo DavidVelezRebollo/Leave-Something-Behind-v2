@@ -11,8 +11,8 @@ namespace LSB.Components.Items {
 
         public override void UndoItem()
         {
-            SoundManager.Instance.setMusicVolume(0);
-            SoundManager.Instance.setMusicActive(false);
+            SoundManager.Instance.SetMusicVolume(0);
+            SoundManager.Instance.SetMusicActive(false);
         }
     }
 }

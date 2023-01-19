@@ -16,17 +16,18 @@ namespace LSB.Components.Items {
         }
 
         #endregion
-        
+
         [Tooltip("Normal Items List")]
         [SerializeField] private List<Item> NormalItems;
         [Tooltip("Narrative Items List")]
         [SerializeField] private List<Item> NarrativeItems;
+        [SerializeField] private GameObject ItemContainer;
 
         [Tooltip("Player Items List")]
         private List<Item> _playerItems;
 
         [Tooltip("Number of Normal Items which the player will have")]
-        private const int _NORMAL_ITEMS_COUNT = 3;
+        private const int _NORMAL_ITEMS_COUNT = 4;
         [Tooltip("Number of Narrative Items which the player will have")]
         private const int _NARRATIVE_ITEMS_COUNT = 2;
 
@@ -51,6 +52,7 @@ namespace LSB.Components.Items {
                 
                 _playerItems.Add(NormalItems[index]);
                 NormalItems[index].UseItem();
+                ItemContainer.gameObject.transform.GetChild(i).GetComponent<Image>().sprite = NormalItems[index].GetSprite();
                 NormalItems.RemoveAt(index);
             }
 
@@ -60,6 +62,7 @@ namespace LSB.Components.Items {
                 
                 _playerItems.Add(NarrativeItems[index]);
                 NarrativeItems[index].UseItem();
+                ItemContainer.gameObject.transform.GetChild(i + _NORMAL_ITEMS_COUNT).GetComponent<Image>().sprite = NarrativeItems[index].GetSprite();
                 NarrativeItems.RemoveAt(index);
             }
         }

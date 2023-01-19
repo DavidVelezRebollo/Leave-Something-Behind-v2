@@ -19,7 +19,7 @@ namespace LSB.Classes.Player {
             _characterController.Move(new Vector3(_input.GetMovement().x, _input.GetMovement().y, 0) * (_speed * Time.fixedDeltaTime));
         }
 
-        public void addSpeed(float speed)
+        public void AddSpeed(float speed)
         {
             _speed *= speed;
         }

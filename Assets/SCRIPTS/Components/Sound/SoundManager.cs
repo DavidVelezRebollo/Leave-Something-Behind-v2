@@ -90,11 +90,11 @@ namespace LSB.Components.Audio {
             
         }
 
-        public void setMusicVolume(float volume)
+        public void SetMusicVolume(float volume)
         {
             MusicMixerGroup.audioMixer.SetFloat("Music", volume);
         }
-        public void setMusicActive(bool active)
+        public void SetMusicActive(bool active)
         {
             isMusicActive = active;
         }
