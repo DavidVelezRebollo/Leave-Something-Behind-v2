@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using LSB.Components.Player;
 
 namespace LSB.Components.Items {
     public class BackPack : MonoBehaviour {
@@ -65,6 +66,8 @@ namespace LSB.Components.Items {
                 ItemContainer.gameObject.transform.GetChild(i + _NORMAL_ITEMS_COUNT).GetComponent<Image>().sprite = NarrativeItems[index].GetSprite();
                 NarrativeItems.RemoveAt(index);
             }
+
+            PlayerManager.Instance.InitializeStats();
         }
         
         /// <summary>

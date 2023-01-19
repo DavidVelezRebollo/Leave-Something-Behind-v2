@@ -527,9 +527,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalItems:
   - {fileID: 587233180667577578, guid: dae03cc643b61b045a06b16a4a08faf6, type: 3}
-  - {fileID: 587233180667577578, guid: dae03cc643b61b045a06b16a4a08faf6, type: 3}
-  - {fileID: 587233180667577578, guid: dae03cc643b61b045a06b16a4a08faf6, type: 3}
-  - {fileID: 587233180667577578, guid: dae03cc643b61b045a06b16a4a08faf6, type: 3}
+  - {fileID: 721445855114182189, guid: 37f12d4b505f51546a1f649febe31986, type: 3}
+  - {fileID: 2087072363663054572, guid: 8682cfa65aaaec5439624127b9d48f79, type: 3}
+  - {fileID: 6553601195253685798, guid: c35fb8116ae591c4abf3aca4ccad07de, type: 3}
   NarrativeItems:
   - {fileID: 5281264619930722995, guid: 49d0440b84607ec4e924e4e037bb27de, type: 3}
   - {fileID: 6736183350168690814, guid: 1f92a6d03284e0c40855d0a199af3354, type: 3}

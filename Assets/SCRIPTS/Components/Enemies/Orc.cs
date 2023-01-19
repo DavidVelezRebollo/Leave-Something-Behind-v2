@@ -4,7 +4,7 @@ using LSB.Shared;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace LSB {
+namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour {
 		private Chase _movement;
 		private MeleeAttack _attack;
@@ -32,5 +32,7 @@ namespace LSB {
 		private void OnCollisionEnter2D(Collision2D col) {
 			if(_enemy.OnCollide(col, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
+
+		
 	}
 }

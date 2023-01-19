@@ -20,15 +20,14 @@ namespace LSB.Components.Player {
 		}
 
 		private void Start() {
-			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
 			_shoot = GetComponent<PlayerAttack>();
-			_currentHp = Attributes.MaxHp;
 		}
 
-		public void SetPlayerSpeed(float speed)
+		public void InitializeStats()
         {
-			_movement.AddSpeed(speed);
-        }
+			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
+			_currentHp = Attributes.MaxHp;
+		}
 
 		private void Update() {
 			_shoot.TickUpdate();

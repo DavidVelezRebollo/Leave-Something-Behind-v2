@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b75839a3f49da946b203e2b56ae4cbb, type: 3}
+  m_Name: ConstructionHelmet
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 6b430e4616917b94ea729c1c5fa12f7a, type: 3}
+  Name: Casco de obra
+  Description: ...
+  TechnicDescription: "Reduce el da\xF1o de los orcos en un 10%"
+  Type: 0
