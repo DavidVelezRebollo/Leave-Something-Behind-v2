@@ -1,7 +1,8 @@
-using System.Collections;
+using System.Collections.Generic;
 using LSB.Shared;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.AI;
 
 namespace LSB.Components.Core {
 	public class Map : MonoBehaviour {
@@ -22,7 +23,7 @@ namespace LSB.Components.Core {
 		[SerializeField] private int MapHeight = 50;
 		[SerializeField] private int MapWidth = 50;
 
-		[Header("Player Prefab")] 
+		[Header("Unity Fields")] 
 		[SerializeField] private GameObject PlayerPrefab;
 
 
@@ -105,10 +106,9 @@ namespace LSB.Components.Core {
 		}
 
 		private void DrawMap() {
-			bool isDecoration = false, isFloor = false;
-
 			for(int y = 0; y < MapHeight; y++)
 				for (int x = 0; x < MapWidth; x++) {
+					bool isDecoration = false, isFloor = false;
 					Vector3Int pos = new Vector3Int(MapWidth / 2 - x, MapHeight / 2 - y, 0);
 					TileBase tile = null;
 
@@ -130,6 +130,7 @@ namespace LSB.Components.Core {
 								tile = Tree[0];
 								isDecoration = true;
 								DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tree[1]);
+								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Grass);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
 
@@ -139,7 +140,8 @@ namespace LSB.Components.Core {
 							if (_cellMap[x, y - 1] == Props.Lamp) {
 								tile = Lamp[0];
 								isDecoration = true;
-								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Lamp[1]);
+								DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Lamp[1]);
+								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Grass);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
 							
@@ -149,7 +151,8 @@ namespace LSB.Components.Core {
 							if (_cellMap[x, y - 1] == Props.Tower) {
 								tile = Tower[0];
 								isDecoration = true;
-								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tower[1]);
+								DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tower[1]);
+								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Grass);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
 							
@@ -165,7 +168,10 @@ namespace LSB.Components.Core {
 					}
 					
 					if(isFloor) FloorTilemap.SetTile(pos, tile);
-					if(isDecoration) DecorationTilemap.SetTile(pos, tile);
+					if (isDecoration) {
+						FloorTilemap.SetTile(pos, Grass);
+						DecorationTilemap.SetTile(pos, tile);
+					}
 				}
 			
 			SpawnPlayer();

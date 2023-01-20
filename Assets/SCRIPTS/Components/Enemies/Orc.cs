@@ -8,7 +8,6 @@ namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour {
 		private Chase _movement;
 		private MeleeAttack _attack;
-		private NavMeshAgent _agent;
 
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
@@ -20,16 +19,15 @@ namespace LSB.Components.Enemies {
 			CurrentStats.Speed = BaseStats.Speed;
 			CurrentStats.MaxHp = BaseStats.MaxHp;
 
-			_movement = new Chase(_agent, CurrentStats.Speed);
+			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
 			
-			_agent = GetComponent<NavMeshAgent>();
 			_attack = new MeleeAttack();
 
 			_enemy.Start();
 		}
 
-		private void Update() {
+		private void FixedUpdate() {
 			_enemy.Move();
 		}
 

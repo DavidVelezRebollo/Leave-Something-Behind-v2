@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46520232a824ada498e83954cf025441
+guid: 4ee67679f5a04d94db218ff41bf617c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tower_Top
+      name: Tower_Top_NB
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30716ef994de2d04e9ce27fc0ed83447
-      internalID: -1479884792
+      spriteID: dda10b0440b65714b9d6f88d388cebab
+      internalID: -477135335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_Top
+      name: Tree_Top_NB
       rect:
         serializedVersion: 2
         x: 240
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd08ad2c593dba5429c9763288356658
-      internalID: 7191299
+      spriteID: 43fca5b512bf6d046b441f8619f6b41b
+      internalID: -652015974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Car
+      name: Car_NB
       rect:
         serializedVersion: 2
         x: 480
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40567b5912caa574a96b63400e88157c
-      internalID: 562618095
+      spriteID: 4036e7f85d5c88c40af628bc4955230a
+      internalID: 1631466493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lamp_Top
+      name: Light_Top_NB
       rect:
         serializedVersion: 2
         x: 720
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9860e4a2b39cef40bef6bd5bb33a5f5
-      internalID: 262289579
+      spriteID: 4a935654ee8c22d49942c3e524ed4f5d
+      internalID: -751205075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower_Bottom
+      name: Tower_Bottom_NB
       rect:
         serializedVersion: 2
         x: 0
@@ -215,17 +215,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e843c95738f5894f8b71caa59c3050a
-      internalID: -819864348
+      spriteID: 408b98711af6e464cbe1ad5ec58f700b
+      internalID: 2058962453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_Bottom
+      name: Tree_Bottom_NB
       rect:
         serializedVersion: 2
-        x: 241
+        x: 240
         y: 0
         width: 240
         height: 240
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e98d99ea2b1cc947bc1e375f9717263
-      internalID: -972666506
+      spriteID: 02d051328f8d471409ec1b0f074b89c5
+      internalID: 1012258744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hen
+      name: Hen_NB
       rect:
         serializedVersion: 2
         x: 480
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5170a8334d2f39b4daea14939d0637c6
-      internalID: -103554971
+      spriteID: 0b0cd2bbdf0d9134da0713c5b936259c
+      internalID: 310412079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lamp_Bottom
+      name: Light_Bottom_NB
       rect:
         serializedVersion: 2
         x: 720
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72a3917405b8add40a945179ff07f7a4
-      internalID: 710347196
+      spriteID: f2923dec1dd98b64ebfec2ef99d5de07
+      internalID: -1939597507
       vertices: []
       indices: 
       edges: []
@@ -295,14 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tower_Top: -1479884792
-      Tree_Top: 7191299
-      Lamp_Bottom: 710347196
-      Lamp_Top: 262289579
-      Tree_Bottom: -972666506
-      Tower_Bottom: -819864348
-      Car: 562618095
-      Hen: -103554971
+      Light_Bottom_NB: -1939597507
+      Light_Top_NB: -751205075
+      Tower_Bottom_NB: 2058962453
+      Tower_Top_NB: -477135335
+      Hen_NB: 310412079
+      Tree_Top_NB: -652015974
+      Car_NB: 1631466493
+      Tree_Bottom_NB: 1012258744
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

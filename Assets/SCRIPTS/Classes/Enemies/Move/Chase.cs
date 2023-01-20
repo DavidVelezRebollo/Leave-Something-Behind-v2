@@ -1,25 +1,21 @@
 using LSB.Interfaces;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace LSB.Classes.Enemies {
     public class Chase : IEnemyMove {
-        private readonly NavMeshAgent _agent;
-        private Vector3 _playerPosition;
-        
-        public Chase(NavMeshAgent agent, float speed) {
-            //_agent = agent;
-            //_agent.updateRotation = false;
-            //_agent.updateUpAxis = false;
-            //_agent.stoppingDistance = 0.5f;
+        private Rigidbody2D _rigidbody2D;
+        private Transform _transform;
+        private float _speed;
 
-            //_agent.speed = speed;
+        public Chase(Transform transform, Rigidbody2D rb, float speed) {
+            _rigidbody2D = rb;
+            _transform = transform;
+            _speed = speed;
         }
         
         public void Move(Vector3 playerPosition) {
-            _playerPosition = playerPosition;
-            
-            //_agent.SetDestination(_playerPosition);
+            Vector2 dir = (playerPosition - _transform.position).normalized;
+            _rigidbody2D.MovePosition(_rigidbody2D.position + _speed * Time.fixedDeltaTime * dir);
         }
     }
 }

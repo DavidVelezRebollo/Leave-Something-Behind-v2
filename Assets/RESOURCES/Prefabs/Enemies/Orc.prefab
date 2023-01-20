@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 507024110704347945}
   - component: {fileID: 507024110704347946}
-  - component: {fileID: 507024110704347944}
   - component: {fileID: 4940126561131847530}
   m_Layer: 9
   m_Name: Orc
@@ -49,28 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseStats: {fileID: 11400000, guid: 3dedb46a5eaafcf4a99cbd64e89b1bd3, type: 2}
   CurrentStats: {fileID: 11400000, guid: c4a20ab7e0f41494da89f8cd1de16a8b, type: 2}
---- !u!195 &507024110704347944
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507024110704347947}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!50 &4940126561131847530
 Rigidbody2D:
   serializedVersion: 4
@@ -91,7 +68,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!1 &507024111437843822
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +82,7 @@ GameObject:
   - component: {fileID: 507024111437843814}
   m_Layer: 9
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using LSB.Classes.Enemies;
 using UnityEngine;
@@ -12,8 +13,9 @@ namespace LSB.Components.Player {
 		[Header("Player Stats")]
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
-		
-		CinemachineVirtualCamera _playerCamera;
+
+		private CinemachineVirtualCamera _playerCamera;
+		private SpriteRenderer _renderer;
 
 		private IShoot _shoot;
 		private PlayerMovement _movement;
@@ -30,6 +32,7 @@ namespace LSB.Components.Player {
 			
 			_shoot = GetComponent<PlayerAttack>();
 			_playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
+			_renderer = GetComponentInChildren<SpriteRenderer>();
 			
 			_playerCamera.Follow = transform;
 		}
@@ -59,6 +62,8 @@ namespace LSB.Components.Player {
 				return;
 			}
 			
+			Debug.Log(_currentHp);
+			StartCoroutine(ChangeColor(Color.red));
 			_currentHp -= amount;
 			OnTakeDamage?.Invoke();
 		}
@@ -66,6 +71,12 @@ namespace LSB.Components.Player {
 		private void die() {
 			// TODO - Player Die
 			Debug.LogError("TODO - Player die");
+		}
+		
+		public IEnumerator ChangeColor(Color color) {
+			_renderer.color = color;
+			yield return new WaitForSeconds(0.1f);
+			_renderer.color = Color.white;
 		}
 	}
 }

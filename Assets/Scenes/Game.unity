@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.2
+    agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
+    agentSlope: 45.2
     agentClimb: 0.75
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.06666667
+    cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.17
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
   m_NavMeshData: {fileID: 23800000, guid: caeabbda2e4b33e4d9c91d34e78674f2, type: 2}
@@ -1321,7 +1321,7 @@ Transform:
   - {fileID: 1836723239}
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1621230845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,15 +1544,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 452a322153d71da489d5766e976da6d2, type: 2}
   - {fileID: 11400000, guid: e22b083877fd3d4479c5c83214b250dd, type: 2}
   Tree:
-  - {fileID: 11400000, guid: 09f0df2f2c0e61a4ab07e7419c0f3254, type: 2}
-  - {fileID: 11400000, guid: 26bd207dc47b6df42b2da0b5316cd9e2, type: 2}
+  - {fileID: 11400000, guid: e04ebbcde076676459f6430823fe620a, type: 2}
+  - {fileID: 11400000, guid: f2e8cf915bc6dbf44991246fe60377f0, type: 2}
   Lamp:
-  - {fileID: 11400000, guid: e9f9816ad15f88a4bb44716db0659667, type: 2}
-  - {fileID: 11400000, guid: 64a8b6b5c5936764ab59dc95c6d47e86, type: 2}
+  - {fileID: 11400000, guid: b6c5b10fdcf78bd4a8e364c37812ebac, type: 2}
+  - {fileID: 11400000, guid: dcb4845ecfdd23349ba7a1c7d929c5f9, type: 2}
   Tower:
-  - {fileID: 11400000, guid: a6adf57fc20b49342b5d32b4b5038671, type: 2}
-  - {fileID: 11400000, guid: ab787fb599463024daff8aeb9862b1dc, type: 2}
-  Car: {fileID: 11400000, guid: c4fc90f43f61bc94dba67c9728b0d092, type: 2}
+  - {fileID: 11400000, guid: 792d9ed7334d6e34092a7ddc61c7a59d, type: 2}
+  - {fileID: 11400000, guid: 7de0473d013ffc447832bcf5f940ed7e, type: 2}
+  Car: {fileID: 11400000, guid: 1e85fe6cff9d30746a738b588b575ef8, type: 2}
   Hen: {fileID: 11400000, guid: d6b720bbd21644e41946c17271c65c40, type: 2}
   MapHeight: 50
   MapWidth: 50
@@ -1568,7 +1568,8 @@ GameObject:
   - component: {fileID: 1797098375}
   - component: {fileID: 1797098373}
   - component: {fileID: 1797098374}
-  m_Layer: 0
+  - component: {fileID: 1797098376}
+  m_Layer: 7
   m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1677,6 +1678,22 @@ Transform:
   m_Father: {fileID: 1660215224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!19719996 &1797098376
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797098372}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &1831162278
 GameObject:
   m_ObjectHideFlags: 0
