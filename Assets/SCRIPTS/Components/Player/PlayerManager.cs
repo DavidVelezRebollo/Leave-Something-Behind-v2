@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using Cinemachine;
-using LSB.Classes.Enemies;
 using UnityEngine;
 using LSB.Classes.Player;
+using LSB.Components.Core;
 using LSB.Components.Items;
 using LSB.Interfaces;
 using LSB.Shared;
@@ -16,6 +16,7 @@ namespace LSB.Components.Player {
 
 		private CinemachineVirtualCamera _playerCamera;
 		private SpriteRenderer _renderer;
+		private GameManager _gameManager;
 
 		private IShoot _shoot;
 		private PlayerMovement _movement;
@@ -33,7 +34,8 @@ namespace LSB.Components.Player {
 			_shoot = GetComponent<PlayerAttack>();
 			_playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
 			_renderer = GetComponentInChildren<SpriteRenderer>();
-			
+			_gameManager = GameManager.Instance;
+
 			_playerCamera.Follow = transform;
 		}
 
@@ -43,10 +45,12 @@ namespace LSB.Components.Player {
 		}
 
 		private void Update() {
+			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
 			_shoot.TickUpdate();
 		}
 
 		private void FixedUpdate() {
+			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
 			_movement.Move();
 		}
 
@@ -62,7 +66,6 @@ namespace LSB.Components.Player {
 				return;
 			}
 			
-			Debug.Log(_currentHp);
 			StartCoroutine(ChangeColor(Color.red));
 			_currentHp -= amount;
 			OnTakeDamage?.Invoke();

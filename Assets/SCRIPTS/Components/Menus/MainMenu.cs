@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using LSB.Components.Audio;
+using LSB.Components.Core;
 
 namespace LSB.Components.Menus
 {
@@ -13,9 +14,8 @@ namespace LSB.Components.Menus
         /// <summary>
         /// Function that runs when the start button is clicked.
         /// </summary>
-        public void OnStartButton()
-        {
-            //GameManager.Instance.SetGameStates(true);
+        public void OnStartButton() {
+            GameManager.Instance.SetGameState(GameState.Running);
             SceneManager.LoadScene(1);
             PlayButton();
         }
@@ -23,8 +23,7 @@ namespace LSB.Components.Menus
         /// <summary>
         /// Function that runs when the exit button is clicked.
         /// </summary>
-        public void OnExitButton()
-        {
+        public void OnExitButton() {
             Application.Quit();
             PlayButton();
         }
@@ -32,8 +31,7 @@ namespace LSB.Components.Menus
         /// <summary>
         /// Function that plays the general sound of a button.
         /// </summary>
-        public void PlayButton()
-        {
+        public void PlayButton() {
             SoundManager.Instance.Play("Button");
         }
 

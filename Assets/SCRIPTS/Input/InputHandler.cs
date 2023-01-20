@@ -10,8 +10,6 @@ namespace LSB.Input {
 		private Vector2 _movement;
 		[Tooltip("Mouse Position")]
 		private Vector2 _mouse;
-		[Tooltip("Main Camera")] 
-		[SerializeField] private Camera MainCamera;
 
 		private void Awake() {
 			if (_input == null) _input = new GameInput();
@@ -40,7 +38,7 @@ namespace LSB.Input {
 		}
 
 		private void OnMouseMove() {
-			_mouse =MainCamera.ScreenToWorldPoint(_input.InputCharacter.InputShootPosition.ReadValue<Vector2>());
+			_mouse =Camera.main.ScreenToWorldPoint(_input.InputCharacter.InputShootPosition.ReadValue<Vector2>());
 		}
 
 		public Vector2 GetMovement() {

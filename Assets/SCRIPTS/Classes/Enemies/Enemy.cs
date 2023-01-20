@@ -2,6 +2,7 @@ using LSB.Components.Combat;
 using LSB.Interfaces;
 using UnityEngine;
 using System.Collections;
+using LSB.Components.Core;
 
 namespace LSB.Classes.Enemies {
     public class Enemy
@@ -9,6 +10,8 @@ namespace LSB.Classes.Enemies {
         private readonly IEnemyMove _movement;
         private IAttack _attack;
         private IState _state;
+
+        private GameManager _gameManager;
 
         private readonly SpriteRenderer _renderer;
         private Transform _player;
@@ -19,6 +22,8 @@ namespace LSB.Classes.Enemies {
             _attack = attackType;
             _renderer = renderer;
             _currentHp = currentHp;
+            
+            _gameManager = GameManager.Instance;
         }
         
         public void Start() {
@@ -30,6 +35,7 @@ namespace LSB.Classes.Enemies {
         }
 
         public void Move() {
+            if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
             _movement?.Move(_player.position);
         }
 

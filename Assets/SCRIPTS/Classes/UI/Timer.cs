@@ -6,8 +6,8 @@ namespace LSB.Classes.UI {
 		private float _currentMinutes;
 		private float _currentSeconds;
 
-		public Timer(float minutes) {
-			_currentMinutes = minutes;
+		public Timer() {
+			_currentMinutes = 0f;
 			_currentSeconds = 0f;
 		}
 
