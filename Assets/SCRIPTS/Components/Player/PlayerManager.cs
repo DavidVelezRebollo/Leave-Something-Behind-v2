@@ -54,13 +54,7 @@ namespace LSB.Components.Player {
 			_movement.Move();
 		}
 
-		private void OnCollisionEnter2D(Collision2D col) {
-			if (!col.collider.CompareTag("Enemy")) return;
-			
-			takeDamage(5f);
-		}
-
-		private void takeDamage(float amount) {
+		public void TakeDamage(float amount) {
 			if (_currentHp <= 0) {
 				die();
 				return;
@@ -73,6 +67,7 @@ namespace LSB.Components.Player {
 
 		private void die() {
 			// TODO - Player Die
+			_gameManager.SetGameState(GameState.Lost);
 			Debug.LogError("TODO - Player die");
 		}
 		

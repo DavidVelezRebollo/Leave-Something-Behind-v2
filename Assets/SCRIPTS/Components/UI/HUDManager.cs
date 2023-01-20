@@ -1,6 +1,7 @@
 using UnityEngine;
 using LSB.Classes.UI;
 using LSB.Components.Core;
+using LSB.Components.Player;
 using TMPro;
 
 namespace LSB.Components.UI {
@@ -9,13 +10,16 @@ namespace LSB.Components.UI {
 		[SerializeField] private TextMeshProUGUI TimerText;
 
 		private GameManager _gameManager;
+		private PlayerManager _player;
 
 		private Timer _timer;
 		
 		private void Start() {
 			_gameManager = GameManager.Instance;
+			_player = FindObjectOfType<PlayerManager>();
 
 			_timer = new Timer();
+			_player.OnTakeDamage += UpdateHpUI;
 		}
 
 		private void Update() {
@@ -26,6 +30,10 @@ namespace LSB.Components.UI {
 			
 			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
 			_timer.UpdateTimer();
+		}
+
+		private void UpdateHpUI() {
+			
 		}
 	}
 	

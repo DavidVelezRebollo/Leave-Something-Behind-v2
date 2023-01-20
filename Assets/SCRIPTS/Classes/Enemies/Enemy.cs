@@ -1,8 +1,10 @@
+using System;
 using LSB.Components.Combat;
 using LSB.Interfaces;
 using UnityEngine;
 using System.Collections;
 using LSB.Components.Core;
+using Object = UnityEngine.Object;
 
 namespace LSB.Classes.Enemies {
     public class Enemy
@@ -11,7 +13,8 @@ namespace LSB.Classes.Enemies {
         private IAttack _attack;
         private IState _state;
 
-        private GameManager _gameManager;
+        private readonly GameManager _gameManager;
+        public Action OnEnemyDie;
 
         private readonly SpriteRenderer _renderer;
         private Transform _player;
@@ -52,6 +55,7 @@ namespace LSB.Classes.Enemies {
         }
 
         private void Die(GameObject enemy) {
+            OnEnemyDie?.Invoke();
             Object.Destroy(enemy);
         }
 

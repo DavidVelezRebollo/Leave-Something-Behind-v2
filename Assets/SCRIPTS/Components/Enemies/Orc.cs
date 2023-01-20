@@ -1,8 +1,8 @@
+using System;
 using LSB.Classes.Enemies;
-using LSB.Components.Items;
+using LSB.Components.Player;
 using LSB.Shared;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour {
@@ -31,7 +31,16 @@ namespace LSB.Components.Enemies {
 			_enemy.Move();
 		}
 
+		public void SuscribeEvent(Action function) {
+			_enemy.OnEnemyDie += function;
+		}
+
 		private void OnCollisionEnter2D(Collision2D collision) {
+			if (collision.collider.CompareTag("Player")) {
+				collision.collider.GetComponent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+				return;
+			}
+			
 			if(_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 

@@ -1,46 +1,72 @@
+using System;
+using LSB.Classes.Enemies;
 using LSB.Components.Items;
 using LSB.Components.Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace LSB.Components.Enemies {
 	public class EnemyGenerator : MonoBehaviour {
+		[Header("Numeric Fields")]
 		[SerializeField] private float EnemyGenerationCooldown;
+		[Range(1, 20)] [SerializeField] private int MaxEnemies;
+		[Header("Unity Prefabs")]
 		[SerializeField] private GameObject OrcPrefab;
 		[SerializeField] private GameObject WizardPrefab;
 
-		private int _waveNumber;
+		private Transform _playerTransform;
 		private float _generationDelta;
 		private bool _canGenerate;
-		private Vector3 _playerPosition;
+		private int _waveNumber;
+		private int _enemyNumber;
+		private int _currentWave;
 
 		private void OnEnable() {
 			BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
 
 			_generationDelta = EnemyGenerationCooldown;
 			_canGenerate = false;
+			_enemyNumber = 0;
+			_waveNumber = 0;
+		}
+		
+		private void Start() {
+			_playerTransform = FindObjectOfType<PlayerManager>().gameObject.transform;
 		}
 
 		private void Update() {
 			_generationDelta -= Time.deltaTime;
 			if (_generationDelta <= 0) _canGenerate = true;
 
-			if (!_canGenerate) return;
+			if (!_canGenerate || _enemyNumber >= MaxEnemies) return;
 
-			generateWave(OrcPrefab, 2);
+			generateWave(OrcPrefab, typeof(Orc), 2);
 			_canGenerate = false;
 			_generationDelta = EnemyGenerationCooldown;
 		}
 
-		private void generateWave(GameObject enemyPrefab, int numEnemies) {
+		private void generateWave(GameObject enemyPrefab, Type enemyType, int numEnemies) {
 			float x, y;
+			int i = 0;
+			bool follow = true;
 
-			for (int i = 0; i < numEnemies; i++) {
-				_playerPosition = FindObjectOfType<PlayerManager>().gameObject.transform.position;
-				x = _playerPosition.x + (Random.value < 0.5f ? -5f : 5f);
-				y = _playerPosition.y + Random.Range(-5f, 5f);
+			while (i < numEnemies && follow) {
+				Vector3 playerPosition = _playerTransform.position;
+				x = playerPosition.x + (Random.value < 0.5f ? -5f : 5f);
+				y = playerPosition.y + Random.Range(-5f, 5f);
 
 				GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, y), Quaternion.identity);
+				if(enemyType == typeof(Orc)) enemy.GetComponent<Orc>().SuscribeEvent(onEnemyDieInvoke);
+
+				_enemyNumber++;
+				i++;
+
+				if (_enemyNumber == MaxEnemies) follow = false;
 			}
+		}
+
+		private void onEnemyDieInvoke() {
+			_enemyNumber--;
 		}
 	}
 }

@@ -656,6 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyGenerationCooldown: 3
+  MaxEnemies: 20
   OrcPrefab: {fileID: 507024110704347947, guid: 77488009cd1329b46beb87069569c35a, type: 3}
   WizardPrefab: {fileID: 1828492275894917167, guid: 2ab22bb875614a64fbfdc20c3cb92c44, type: 3}
 --- !u!4 &1050759871
