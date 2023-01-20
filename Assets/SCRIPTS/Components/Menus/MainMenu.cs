@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using LSB.Components.Audio;
 
-namespace LSB.Components.UI
+namespace LSB.Components.Menus
 {
     public class MainMenu : MonoBehaviour
     {
