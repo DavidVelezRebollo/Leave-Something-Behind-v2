@@ -18,6 +18,11 @@ namespace LSB.Components.Combat {
 			if(_deltaAir <= 0) Destroy(gameObject);
 		}
 
+		public void MutiplyDamage(float damage)
+        {
+			Stats.Damage *= damage;
+		}
+
 		public float GetDamage() {
 			return Stats.Damage;
 		}
@@ -29,5 +34,12 @@ namespace LSB.Components.Combat {
 		private void OnCollisionEnter2D(Collision2D collision) {
 			Destroy(gameObject);
 		}
-	}
+
+        public void ResetStats()
+        {
+			Stats.Speed = 5;
+			Stats.AirTime = 5;
+			Stats.Damage = 2;
+        }
+    }
 }

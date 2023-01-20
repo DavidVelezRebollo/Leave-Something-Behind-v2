@@ -658,6 +658,8 @@ MonoBehaviour:
   EnemyGenerationCooldown: 3
   MaxEnemies: 20
   OrcPrefab: {fileID: 507024110704347947, guid: 77488009cd1329b46beb87069569c35a, type: 3}
+  OrcCurrentStats: {fileID: 11400000, guid: c4a20ab7e0f41494da89f8cd1de16a8b, type: 2}
+  OrcBaseStats: {fileID: 11400000, guid: 3dedb46a5eaafcf4a99cbd64e89b1bd3, type: 2}
   WizardPrefab: {fileID: 1828492275894917167, guid: 2ab22bb875614a64fbfdc20c3cb92c44, type: 3}
 --- !u!4 &1050759871
 Transform:

@@ -13,6 +13,7 @@ namespace LSB.Components.Player {
 		[Header("Player Stats")]
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
+		[SerializeField] private Projectile ArrowStats;
 
 		private CinemachineVirtualCamera _playerCamera;
 		private SpriteRenderer _renderer;
@@ -64,6 +65,11 @@ namespace LSB.Components.Player {
 			_currentHp -= amount;
 			OnTakeDamage?.Invoke();
 		}
+
+		public float GetDamage()
+        {
+			return CurrentStats.Damage;
+        }
 
 		private void die() {
 			// TODO - Player Die

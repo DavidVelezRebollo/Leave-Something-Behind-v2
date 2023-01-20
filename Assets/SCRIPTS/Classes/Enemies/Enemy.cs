@@ -35,6 +35,7 @@ namespace LSB.Classes.Enemies {
 
         public void TakeDamage(float amount) {
             _currentHp -= amount;
+
         }
 
         public void Move() {

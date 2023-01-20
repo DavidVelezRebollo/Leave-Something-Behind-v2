@@ -3,6 +3,7 @@ using LSB.Classes.Enemies;
 using LSB.Components.Player;
 using LSB.Shared;
 using UnityEngine;
+using LSB.Components.Combat;
 
 namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour {
@@ -15,10 +16,6 @@ namespace LSB.Components.Enemies {
 		private Enemy _enemy;
 
 		private void OnEnable() {
-			CurrentStats.Damage = BaseStats.Damage;
-			CurrentStats.Speed = BaseStats.Speed;
-			CurrentStats.MaxHp = BaseStats.MaxHp;
-
 			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
 			
@@ -37,12 +34,18 @@ namespace LSB.Components.Enemies {
 
 		private void OnCollisionEnter2D(Collision2D collision) {
 			if (collision.collider.CompareTag("Player")) {
-				collision.collider.GetComponent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+				collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
 				return;
 			}
-			
-			if(_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
+
+			if (_enemy.OnCollide(collision, gameObject))
+			{
+				StartCoroutine(_enemy.ChangeColor(Color.red));
+				_enemy.TakeDamage(collision.collider.GetComponentInParent<Arrow>().GetDamage());
+			}
 		}
+
+		
 
 	}
 }

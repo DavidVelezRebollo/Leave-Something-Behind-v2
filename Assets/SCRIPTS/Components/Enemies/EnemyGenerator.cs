@@ -4,6 +4,7 @@ using LSB.Components.Items;
 using LSB.Components.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using LSB.Shared;
 
 namespace LSB.Components.Enemies {
 	public class EnemyGenerator : MonoBehaviour {
@@ -12,6 +13,8 @@ namespace LSB.Components.Enemies {
 		[Range(1, 20)] [SerializeField] private int MaxEnemies;
 		[Header("Unity Prefabs")]
 		[SerializeField] private GameObject OrcPrefab;
+		[SerializeField] private Stats OrcCurrentStats;
+		[SerializeField] private Stats OrcBaseStats;
 		[SerializeField] private GameObject WizardPrefab;
 
 		private Transform _playerTransform;
@@ -21,7 +24,12 @@ namespace LSB.Components.Enemies {
 		private int _enemyNumber;
 		private int _currentWave;
 
-		private void OnEnable() {
+        private void Awake()
+        {
+			ResetStats();
+        }
+
+        private void OnEnable() {
 			BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
 
 			_generationDelta = EnemyGenerationCooldown;
@@ -67,6 +75,13 @@ namespace LSB.Components.Enemies {
 
 		private void onEnemyDieInvoke() {
 			_enemyNumber--;
+		}
+
+		private void ResetStats()
+		{
+			OrcCurrentStats.Damage = OrcBaseStats.Damage;
+			OrcCurrentStats.Speed = OrcBaseStats.Speed;
+			OrcCurrentStats.MaxHp = OrcBaseStats.MaxHp;
 		}
 	}
 }

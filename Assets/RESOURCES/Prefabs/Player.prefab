@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseStats: {fileID: 11400000, guid: 5997594c06841324386d0d10a8fd2c3b, type: 2}
   CurrentStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}
+  ArrowStats: {fileID: 0}
 --- !u!114 &121699565080282753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowSpeed: 5
   ArrowPrefab: {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
+  CurrentStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}
   ShootCooldown: 1.5
 --- !u!50 &7817655970097789286
 Rigidbody2D:

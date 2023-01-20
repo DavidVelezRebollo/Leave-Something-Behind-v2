@@ -25,6 +25,7 @@ namespace LSB.Components.Core {
 		#endregion
 
 		private GameState _gameState;
+		
 
 		public void SetGameState(GameState state) {
 			_gameState = state;
@@ -33,5 +34,13 @@ namespace LSB.Components.Core {
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }
 
 		public bool GamePaused() { return _gameState == GameState.Paused; }
+
+		/*public void ResetGame()
+        {
+			OrcCurrentStats.Damage = OrcBaseStats.Damage;
+			OrcCurrentStats.Speed = OrcBaseStats.Speed;
+			OrcCurrentStats.MaxHp = OrcBaseStats.MaxHp;
+		}
+		*/
 	}
 }

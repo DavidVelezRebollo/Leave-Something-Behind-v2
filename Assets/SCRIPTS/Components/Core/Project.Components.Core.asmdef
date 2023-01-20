@@ -1,7 +1,9 @@
 {
     "name": "Project.Components.Core",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:50fdd4a39f8219f41ab721d8ca0d2862"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
