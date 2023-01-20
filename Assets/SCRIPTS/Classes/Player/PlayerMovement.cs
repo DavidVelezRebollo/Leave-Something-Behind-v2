@@ -4,24 +4,20 @@ using UnityEngine;
 
 namespace LSB.Classes.Player {
     public class PlayerMovement {
-        private readonly CharacterController _characterController;
-        private float _speed;
+        private readonly Rigidbody2D _rigidbody2D;
+        private readonly float _speed;
         private readonly InputHandler _input;
         
-        public PlayerMovement(CharacterController controller, float speed) {
-            _characterController = controller;
+        public PlayerMovement(Rigidbody2D rigidbody2D, float speed) {
+            _rigidbody2D = rigidbody2D;
             _speed = speed;
             
             _input = InputHandler.Instance;
         }
         
         public void Move() {
-            _characterController.Move(new Vector3(_input.GetMovement().x, _input.GetMovement().y, 0) * (_speed * Time.fixedDeltaTime));
-        }
-
-        public void AddSpeed(float speed)
-        {
-            _speed *= speed;
+            Vector2 movement = new Vector2(_input.GetMovement().x, _input.GetMovement().y);
+            _rigidbody2D.MovePosition(_rigidbody2D.position + _speed * Time.fixedDeltaTime * movement.normalized);
         }
     }
 }

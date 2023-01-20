@@ -7,6 +7,7 @@ namespace LSB.Components.Core {
 	public class Map : MonoBehaviour {
 		[Header("Tilemaps")]
 		[SerializeField] private Tilemap FloorTilemap;
+		[SerializeField] private Tilemap DecorationTilemap;
 
 		[Space(10)] [Header("Tiles")] 
 		[SerializeField] private TileBase Grass;
@@ -20,14 +21,11 @@ namespace LSB.Components.Core {
 		[Space(10)] [Header("Map variables")] 
 		[SerializeField] private int MapHeight = 50;
 		[SerializeField] private int MapWidth = 50;
-		[Range(0, 1)]
-		[SerializeField] private float Scale = 0.1f;
-		[Range(0, 1)]
-		[SerializeField] private float XOffset = 0.5f;
-		[Range(0, 1)]
-		[SerializeField] private float YOffset = 0.5f;
-		
-	
+
+		[Header("Player Prefab")] 
+		[SerializeField] private GameObject PlayerPrefab;
+
+
 		private const float _LAMP_PROBABILITY = 0.05f;
 		private const float _TOWER_PROBABILITY = 0.10f;
 		private const float _CAR_PROBABILITY = 0.15f;
@@ -37,7 +35,7 @@ namespace LSB.Components.Core {
 		
 		private Props[,] _cellMap;
 
-		private void Start() {
+		private void Awake() {
 			_cellMap = new Props[MapWidth, MapHeight];
 			
 			GenerateCellMap();
@@ -107,6 +105,8 @@ namespace LSB.Components.Core {
 		}
 
 		private void DrawMap() {
+			bool isDecoration = false, isFloor = false;
+
 			for(int y = 0; y < MapHeight; y++)
 				for (int x = 0; x < MapWidth; x++) {
 					Vector3Int pos = new Vector3Int(MapWidth / 2 - x, MapHeight / 2 - y, 0);
@@ -117,18 +117,19 @@ namespace LSB.Components.Core {
 							continue;
 						case Props.Grass:
 							tile = Grass;
+							isFloor = true;
 							break;
 						case Props.Decoration:
 							int index = Random.Range(0, Decoration.Length);
-							
+							isFloor = true;
 							tile = Decoration[index];
 							break;
 						case Props.Tree:
 							if (y == 0) continue;
 							if (_cellMap[x, y - 1] == Props.Tree) {
 								tile = Tree[0];
-								
-								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tree[1]);
+								isDecoration = true;
+								DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tree[1]);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
 
@@ -137,7 +138,7 @@ namespace LSB.Components.Core {
 							if (y == 0) continue;
 							if (_cellMap[x, y - 1] == Props.Lamp) {
 								tile = Lamp[0];
-								
+								isDecoration = true;
 								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Lamp[1]);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
@@ -147,35 +148,49 @@ namespace LSB.Components.Core {
 							if (y == 0) continue;
 							if (_cellMap[x, y - 1] == Props.Tower) {
 								tile = Tower[0];
-								
+								isDecoration = true;
 								FloorTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tower[1]);
 								_cellMap[x, y - 1] = Props.Tiled;
 							}
 							
 							break;
 						case Props.Car:
+							isDecoration = true;
 							tile = Car;
 							break;
 						case Props.Hen:
+							isDecoration = true;
 							tile = Hen;
 							break;
 					}
 					
-					FloorTilemap.SetTile(pos, tile);
+					if(isFloor) FloorTilemap.SetTile(pos, tile);
+					if(isDecoration) DecorationTilemap.SetTile(pos, tile);
 				}
+			
+			SpawnPlayer();
 		}
 
 		private float[,] GeneratePerlinNoise() {
 			float[,] noiseMap = new float[MapWidth, MapHeight];
+			float xOffset = Random.Range(-100000f, 100000f);
+			float yOffset = Random.Range(-100000f, 100000f);
+			const float SCALE = 0.5f;
 
 			for(int x = 0; x < MapWidth; x++)
 				for (int y = 0; y < MapHeight; y++) {
-					float noise = Mathf.PerlinNoise(x * Scale + XOffset, y * Scale + YOffset);
+					float noise = Mathf.PerlinNoise(x * SCALE + xOffset, y * SCALE + yOffset);
 
 					noiseMap[x, y] = noise;
 				}
 
 			return noiseMap;
+		}
+
+		private void SpawnPlayer() {
+			// TODO - Determine if the player can spawn
+			
+			Instantiate(PlayerPrefab, new Vector3(0, 0), Quaternion.identity);
 		}
 	}
 }

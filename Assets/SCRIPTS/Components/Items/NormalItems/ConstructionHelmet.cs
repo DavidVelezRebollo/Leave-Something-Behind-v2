@@ -7,17 +7,17 @@ namespace LSB.Components.Items
 {
     public class ConstructionHelmet : Item
     {
-        private float damagePercentage = 1 - 0.10f;
         [SerializeField] private Stats OrcStats;
+        private const float _DAMAGE_PERCENTAGE = 1 - 0.10f;
 
         public override void UseItem()
         {
-            OrcStats.Damage *= damagePercentage;
+            OrcStats.Damage *= _DAMAGE_PERCENTAGE;
         }
 
         public override void UndoItem()
         {
-            OrcStats.Damage /= damagePercentage;
+            OrcStats.Damage /= _DAMAGE_PERCENTAGE;
         }
     }
 }

@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Info: {fileID: 11400000, guid: 720ff4a663584e844899e3cc14d920c4, type: 2}
-  PlayerStats: {fileID: 11400000, guid: 5997594c06841324386d0d10a8fd2c3b, type: 2}
+  PlayerStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}

@@ -6,15 +6,15 @@ using LSB.Shared;
 namespace LSB.Components.Items {
     public class Scooter : Item {
         [SerializeField] private Stats PlayerStats;
-        private float speedPercentage = 1 + 0.15f;
+        private const float _SPEED_PERCENTAGE = 1 + 0.15f;
 
         public override void UseItem() {
-            PlayerStats.Speed *= speedPercentage;
+            PlayerStats.Speed *= _SPEED_PERCENTAGE;
         }
 
         public override void UndoItem()
         {
-            PlayerStats.Speed /= speedPercentage;
+            PlayerStats.Speed /= _SPEED_PERCENTAGE;
         }
     }
 }

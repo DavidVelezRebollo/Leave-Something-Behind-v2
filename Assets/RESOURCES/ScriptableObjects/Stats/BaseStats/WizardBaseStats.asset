@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4b2da4d512a49b4fb68a784d21c4fc2, type: 3}
-  m_Name: OrcStats
+  m_Name: WizardBaseStats
   m_EditorClassIdentifier: 
-  Damage: 10
-  MaxHp: 5
-  Speed: 2
+  Damage: 3
+  MaxHp: 10
+  Speed: 3

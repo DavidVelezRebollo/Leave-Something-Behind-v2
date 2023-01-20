@@ -1,6 +1,5 @@
 using LSB.Components.Combat;
 using LSB.Interfaces;
-using LSB.Shared;
 using UnityEngine;
 using System.Collections;
 
@@ -10,19 +9,16 @@ namespace LSB.Classes.Enemies {
         private readonly IEnemyMove _movement;
         private IAttack _attack;
         private IState _state;
-        private Stats _attributes;
 
         private readonly SpriteRenderer _renderer;
         private Transform _player;
         private float _currentHp;
 
-        public Enemy(IEnemyMove movementType, IAttack attackType, Stats attributes, SpriteRenderer renderer) {
+        public Enemy(IEnemyMove movementType, IAttack attackType, SpriteRenderer renderer, float currentHp) {
             _movement = movementType;
             _attack = attackType;
-            _attributes = attributes;
             _renderer = renderer;
-
-            _currentHp = attributes.MaxHp;
+            _currentHp = currentHp;
         }
         
         public void Start() {
@@ -49,7 +45,7 @@ namespace LSB.Classes.Enemies {
             return true;
         }
 
-        public void Die(GameObject enemy) {
+        private void Die(GameObject enemy) {
             Object.Destroy(enemy);
         }
 

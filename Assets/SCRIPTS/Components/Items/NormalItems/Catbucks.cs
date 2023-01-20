@@ -8,15 +8,16 @@ namespace LSB.Components.Items
     public class Catbucks : Item
     {
         [SerializeField] private Stats PlayerStats;
-        private float livePercentage = 1 + 0.10f;
+        private const float _LIVE_PERCENTAGE = 1 + 0.10f;
+
         public override void UseItem()
         {
-            PlayerStats.MaxHp *= livePercentage;
+            PlayerStats.MaxHp *= _LIVE_PERCENTAGE;
         }
 
         public override void UndoItem()
         {
-            PlayerStats.MaxHp /= livePercentage;
+            PlayerStats.MaxHp /= _LIVE_PERCENTAGE;
         }
     }
 }

@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using LSB.Components.Player;
 
 namespace LSB.Components.Items {
     public class BackPack : MonoBehaviour {
@@ -24,6 +24,8 @@ namespace LSB.Components.Items {
         [SerializeField] private List<Item> NarrativeItems;
         [SerializeField] private GameObject ItemContainer;
 
+        public Action OnItemInitialize;
+
         [Tooltip("Player Items List")]
         private List<Item> _playerItems;
 
@@ -34,10 +36,9 @@ namespace LSB.Components.Items {
 
         private void Start() {
             _playerItems = new List<Item>();
-            
             fillBackPack();
         }
-        
+
         /// <summary>
         /// Fills the player's items with items
         /// </summary>
@@ -67,7 +68,7 @@ namespace LSB.Components.Items {
                 NarrativeItems.RemoveAt(index);
             }
 
-            PlayerManager.Instance.InitializeStats();
+            OnItemInitialize?.Invoke();
         }
         
         /// <summary>

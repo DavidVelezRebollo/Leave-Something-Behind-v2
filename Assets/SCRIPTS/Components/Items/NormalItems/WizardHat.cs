@@ -7,17 +7,17 @@ namespace LSB.Components.Items
 {
     public class WizardHat : Item
     {
-        private float damagePercentage = 1 - 0.10f;
         [SerializeField] private Stats WizardStats;
+        private const float _DAMAGE_PERCENTAGE = 1 - 0.10f;
 
         public override void UseItem()
         {
-            WizardStats.Damage *= damagePercentage;
+            WizardStats.Damage *= _DAMAGE_PERCENTAGE;
         }
 
         public override void UndoItem()
         {
-            WizardStats.Damage /= damagePercentage;
+            WizardStats.Damage /= _DAMAGE_PERCENTAGE;
         }
     }
 }

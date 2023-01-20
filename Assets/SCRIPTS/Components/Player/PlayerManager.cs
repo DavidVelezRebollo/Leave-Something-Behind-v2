@@ -1,32 +1,42 @@
+using System;
+using Cinemachine;
+using LSB.Classes.Enemies;
 using UnityEngine;
 using LSB.Classes.Player;
+using LSB.Components.Items;
 using LSB.Interfaces;
 using LSB.Shared;
 
 namespace LSB.Components.Player {
 	public class PlayerManager : MonoBehaviour {
-		public static PlayerManager Instance;
-		[SerializeField] private Stats Attributes;
+		[Header("Player Stats")]
+		[SerializeField] private Stats BaseStats;
+		[SerializeField] private Stats CurrentStats;
+		
+		CinemachineVirtualCamera _playerCamera;
+
 		private IShoot _shoot;
 		private PlayerMovement _movement;
-
 		private float _currentHp;
 
-		private void Awake()
-		{
-			if (Instance != null) return;
+		public Action OnTakeDamage;
 
-			Instance = this;
-		}
-
-		private void Start() {
+		private void OnEnable() {
+			CurrentStats.MaxHp = BaseStats.MaxHp;
+			CurrentStats.Speed = BaseStats.Speed;
+			CurrentStats.Damage = BaseStats.Damage;
+			
+			BackPack.Instance.OnItemInitialize += InitializeStats;
+			
 			_shoot = GetComponent<PlayerAttack>();
+			_playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
+			
+			_playerCamera.Follow = transform;
 		}
 
-		public void InitializeStats()
-        {
-			_movement = new PlayerMovement(GetComponent<CharacterController>(), Attributes.Speed);
-			_currentHp = Attributes.MaxHp;
+		private void InitializeStats() {
+			_movement = new PlayerMovement(GetComponent<Rigidbody2D>(), CurrentStats.Speed);
+			_currentHp = CurrentStats.MaxHp;
 		}
 
 		private void Update() {
@@ -37,6 +47,12 @@ namespace LSB.Components.Player {
 			_movement.Move();
 		}
 
+		private void OnCollisionEnter2D(Collision2D col) {
+			if (!col.collider.CompareTag("Enemy")) return;
+			
+			takeDamage(5f);
+		}
+
 		private void takeDamage(float amount) {
 			if (_currentHp <= 0) {
 				die();
@@ -44,6 +60,7 @@ namespace LSB.Components.Player {
 			}
 			
 			_currentHp -= amount;
+			OnTakeDamage?.Invoke();
 		}
 
 		private void die() {
