@@ -41,6 +41,10 @@ namespace LSB.Input {
 			_mouse =Camera.main.ScreenToWorldPoint(_input.InputCharacter.InputShootPosition.ReadValue<Vector2>());
 		}
 
+		public bool OnPauseButton() {
+			return _input.Buttons.Pause.WasPressedThisFrame();
+		}
+
 		public Vector2 GetMovement() {
 			return _movement;
 		}

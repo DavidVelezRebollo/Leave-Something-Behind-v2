@@ -1,5 +1,6 @@
 using UnityEngine;
 using LSB.Classes.UI;
+using LSB.Input;
 using LSB.Components.Core;
 using LSB.Components.Player;
 using LSB.Components.Items;
@@ -11,12 +12,15 @@ namespace LSB.Components.UI {
 		[Header("UI Fields")] 
 		[SerializeField] private GameObject ItemContainers;
 		[SerializeField] private TextMeshProUGUI TimerText;
+		[SerializeField] private GameObject PauseMenu;
+		[Space(15)]
 		[Header("Item Selector Fields")]
 		[SerializeField] private GameObject ItemSelectorPanel;
 		[SerializeField] private Image LeftItemImage;
 		[SerializeField] private TextMeshProUGUI LeftItemName;
 		[SerializeField] private TextMeshProUGUI LeftItemDescription;
 		[SerializeField] private TextMeshProUGUI LeftItemTechnicalDescription;
+		[Space(5)]
 		[SerializeField] private Image RightItemImage;
 		[SerializeField] private TextMeshProUGUI RightItemName;
 		[SerializeField] private TextMeshProUGUI RightItemDescription;
@@ -25,6 +29,7 @@ namespace LSB.Components.UI {
 		private GameManager _gameManager;
 		private PlayerManager _player;
 		private BackPack _backPack;
+		private InputHandler _input;
 
 		private Timer _timer;
 		private int _rightItem;
@@ -35,12 +40,20 @@ namespace LSB.Components.UI {
 			_gameManager = GameManager.Instance;
 			_player = FindObjectOfType<PlayerManager>();
 			_backPack = BackPack.Instance;
+			_input = InputHandler.Instance;
 
 			_timer = new Timer();
 			_player.OnTakeDamage += updateHpUI;
 		}
 
 		private void Update() {
+			if(_input.OnPauseButton()) handlePauseMenu();
+			if (_gameManager.GamePaused() || _gameManager.GameEnded()) return;
+			
+			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+			
+			_timer.UpdateTimer();
+			
 			if (_timer.GetMinuteCount() >= 30) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
@@ -48,14 +61,11 @@ namespace LSB.Components.UI {
 
 			if (_timer.GetMinuteCount() % 5 != 0) _itemDrop = false;
 
-			if (_timer.GetMinuteCount() % 5 == 0 && !_itemDrop) {
-				displayItemSelector();
-				_itemDrop = true;
-			}
+			if (_timer.GetMinuteCount() % 5 != 0 || _timer.GetMinuteCount() == 0 || _itemDrop) return;
 			
-			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+			displayItemSelector();
+			_itemDrop = true;
 			
-			if(!_gameManager.GamePaused() && !_gameManager.GameEnded()) _timer.UpdateTimer();
 		}
 
 		private void displayItemSelector() {
@@ -105,6 +115,22 @@ namespace LSB.Components.UI {
 
 		private void updateHpUI() {
 			
+		}
+
+		private void handlePauseMenu() {
+			_gameManager.SetGameState(_gameManager.GamePaused() ? GameState.Running : GameState.Paused);
+			
+			PauseMenu.SetActive(!PauseMenu.activeSelf);
+			ItemContainers.SetActive(!ItemContainers.activeSelf);
+			TimerText.enabled = !TimerText.IsActive();
+		}
+
+		public void OnContinueButton() {
+			_gameManager.SetGameState(GameState.Running);
+			
+			PauseMenu.SetActive(false);
+			ItemContainers.SetActive(true);
+			TimerText.enabled = true;
 		}
 	}
 	

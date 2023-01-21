@@ -32,11 +32,15 @@ namespace LSB.Classes.Player {
 		}
 
 		public void Shoot() {
-			Vector2 dir = (_input.GetMousePosition() - new Vector2(transform.position.x, transform.position.y)).normalized;
-			
-			GameObject arrow = Instantiate(ArrowPrefab, transform.position, Quaternion.identity);
+			Vector3 position = transform.position;
+			Vector2 mousePosition = _input.GetMousePosition();
 
-			arrow.GetComponent<Rigidbody2D>().velocity = dir * ArrowSpeed;
+			Vector2 dir = mousePosition - new Vector2(position.x, position.y);
+			Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg);
+			
+			GameObject arrow = Instantiate(ArrowPrefab, position, rotation);
+
+			arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * ArrowSpeed;
 			
 			_shootDelta = ShootCooldown;
 		}

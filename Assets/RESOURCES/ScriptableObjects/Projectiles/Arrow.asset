@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed59103aad8ae9479c98d8df73a7bd9, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-  Damage: 5
-  Speed: 5
-  AirTime: 2
+  Damage: 20
+  Speed: 7
+  AirTime: 5

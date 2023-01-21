@@ -180,6 +180,45 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Buttons"",
+            ""id"": ""25efdd87-30c9-472c-a51e-582209414000"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0b2d651-5175-442b-bb71-4e0fcc355a5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6da821ea-cec9-447f-a9b3-05ccd951d7e5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""529704ef-3692-4ca1-8ba8-77d805bcd018"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -222,6 +261,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_InputCharacter = asset.FindActionMap("InputCharacter", throwIfNotFound: true);
         m_InputCharacter_InputMovement = m_InputCharacter.FindAction("InputMovement", throwIfNotFound: true);
         m_InputCharacter_InputShootPosition = m_InputCharacter.FindAction("InputShootPosition", throwIfNotFound: true);
+        // Buttons
+        m_Buttons = asset.FindActionMap("Buttons", throwIfNotFound: true);
+        m_Buttons_Pause = m_Buttons.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -318,6 +360,39 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     }
     public InputCharacterActions @InputCharacter => new InputCharacterActions(this);
+
+    // Buttons
+    private readonly InputActionMap m_Buttons;
+    private IButtonsActions m_ButtonsActionsCallbackInterface;
+    private readonly InputAction m_Buttons_Pause;
+    public struct ButtonsActions
+    {
+        private @GameInput m_Wrapper;
+        public ButtonsActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_Buttons_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_Buttons; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ButtonsActions set) { return set.Get(); }
+        public void SetCallbacks(IButtonsActions instance)
+        {
+            if (m_Wrapper.m_ButtonsActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_ButtonsActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_ButtonsActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_ButtonsActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_ButtonsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public ButtonsActions @Buttons => new ButtonsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -349,5 +424,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     {
         void OnInputMovement(InputAction.CallbackContext context);
         void OnInputShootPosition(InputAction.CallbackContext context);
+    }
+    public interface IButtonsActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }
