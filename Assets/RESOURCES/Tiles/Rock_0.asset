@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Tree_Bottom
+  m_Name: Rock_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -972666506, guid: 46520232a824ada498e83954cf025441, type: 3}
+  m_Sprite: {fileID: -1575423888, guid: 097bafe0882d9a444883d31c2e17c09c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -48,7 +48,7 @@ namespace LSB.Classes.Enemies {
 
             TakeDamage(col.collider.GetComponent<Arrow>().GetDamage());
 
-            if (_currentHp > 0) {
+            if (_currentHp <= 0) {
                 Die(gameObject);
             }
 

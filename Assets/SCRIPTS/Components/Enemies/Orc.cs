@@ -9,8 +9,7 @@ namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour {
 		private Chase _movement;
 		private MeleeAttack _attack;
-
-		[SerializeField] private Stats BaseStats;
+		
 		[SerializeField] private Stats CurrentStats;
 
 		private Enemy _enemy;
@@ -38,11 +37,7 @@ namespace LSB.Components.Enemies {
 				return;
 			}
 
-			if (_enemy.OnCollide(collision, gameObject))
-			{
-				StartCoroutine(_enemy.ChangeColor(Color.red));
-				_enemy.TakeDamage(collision.collider.GetComponentInParent<Arrow>().GetDamage());
-			}
+			if (_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 
 		

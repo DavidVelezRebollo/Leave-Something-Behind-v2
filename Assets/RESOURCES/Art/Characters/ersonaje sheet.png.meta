@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ee67679f5a04d94db218ff41bf617c0
+guid: 06dee6715b61d9d4db39ae1f9d05191f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tower_Top_NB
+      name: ersonaje sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 256
-        height: 192
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e306f85be90ab1e488e618429ff70002
-      internalID: -477135335
+      spriteID: 5021795e083d45e4d8af278b6f413bd0
+      internalID: -2032540746
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_Up_NB
+      name: ersonaje sheet_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09dd46369b4ec1047989fc13598af378
+      internalID: -1890427569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ersonaje sheet_2
       rect:
         serializedVersion: 2
         x: 256
-        y: 192
-        width: 256
-        height: 192
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +173,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a13bcada2fd0d84aa85ed343dedc9ac
-      internalID: 217164054
+      spriteID: 49d1f7fc436939945853e4cf32e79919
+      internalID: -729210798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Car_NB
+      name: ersonaje sheet_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86f8d08470c065a458a6c6acb536d65c
+      internalID: -1572605419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ersonaje sheet_4
       rect:
         serializedVersion: 2
         x: 512
-        y: 209
-        width: 256
-        height: 175
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,41 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48540b52e034c5d4eb63ae7e8fe0c3bb
-      internalID: 1631466493
+      spriteID: 9f11f6663d1c5f142bdb8e2519e12ac9
+      internalID: 1869675725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lamp_Top_NB
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 192
-        width: 256
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd8ef6aa912629140a3ea6832a71dc9d
-      internalID: 582865624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tower_Bottom_NB
+      name: ersonaje sheet_5
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 192
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +236,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45ef66de99608314ab40b92eb1f92a13
-      internalID: 2058962453
+      spriteID: 49e438db71d709d4c8ca568680691ccb
+      internalID: 838173111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_Bottom_NB
+      name: ersonaje sheet_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3106d6997c2f97443a5f38d350ce3e40
+      internalID: 1795621554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ersonaje sheet_7
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 256
-        height: 192
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,20 +278,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20a394cb24f490e48b2717131ff616e3
-      internalID: 1012258744
+      spriteID: b0c98af0d98ef04428a31ee26f1b3b6f
+      internalID: -1779749570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_6
+      name: ersonaje sheet_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afa60fca2cdb81445801c03159e2cfb9
+      internalID: 1531227556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ersonaje sheet_9
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 256
-        height: 209
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,29 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8020957e76d08bd40894b69a40258fc3
-      internalID: -1508138141
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lamp_Bottom_NB
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42922933017bef544be7bbb64c51959c
-      internalID: -94001532
+      spriteID: 06a2c44634aa71e429a11a3fd5323ac8
+      internalID: -883462516
       vertices: []
       indices: 
       edges: []
@@ -295,14 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      props_6: -1508138141
-      Lamp_Bottom_NB: -94001532
-      Tower_Bottom_NB: 2058962453
-      Tower_Top_NB: -477135335
-      Lamp_Top_NB: 582865624
-      Tree_Up_NB: 217164054
-      Car_NB: 1631466493
-      Tree_Bottom_NB: 1012258744
+      ersonaje sheet_6: 1795621554
+      ersonaje sheet_5: 838173111
+      ersonaje sheet_3: -1572605419
+      ersonaje sheet_9: -883462516
+      ersonaje sheet_4: 1869675725
+      ersonaje sheet_0: -2032540746
+      ersonaje sheet_2: -729210798
+      ersonaje sheet_8: 1531227556
+      ersonaje sheet_7: -1779749570
+      ersonaje sheet_1: -1890427569
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

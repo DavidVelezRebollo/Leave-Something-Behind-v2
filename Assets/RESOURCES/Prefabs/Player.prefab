@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 261895441
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1975817894, guid: be8a5468dbdf3ad47be6ae7fb1d3d508, type: 3}
+  m_Sprite: {fileID: -2032540746, guid: 06dee6715b61d9d4db39ae1f9d05191f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   ArrowSpeed: 5
   ArrowPrefab: {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
   CurrentStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}
-  ShootCooldown: 1.5
+  ShootCooldown: 1
 --- !u!50 &7817655970097789286
 Rigidbody2D:
   serializedVersion: 4

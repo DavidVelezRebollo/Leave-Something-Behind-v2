@@ -38,6 +38,10 @@ namespace LSB.Components.Items {
             return Info.Name;
         }
 
+        public string GetTechnicalDescription() {
+            return Info.TechnicDescription;
+        }
+
         /// <summary>
         /// Gets the description of the item
         /// </summary>

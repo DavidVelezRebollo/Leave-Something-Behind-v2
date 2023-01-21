@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -27,7 +28,7 @@ namespace LSB.Components.Items {
         public Action OnItemInitialize;
 
         [Tooltip("Player Items List")]
-        private List<Item> _playerItems;
+        private Dictionary<int, Item> _playerItems;
 
         [Tooltip("Number of Normal Items which the player will have")]
         private const int _NORMAL_ITEMS_COUNT = 4;
@@ -35,7 +36,7 @@ namespace LSB.Components.Items {
         private const int _NARRATIVE_ITEMS_COUNT = 2;
 
         private void Start() {
-            _playerItems = new List<Item>();
+            _playerItems = new Dictionary<int, Item>();
             fillBackPack();
         }
 
@@ -52,7 +53,7 @@ namespace LSB.Components.Items {
             for (int i = 0; i < _NORMAL_ITEMS_COUNT; i++) {
                 int index = Random.Range(0, NormalItems.Count);
                 
-                _playerItems.Add(NormalItems[index]);
+                _playerItems.Add(i, NormalItems[index]);
                 NormalItems[index].UseItem();
                 ItemContainer.gameObject.transform.GetChild(i).GetComponent<Image>().sprite = NormalItems[index].GetSprite();
                 NormalItems.RemoveAt(index);
@@ -62,7 +63,7 @@ namespace LSB.Components.Items {
             for (int i = 0; i < _NARRATIVE_ITEMS_COUNT; i++) {
                 int index = Random.Range(0, NarrativeItems.Count);
                 
-                _playerItems.Add(NarrativeItems[index]);
+                _playerItems.Add(i + _NORMAL_ITEMS_COUNT, NarrativeItems[index]);
                 NarrativeItems[index].UseItem();
                 ItemContainer.gameObject.transform.GetChild(i + _NORMAL_ITEMS_COUNT).GetComponent<Image>().sprite = NarrativeItems[index].GetSprite();
                 NarrativeItems.RemoveAt(index);
@@ -70,21 +71,32 @@ namespace LSB.Components.Items {
 
             OnItemInitialize?.Invoke();
         }
+
+        public int ItemsRemaining() { return _playerItems.Count; }
+
+        public Item GetItem(int index) { return _playerItems[index]; }
         
         /// <summary>
         /// Drops an item and undo its function
         /// </summary>
-        /// <param name="itemImage">The image used to represent the item</param>
-        public void DropItem(Image itemImage) {
-            Item itemToDrop = _playerItems.Find(i => i.GetSprite() == itemImage.sprite);
+        /// <param name="index">The key used to identify the item</param>
+        public void DropItem(int index = 0) {
+            if (_playerItems.Count == 1) {
+                _playerItems.Last().Value.UndoItem();
+                _playerItems.Remove(_playerItems.Last().Key);
+                return;
+            }
+            
+            Item itemToDrop = _playerItems[index];
 
             if (itemToDrop == null) {
-                Debug.LogWarning("Item " + itemImage.name + " not found");
+                Debug.LogError("Item with index" + index + " not found");
                 return;
             }
 
             itemToDrop.UndoItem();
-            _playerItems.Remove(itemToDrop);
+            ItemContainer.gameObject.transform.GetChild(index).GetComponent<Image>().color = Color.black;
+            _playerItems.Remove(index);
         }
 
     }

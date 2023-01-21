@@ -13,7 +13,6 @@ namespace LSB.Components.Player {
 		[Header("Player Stats")]
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
-		[SerializeField] private Projectile ArrowStats;
 
 		private CinemachineVirtualCamera _playerCamera;
 		private SpriteRenderer _renderer;

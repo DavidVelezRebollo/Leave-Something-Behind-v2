@@ -1,5 +1,6 @@
 using System;
 using LSB.Classes.Enemies;
+using LSB.Components.Core;
 using LSB.Components.Items;
 using LSB.Components.Player;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace LSB.Components.Enemies {
 		[SerializeField] private GameObject WizardPrefab;
 
 		private Transform _playerTransform;
+		private GameManager _gameManager;
 		private float _generationDelta;
 		private bool _canGenerate;
 		private int _waveNumber;
@@ -30,7 +32,8 @@ namespace LSB.Components.Enemies {
         }
 
         private void OnEnable() {
-			BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
+	        _gameManager = GameManager.Instance;
+	        BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
 
 			_generationDelta = EnemyGenerationCooldown;
 			_canGenerate = false;
@@ -43,6 +46,7 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void Update() {
+			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
 			_generationDelta -= Time.deltaTime;
 			if (_generationDelta <= 0) _canGenerate = true;
 
