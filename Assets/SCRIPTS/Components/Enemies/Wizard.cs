@@ -21,7 +21,8 @@ namespace LSB.Components.Enemies {
 			_movement = new Chase(transform, GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_attack = GetComponent<DistanceAttack>();
 
-			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
+			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<Animator>(), 
+				GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
 			
 			_enemy.SetState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
 			

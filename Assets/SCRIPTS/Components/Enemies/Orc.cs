@@ -16,9 +16,9 @@ namespace LSB.Components.Enemies {
 		private Enemy _enemy;
 
 		private void OnEnable() {
-			
 			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);
-			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
+			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
+				CurrentStats.MaxHp);
 			
 			_attack = new MeleeAttack();
 

@@ -14,18 +14,20 @@ namespace LSB.Classes.Enemies {
 
         private readonly GameManager _gameManager;
         public Action<GameObject> OnEnemyDie;
+        private readonly EnemyAnimation _animation;
 
         private readonly SpriteRenderer _renderer;
         private Transform _player;
         private float _currentHp;
 
-        public Enemy(IEnemyMove movementType, IAttack attackType, SpriteRenderer renderer, float currentHp) {
+        public Enemy(IEnemyMove movementType, IAttack attackType, Animator animator, SpriteRenderer renderer, float currentHp) {
             _movement = movementType;
             _attack = attackType;
             _renderer = renderer;
             _currentHp = currentHp;
-            
+
             _gameManager = GameManager.Instance;
+            _animation = new EnemyAnimation(animator, this);
         }
         
         public void Start() {
@@ -39,6 +41,7 @@ namespace LSB.Classes.Enemies {
         public void Move() {
             if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
             _movement?.Move(_player.position);
+            _animation.TickUpdate();
         }
 
         public void Attack() {
@@ -55,6 +58,11 @@ namespace LSB.Classes.Enemies {
 
             _currentState = state;
             _currentState.Enter();
+        }
+
+        public Vector2 GetLastDirection() 
+        {
+            return _movement.GetLastDirection();
         }
 
         public bool OnCollide(Collision2D col, GameObject gameObject) {
