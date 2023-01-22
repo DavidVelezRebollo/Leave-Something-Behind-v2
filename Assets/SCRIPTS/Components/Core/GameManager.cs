@@ -13,7 +13,7 @@ namespace LSB.Components.Core {
 	
 	public class GameManager : MonoBehaviour {
 		#region Singleton
-
+		private GameState _gameState;
 		public static GameManager Instance;
 
 		private void Awake() {
@@ -26,15 +26,13 @@ namespace LSB.Components.Core {
 
 		#endregion
 
-		private GameState _gameState;
+		
 		[SerializeField] private Texture2D HandleCursor;
 		[SerializeField] private Texture2D TargetCursor;
 
-		public void Update() {
-			if (!GameEnded()) return;
-			
-			if(_gameState == GameState.Lost) handleDefeat();
-			if(_gameState == GameState.Won) handleVictory();
+		public GameState GetGameState()
+		{
+			return _gameState;
 		}
 
 		public void SetGameState(GameState state) {
@@ -46,16 +44,6 @@ namespace LSB.Components.Core {
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }
 
 		public bool GamePaused() { return _gameState == GameState.Paused; }
-
-		private void handleVictory() {
-			Debug.LogError("TO DO - Victory Scene");
-			SetGameState(GameState.Menu);
-		}
-
-		private void handleDefeat() {
-			Debug.LogError("TO DO - Defeat Scene");
-			SetGameState(GameState.Menu);
-		}
 
 		/*public void ResetGame()
         {

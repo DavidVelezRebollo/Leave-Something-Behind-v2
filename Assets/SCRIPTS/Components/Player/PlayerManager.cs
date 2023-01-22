@@ -84,9 +84,7 @@ namespace LSB.Components.Player {
 		}
 
 		private void die() {
-			// TODO - Player Die
 			_gameManager.SetGameState(GameState.Lost);
-			Debug.LogError("TODO - Player die");
 		}
 		
 		public IEnumerator ChangeColor(Color color) {
