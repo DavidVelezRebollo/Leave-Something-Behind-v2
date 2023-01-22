@@ -8,6 +8,7 @@ using LSB.Components.Items;
 using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
@@ -157,6 +158,12 @@ namespace LSB.Components.UI {
 			PauseMenu.SetActive(false);
 			ItemContainers.SetActive(true);
 			TimerText.enabled = true;
+		}
+
+		public void OnExitButton()
+		{
+			GameManager.Instance.SetGameState(GameState.Paused);
+			SceneManager.LoadScene(0);
 		}
 	}
 	
