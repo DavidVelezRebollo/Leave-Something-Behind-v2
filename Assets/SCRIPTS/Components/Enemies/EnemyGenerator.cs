@@ -14,8 +14,6 @@ namespace LSB.Components.Enemies {
 		[Range(1, 20)] [SerializeField] private int MaxEnemies;
 		[Header("Unity Prefabs")]
 		[SerializeField] private GameObject OrcPrefab;
-		[SerializeField] private Stats OrcCurrentStats;
-		[SerializeField] private Stats OrcBaseStats;
 		[SerializeField] private GameObject WizardPrefab;
 
 		private Transform _playerTransform;
@@ -26,12 +24,7 @@ namespace LSB.Components.Enemies {
 		private int _enemyNumber;
 		private int _currentWave;
 
-        private void Awake()
-        {
-			ResetStats();
-        }
-
-        private void OnEnable() {
+		private void OnEnable() {
 	        _gameManager = GameManager.Instance;
 	        BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
 
@@ -52,7 +45,7 @@ namespace LSB.Components.Enemies {
 
 			if (!_canGenerate || _enemyNumber >= MaxEnemies) return;
 
-			generateWave(OrcPrefab, typeof(Orc), 2);
+			generateWave(WizardPrefab, typeof(Wizard), 3);
 			_canGenerate = false;
 			_generationDelta = EnemyGenerationCooldown;
 		}
@@ -68,7 +61,8 @@ namespace LSB.Components.Enemies {
 				y = playerPosition.y + Random.Range(-5f, 5f);
 
 				GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, y), Quaternion.identity);
-				if(enemyType == typeof(Orc)) enemy.GetComponent<Orc>().SuscribeEvent(onEnemyDieInvoke);
+				if(enemyType == typeof(Orc)) enemy.GetComponent<Orc>().SubscribeEvent(onEnemyDieInvoke);
+				if(enemyType == typeof(Wizard)) enemy.GetComponent<Wizard>().SubscribeEvent(onEnemyDieInvoke);
 
 				_enemyNumber++;
 				i++;
@@ -79,13 +73,6 @@ namespace LSB.Components.Enemies {
 
 		private void onEnemyDieInvoke() {
 			_enemyNumber--;
-		}
-
-		private void ResetStats()
-		{
-			OrcCurrentStats.Damage = OrcBaseStats.Damage;
-			OrcCurrentStats.Speed = OrcBaseStats.Speed;
-			OrcCurrentStats.MaxHp = OrcBaseStats.MaxHp;
 		}
 	}
 }

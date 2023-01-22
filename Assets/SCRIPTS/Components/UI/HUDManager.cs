@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using LSB.Classes.UI;
 using LSB.Input;
@@ -6,6 +7,7 @@ using LSB.Components.Player;
 using LSB.Components.Items;
 using TMPro;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
@@ -13,6 +15,9 @@ namespace LSB.Components.UI {
 		[SerializeField] private GameObject ItemContainers;
 		[SerializeField] private TextMeshProUGUI TimerText;
 		[SerializeField] private GameObject PauseMenu;
+		[Header("HP UI Fields")]
+		[SerializeField] private Image HpBar;
+		[SerializeField] private TextMeshProUGUI HpText;
 		[Space(15)]
 		[Header("Item Selector Fields")]
 		[SerializeField] private GameObject ItemSelectorPanel;
@@ -35,6 +40,7 @@ namespace LSB.Components.UI {
 		private int _rightItem;
 		private int _leftItem;
 		private bool _itemDrop;
+		private bool _hpCheck = true;
 		
 		private void Start() {
 			_gameManager = GameManager.Instance;
@@ -44,6 +50,7 @@ namespace LSB.Components.UI {
 
 			_timer = new Timer();
 			_player.OnTakeDamage += updateHpUI;
+			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
 		}
 
 		private void Update() {
@@ -114,7 +121,26 @@ namespace LSB.Components.UI {
 		}
 
 		private void updateHpUI() {
+			float playerCurrentHp = _player.GetCurrentHp();
+			float playerMaxHp = _player.GetMaxHp();
 			
+			HpText.text = Mathf.FloorToInt(playerCurrentHp).ToString();
+			HpBar.fillAmount = playerCurrentHp / playerMaxHp;
+			
+			switch (HpBar.fillAmount) {
+				case <= 0.75f and > 0.5f:
+					HpBar.color = Color.yellow;
+					break;
+				case <= 0.5f and > 0.25f:
+					HpBar.color = new Color(1f, 0.5f, 0f);
+					break;
+				case <= 0.25f:
+					HpBar.color = Color.red;
+					break;
+				default:
+					HpBar.color = Color.green;
+					break;
+			}
 		}
 
 		private void handlePauseMenu() {

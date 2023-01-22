@@ -1,3 +1,17 @@
 {
-	"name": "Project.Classes.State"
+    "name": "Project.Classes.State",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e96b040be1517084f87c403d77f42a0a",
+        "GUID:66e9c664c1b810d4f8cdc1f33faf6e15"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using LSB.Classes.Player;
+using LSB.Components.Combat;
 using LSB.Components.Core;
 using LSB.Components.Items;
 using LSB.Interfaces;
@@ -20,6 +21,7 @@ namespace LSB.Components.Player {
 
 		private IShoot _shoot;
 		private PlayerMovement _movement;
+		private PlayerAnimation _animation;
 		private float _currentHp;
 
 		public Action OnTakeDamage;
@@ -32,6 +34,7 @@ namespace LSB.Components.Player {
 			BackPack.Instance.OnItemInitialize += InitializeStats;
 			
 			_shoot = GetComponent<PlayerAttack>();
+			_animation = new PlayerAnimation(GetComponentInChildren<Animator>());
 			_playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
 			_renderer = GetComponentInChildren<SpriteRenderer>();
 			_gameManager = GameManager.Instance;
@@ -47,6 +50,7 @@ namespace LSB.Components.Player {
 		private void Update() {
 			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
 			_shoot.TickUpdate();
+			_animation.TickUpdate();
 		}
 
 		private void FixedUpdate() {
@@ -54,21 +58,30 @@ namespace LSB.Components.Player {
 			_movement.Move();
 		}
 
-		public void TakeDamage(float amount) {
-			if (_currentHp <= 0) {
-				die();
-				return;
-			}
+		private void LateUpdate() {
+			if (_currentHp > 0) return;
 			
+			die();
+		}
+
+		private void OnCollisionEnter2D(Collision2D col) {
+			if(col.collider.CompareTag("EnemyProjectiles")) 
+				TakeDamage(col.collider.GetComponent<ProjectileComponent>().GetDamage());
+		}
+
+		public float GetMaxHp() {
+			return CurrentStats.MaxHp;
+		}
+
+		public float GetCurrentHp() {
+			return _currentHp;
+		}
+
+		public void TakeDamage(float amount) {
 			StartCoroutine(ChangeColor(Color.red));
 			_currentHp -= amount;
 			OnTakeDamage?.Invoke();
 		}
-
-		public float GetDamage()
-        {
-			return CurrentStats.Damage;
-        }
 
 		private void die() {
 			// TODO - Player Die

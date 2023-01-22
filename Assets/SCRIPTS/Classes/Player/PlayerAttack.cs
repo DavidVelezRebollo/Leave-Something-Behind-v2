@@ -1,3 +1,4 @@
+using System;
 using LSB.Interfaces;
 using LSB.Input;
 using UnityEngine;
@@ -6,7 +7,6 @@ using LSB.Shared;
 
 namespace LSB.Classes.Player {
 	public class PlayerAttack : MonoBehaviour, IShoot {
-		[SerializeField] private float ArrowSpeed = 5f;
 		private InputHandler _input;
 		[SerializeField] private GameObject ArrowPrefab;
 		[SerializeField] private Stats CurrentStats;
@@ -14,14 +14,14 @@ namespace LSB.Classes.Player {
 		[SerializeField] private float ShootCooldown;
 		private float _shootDelta;
 
-        private void Awake()
-        {
-			ArrowPrefab.GetComponent<Arrow>().ResetStats();
-        }
-        private void Start() {
+		private void Awake() {
+			ArrowPrefab.GetComponent<ProjectileComponent>().Reset();
+		}
+
+		private void Start() {
 			_input = InputHandler.Instance;
 			_shootDelta = 0.5f;
-			ArrowPrefab.GetComponent<Arrow>().MutiplyDamage(CurrentStats.Damage);
+			ArrowPrefab.GetComponent<ProjectileComponent>().MultiplyDamage(CurrentStats.Damage);
 		}
 
 		public void TickUpdate() {
@@ -40,7 +40,8 @@ namespace LSB.Classes.Player {
 			
 			GameObject arrow = Instantiate(ArrowPrefab, position, rotation);
 
-			arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * ArrowSpeed;
+			float speed = arrow.GetComponent<ProjectileComponent>().GetSpeed();
+			arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * speed;
 			
 			_shootDelta = ShootCooldown;
 		}

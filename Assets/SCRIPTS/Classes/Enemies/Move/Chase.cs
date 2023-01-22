@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace LSB.Classes.Enemies {
     public class Chase : IEnemyMove {
-        private Rigidbody2D _rigidbody2D;
-        private Transform _transform;
-        private float _speed;
+        private readonly Rigidbody2D _rigidbody2D;
+        private readonly Transform _transform;
+        private readonly float _speed;
 
         public Chase(Transform transform, Rigidbody2D rb, float speed) {
             _rigidbody2D = rb;

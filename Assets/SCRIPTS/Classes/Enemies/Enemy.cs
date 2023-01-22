@@ -7,11 +7,10 @@ using LSB.Components.Core;
 using Object = UnityEngine.Object;
 
 namespace LSB.Classes.Enemies {
-    public class Enemy
-    {
+    public class Enemy {
         private readonly IEnemyMove _movement;
-        private IAttack _attack;
-        private IState _state;
+        private readonly IAttack _attack;
+        private IState _currentState;
 
         private readonly GameManager _gameManager;
         public Action OnEnemyDie;
@@ -35,7 +34,6 @@ namespace LSB.Classes.Enemies {
 
         public void TakeDamage(float amount) {
             _currentHp -= amount;
-
         }
 
         public void Move() {
@@ -43,10 +41,26 @@ namespace LSB.Classes.Enemies {
             _movement?.Move(_player.position);
         }
 
+        public void Attack() {
+            if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+            _attack?.Attack();
+        }
+
+        public IState GetCurrentState() {
+            return _currentState;
+        }
+        
+        public void SetState(IState state) {
+            _currentState?.Exit();
+
+            _currentState = state;
+            _currentState.Enter();
+        }
+
         public bool OnCollide(Collision2D col, GameObject gameObject) {
             if (!col.collider.CompareTag("Bullets")) return false;
 
-            TakeDamage(col.collider.GetComponent<Arrow>().GetDamage());
+            TakeDamage(col.collider.GetComponent<ProjectileComponent>().GetDamage());
 
             if (_currentHp <= 0) {
                 Die(gameObject);
