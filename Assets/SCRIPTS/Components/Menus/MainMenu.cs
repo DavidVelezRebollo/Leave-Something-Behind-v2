@@ -11,6 +11,7 @@ namespace LSB.Components.Menus
     {
         #region Methods
 
+        
         /// <summary>
         /// Function that runs when the start button is clicked.
         /// </summary>

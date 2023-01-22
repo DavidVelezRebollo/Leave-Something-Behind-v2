@@ -22,6 +22,7 @@ namespace RoundTableStudio.UI
 		private SoundManager _soundManager;
 		private Queue<string> _sentences;
 		private bool _finished;
+		[SerializeField] private GameObject ContinueButton;
 
 		private void OnEnable()
 		{
@@ -62,7 +63,8 @@ namespace RoundTableStudio.UI
 			}
 
 			//EndCinematic();
-			SceneManager.LoadScene(1);
+			if (SceneManager.GetActiveScene().buildIndex == 0) SceneManager.LoadScene(1);
+			else if (ContinueButton!=null) ContinueButton.SetActive(true);
 		}
 
 		private void DisplayNextSentence(string sentence)

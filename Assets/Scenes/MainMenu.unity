@@ -1574,6 +1574,7 @@ MonoBehaviour:
   - Parece que no le caigo muy bien
   - "\xA1\xA1\xA1\xA1\xA1\xA1\xA1AHHHHH!!!!!!!"
   CinematicText: {fileID: 1661558128}
+  ContinueButton: {fileID: 0}
 --- !u!1 &513803451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838886cb0db8b7d448808db83fe09d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HandleCursor: {fileID: 2800000, guid: f266db8a900b70b40a8374d62e7ab6b8, type: 3}
+  TargetCursor: {fileID: 2800000, guid: 8c80aff495bcdcf49b8aeae5b8554f86, type: 3}
 --- !u!114 &949132895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,18 +4546,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LSB.Components.Menus.MainMenu, Project.Components.Menus
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

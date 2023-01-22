@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LSB.Components.Core {
 	public enum GameState {
@@ -25,10 +26,13 @@ namespace LSB.Components.Core {
 		#endregion
 
 		private GameState _gameState;
-		
+		[SerializeField] private Texture2D HandleCursor;
+		[SerializeField] private Texture2D TargetCursor;
 
-		public void SetGameState(GameState state) {
+        public void SetGameState(GameState state) {
 			_gameState = state;
+			if(state==GameState.Paused) Cursor.SetCursor(HandleCursor, new Vector2(0, 0), CursorMode.Auto);
+			else if(state==GameState.Running) Cursor.SetCursor(TargetCursor, new Vector2(0, 0), CursorMode.Auto);
 		}
 
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }

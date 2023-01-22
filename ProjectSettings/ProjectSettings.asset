@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Leave-Something-Behind-v2
-  defaultCursor: {fileID: 2800000, guid: 8c80aff495bcdcf49b8aeae5b8554f86, type: 3}
+  defaultCursor: {fileID: 2800000, guid: f266db8a900b70b40a8374d62e7ab6b8, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
