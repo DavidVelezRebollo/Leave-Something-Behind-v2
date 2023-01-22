@@ -813,8 +813,8 @@ MonoBehaviour:
   ItemGrid: {fileID: 82591791}
   TimerText: {fileID: 855559214}
   PauseMenu: {fileID: 497262970}
-  Victory: {fileID: 0}
-  Defeat: {fileID: 0}
+  Victory: {fileID: 891148367}
+  Defeat: {fileID: 1123965677}
   HpBar: {fileID: 2102299817}
   HpText: {fileID: 463181943}
   ItemSelectorPanel: {fileID: 2076277753}
@@ -1222,7 +1222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &412365737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2834,7 +2834,7 @@ MonoBehaviour:
   Sentences:
   - El mundo se cae a pedazos...
   - Por mi culpa.
-  - Mis viajes han desastibilizado demasiado el espaciotiempo.
+  - Mis viajes han desestibilizado el espaciotiempo.
   - "Quiz\xE1s..."
   - "quiz\xE1s si yo no hubiera existido..."
   - "todo ser\xEDa diferente..."
@@ -3211,7 +3211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1049925628
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4961,7 +4961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 229646688}
         m_TargetAssemblyTypeName: LSB.Components.UI.HUDManager, Project.Components.UI
         m_MethodName: OnExitButton
         m_Mode: 1

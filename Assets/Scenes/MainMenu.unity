@@ -2603,6 +2603,20 @@ MonoBehaviour:
     PlayOnAwake: 0
     Volume: 0.2
     Source: {fileID: 0}
+  - ClipName: MenuSong
+    AudioType: 0
+    AudioClip: {fileID: 8300000, guid: 390b43a14cb84c140bbbfaec8b746d11, type: 3}
+    IsLoop: 1
+    PlayOnAwake: 1
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: ThemeSong
+    AudioType: 0
+    AudioClip: {fileID: 8300000, guid: 38637eae6a6058c4cb69b097c206bf8c, type: 3}
+    IsLoop: 1
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
 --- !u!114 &949132894
 MonoBehaviour:
   m_ObjectHideFlags: 0

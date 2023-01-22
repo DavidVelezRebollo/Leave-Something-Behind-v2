@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using LSB.Components.Audio;
 
 namespace LSB.Components.Core {
 	public enum GameState {
@@ -37,8 +38,18 @@ namespace LSB.Components.Core {
 
 		public void SetGameState(GameState state) {
 			_gameState = state;
-			if(state == GameState.Paused || state == GameState.Menu) Cursor.SetCursor(HandleCursor, new Vector2(0, 0), CursorMode.Auto);
-			else if(state == GameState.Running) Cursor.SetCursor(TargetCursor, new Vector2(0, 0), CursorMode.Auto);
+			if (state == GameState.Paused || state == GameState.Menu)
+			{
+				Cursor.SetCursor(HandleCursor, new Vector2(0, 0), CursorMode.Auto);
+				SoundManager.Instance.Play("MenuSong");
+				SoundManager.Instance.Stop("ThemeSong");
+			}
+			else if (state == GameState.Running)
+			{
+				Cursor.SetCursor(TargetCursor, new Vector2(0, 0), CursorMode.Auto);
+				SoundManager.Instance.Play("ThemeSong");
+				SoundManager.Instance.Stop("MenuSong");
+			}
 		}
 
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }

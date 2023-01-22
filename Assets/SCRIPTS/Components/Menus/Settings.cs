@@ -135,7 +135,6 @@ namespace LSB.Components.Menus {
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
         }
 
-
         #endregion
     }
     

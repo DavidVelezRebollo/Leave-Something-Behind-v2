@@ -25,7 +25,7 @@ namespace LSB.Components.Enemies {
 		private GameManager _gameManager;
 		private HUDManager _hud;
 		private float _generationDelta;
-		private bool _canGenerate;
+		private bool _canGenerate;		// dirtyFlag
 		private bool _generating;
 
 		private int _wizardNumber;
