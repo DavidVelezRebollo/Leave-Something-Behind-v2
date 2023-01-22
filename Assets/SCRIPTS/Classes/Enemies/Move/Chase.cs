@@ -7,6 +7,8 @@ namespace LSB.Classes.Enemies {
         private readonly Transform _transform;
         private readonly float _speed;
         private Vector2 _lastDirection;
+        //private GameObject _enemy;
+        //private Enemy _die;
 
         public Chase(Transform transform, Rigidbody2D rb, float speed) {
             _rigidbody2D = rb;
@@ -15,6 +17,9 @@ namespace LSB.Classes.Enemies {
         }
         
         public void Move(Vector3 playerPosition) {
+            float distance = Vector3.Distance(playerPosition, _transform.position);
+            //if(distance > 5) { _die.Die(_enemy);  return; }
+
             Vector2 dir = (playerPosition - _transform.position).normalized;
             _lastDirection = dir;
             _rigidbody2D.MovePosition(_rigidbody2D.position + _speed * Time.fixedDeltaTime * dir);

@@ -77,9 +77,10 @@ namespace LSB.Classes.Enemies {
             return true;
         }
 
-        private void Die(GameObject enemy) {
+        public void Die(GameObject enemy) {
             OnEnemyDie?.Invoke(enemy);
             Object.Destroy(enemy);
+            Debug.Log("Died");
         }
 
         public IEnumerator ChangeColor(Color color) {

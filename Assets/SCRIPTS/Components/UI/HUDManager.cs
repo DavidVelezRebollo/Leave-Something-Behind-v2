@@ -32,6 +32,8 @@ namespace LSB.Components.UI {
 		[SerializeField] private TextMeshProUGUI RightItemDescription;
 		[SerializeField] private TextMeshProUGUI RightItemTechnicalDescription;
 
+		[SerializeField] private GameObject ObjectExplanationPanel;
+
 		private GameManager _gameManager;
 		private PlayerManager _player;
 		private BackPack _backPack;
@@ -67,16 +69,16 @@ namespace LSB.Components.UI {
 				return;
 			}
 
-			if (_timer.GetMinuteCount() % 5 != 0) _itemDrop = false;
+			if (_timer.GetMinuteCount() % 2 != 0) _itemDrop = false;
 
-			if (_timer.GetMinuteCount() % 5 != 0 || _timer.GetMinuteCount() == 0 || _itemDrop) return;
-			
-			displayItemSelector();
-			_itemDrop = true;
+			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetMinuteCount() == 0 || _itemDrop) return;
+
+			if (_backPack.ItemsRemaining() != 6) DisplayItemSelector();
+			else ObjectExplanationPanel.SetActive(true);
 			
 		}
 
-		private void displayItemSelector() {
+		public void DisplayItemSelector() {
 			GameManager.Instance.SetGameState(GameState.Paused);
 			
 			ItemSelectorPanel.SetActive(true);
@@ -105,6 +107,8 @@ namespace LSB.Components.UI {
 			else {
 				_backPack.DropItem();
 			}
+
+			_itemDrop = true;
 		}
 
 		public void OnLeftItemSelect() {
