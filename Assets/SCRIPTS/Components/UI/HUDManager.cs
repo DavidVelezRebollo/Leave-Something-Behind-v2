@@ -17,6 +17,8 @@ namespace LSB.Components.UI {
 		[SerializeField] private GameObject ItemGrid;
 		[SerializeField] private TextMeshProUGUI TimerText;
 		[SerializeField] private GameObject PauseMenu;
+		[SerializeField] private GameObject Victory;
+		[SerializeField] private GameObject Defeat;
 		[Header("HP UI Fields")]
 		[SerializeField] private Image HpBar;
 		[SerializeField] private TextMeshProUGUI HpText;
@@ -39,6 +41,7 @@ namespace LSB.Components.UI {
 		private PlayerManager _player;
 		private BackPack _backPack;
 		private InputHandler _input;
+		
 
 		private Timer _timer;
 		private int _rightItem;
@@ -46,6 +49,7 @@ namespace LSB.Components.UI {
 		private bool _itemDrop;
 
 		private void Start() {
+			
 			_gameManager = GameManager.Instance;
 			_player = FindObjectOfType<PlayerManager>();
 			_backPack = BackPack.Instance;
@@ -57,14 +61,17 @@ namespace LSB.Components.UI {
 		}
 
 		private void Update() {
-			if(_input.OnPauseButton()) handlePauseMenu();
+			if (_gameManager.GetGameState() == GameState.Lost) { handleDefeat(); return; }
+			if (_gameManager.GetGameState() == GameState.Won) { handleVictory(); return; }
+
+			if (_input.OnPauseButton()) handlePauseMenu();
 			if (_gameManager.GamePaused() || _gameManager.GameEnded()) return;
 			
 			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
 			
 			_timer.UpdateTimer();
 			
-			if (_timer.GetMinuteCount() >= 12) {
+			if (_timer.GetMinuteCount() >= 3) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}
@@ -80,6 +87,7 @@ namespace LSB.Components.UI {
 			}
 			
 		}
+		
 
 		public void DisplayItemSelector() {
 			_gameManager.SetGameState(GameState.Paused);
@@ -179,6 +187,19 @@ namespace LSB.Components.UI {
 		{
 			GameManager.Instance.SetGameState(GameState.Paused);
 			SceneManager.LoadScene(0);
+		}
+
+
+		private void handleVictory()
+		{
+			_gameManager.SetGameState(GameState.Menu);
+			Victory.SetActive(true);
+		}
+
+		private void handleDefeat()
+		{
+			_gameManager.SetGameState(GameState.Menu);
+			Defeat.SetActive(true);
 		}
 	}
 	
