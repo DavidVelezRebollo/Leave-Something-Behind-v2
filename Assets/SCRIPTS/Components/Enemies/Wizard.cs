@@ -27,6 +27,7 @@ namespace LSB.Components.Enemies {
 			_enemy.SetState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
 			
 			_enemy.Start();
+			_attack.SetEnemyStats(CurrentStats);
 		}
 
 		private void FixedUpdate() {

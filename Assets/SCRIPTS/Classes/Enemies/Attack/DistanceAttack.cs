@@ -2,18 +2,26 @@ using System;
 using LSB.Components.Combat;
 using LSB.Interfaces;
 using UnityEngine;
+using LSB.Shared;
 
 namespace LSB.Classes.Enemies {
     public class DistanceAttack : MonoBehaviour, IAttack {
         [SerializeField] private GameObject ProjectilePrefab;
         [SerializeField] private float AttackCooldown;
+        private Stats _enemyStats;
 
         private Transform _playerTransform;
         private float _cooldownDelta;
 
-        private void Awake() {
+        private void Start() {
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             ProjectilePrefab.GetComponent<ProjectileComponent>().Reset();
+            ProjectilePrefab.GetComponent<ProjectileComponent>().MultiplyDamage(_enemyStats.Damage);
+        }
+
+        public void SetEnemyStats(Stats enemyStats)
+        {
+            _enemyStats = enemyStats;   
         }
 
         public void Attack() {
@@ -32,6 +40,8 @@ namespace LSB.Classes.Enemies {
 
             _cooldownDelta = AttackCooldown;
         }
+
+
     }
 }
 
