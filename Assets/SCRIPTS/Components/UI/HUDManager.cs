@@ -42,7 +42,7 @@ namespace LSB.Components.UI {
 		private int _leftItem;
 		private bool _itemDrop;
 		private bool _hpCheck = true;
-		
+
 		private void Start() {
 			_gameManager = GameManager.Instance;
 			_player = FindObjectOfType<PlayerManager>();
@@ -119,6 +119,10 @@ namespace LSB.Components.UI {
 			_gameManager.SetGameState(GameState.Running);
 			ItemSelectorPanel.SetActive(false);
 			ItemContainers.SetActive(true);
+		}
+
+		public float GetMinutes() {
+			return _timer.GetMinuteCount();
 		}
 
 		private void updateHpUI() {

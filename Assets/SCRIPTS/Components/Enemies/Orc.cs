@@ -29,7 +29,7 @@ namespace LSB.Components.Enemies {
 			_enemy.Move();
 		}
 
-		public void SubscribeEvent(Action function) {
+		public void SubscribeEvent(Action<GameObject> function) {
 			_enemy.OnEnemyDie += function;
 		}
 

@@ -2,7 +2,8 @@
     "name": "Project.Components.Combat",
     "rootNamespace": "",
     "references": [
-        "GUID:50fdd4a39f8219f41ab721d8ca0d2862"
+        "GUID:50fdd4a39f8219f41ab721d8ca0d2862",
+        "GUID:a396edb63bba0f04e959d0e27fac1b28"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

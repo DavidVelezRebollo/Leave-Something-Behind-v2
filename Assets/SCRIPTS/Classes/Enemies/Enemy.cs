@@ -13,7 +13,7 @@ namespace LSB.Classes.Enemies {
         private IState _currentState;
 
         private readonly GameManager _gameManager;
-        public Action OnEnemyDie;
+        public Action<GameObject> OnEnemyDie;
 
         private readonly SpriteRenderer _renderer;
         private Transform _player;
@@ -70,7 +70,7 @@ namespace LSB.Classes.Enemies {
         }
 
         private void Die(GameObject enemy) {
-            OnEnemyDie?.Invoke();
+            OnEnemyDie?.Invoke(enemy);
             Object.Destroy(enemy);
         }
 
