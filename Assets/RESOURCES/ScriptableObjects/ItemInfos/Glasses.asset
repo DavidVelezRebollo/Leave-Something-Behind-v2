@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 1a61f4a63878947448414c5395919ffa, type: 3}
   Name: Gafas
-  Description: Las necesitas para ver.
+  Description: "Las necesitas para ver. Tienen 2 diopt\xEDas en un ojoy 42 en otro."
   TechnicDescription: Aumentan un 60% tu visibilidad.
   Type: 1

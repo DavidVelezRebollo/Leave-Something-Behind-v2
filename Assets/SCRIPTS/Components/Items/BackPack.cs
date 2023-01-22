@@ -75,6 +75,8 @@ namespace LSB.Components.Items {
         public int ItemsRemaining() { return _playerItems.Count; }
 
         public Item GetItem(int index) { return _playerItems[index]; }
+
+        public bool ExistItem(int index) { return _playerItems.ContainsKey(index); }
         
         /// <summary>
         /// Drops an item and undo its function

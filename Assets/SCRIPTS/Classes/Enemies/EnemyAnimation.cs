@@ -23,6 +23,10 @@ namespace LSB.Classes.Enemies {
 			_animator.SetFloat(XDirection, _moveDirection.x);
 		}
 
+		public void StopAnimation() {
+			
+		}
+
 		private Vector2 clamp(Vector2 clamp)
         {
 			Vector2 vectorClamped = new Vector2(-1,0);

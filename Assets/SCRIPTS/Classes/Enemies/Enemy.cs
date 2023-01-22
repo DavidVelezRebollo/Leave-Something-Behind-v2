@@ -60,6 +60,10 @@ namespace LSB.Classes.Enemies {
             _currentState.Enter();
         }
 
+        public EnemyAnimation GetAnimation() {
+            return _animation;
+        }
+        
         public Vector2 GetLastDirection() 
         {
             return _movement.GetLastDirection();

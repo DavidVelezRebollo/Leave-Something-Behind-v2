@@ -14,6 +14,7 @@ namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
 		[Header("UI Fields")] 
 		[SerializeField] private GameObject ItemContainers;
+		[SerializeField] private GameObject ItemGrid;
 		[SerializeField] private TextMeshProUGUI TimerText;
 		[SerializeField] private GameObject PauseMenu;
 		[Header("HP UI Fields")]
@@ -43,7 +44,6 @@ namespace LSB.Components.UI {
 		private int _rightItem;
 		private int _leftItem;
 		private bool _itemDrop;
-		private bool _hpCheck = true;
 
 		private void Start() {
 			_gameManager = GameManager.Instance;
@@ -86,11 +86,13 @@ namespace LSB.Components.UI {
 			
 			ItemSelectorPanel.SetActive(true);
 			ItemContainers.SetActive(false);
+			ItemGrid.SetActive(false);
+			
 			if (_backPack.ItemsRemaining() > 1) {
 				do {
 					_rightItem = Random.Range(0, _backPack.ItemsRemaining());
 					_leftItem = Random.Range(0, _backPack.ItemsRemaining());
-				} while (_rightItem == _leftItem);
+				} while (_rightItem == _leftItem && (!_backPack.ExistItem(_rightItem) || !_backPack.ExistItem(_leftItem)));
 				
 				Item leftItem = _backPack.GetItem(_leftItem);
 				Item rightItem = _backPack.GetItem(_rightItem);
@@ -119,6 +121,7 @@ namespace LSB.Components.UI {
 			_gameManager.SetGameState(GameState.Running);
 			ItemSelectorPanel.SetActive(false);
 			ItemContainers.SetActive(true);
+			ItemGrid.SetActive(true);
 		}
 
 		public void OnRightItemSelect() {
@@ -126,6 +129,7 @@ namespace LSB.Components.UI {
 			_gameManager.SetGameState(GameState.Running);
 			ItemSelectorPanel.SetActive(false);
 			ItemContainers.SetActive(true);
+			ItemGrid.SetActive(true);
 		}
 
 		public float GetMinutes() {

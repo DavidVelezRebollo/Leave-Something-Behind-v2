@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 6b430e4616917b94ea729c1c5fa12f7a, type: 3}
   Name: Casco de obra
-  Description: ...
+  Description: pRotEJe tu cAvESa dE gHOlpHES
   TechnicDescription: "Reduce el da\xF1o de los orcos en un 10%"
   Type: 0

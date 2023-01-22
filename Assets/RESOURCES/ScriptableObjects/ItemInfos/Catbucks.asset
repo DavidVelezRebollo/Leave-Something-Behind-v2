@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Catbucks
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 8a82576d5b3912e48992e625f97582b6, type: 3}
-  Name: "Caf\xE9 del Catbucks"
-  Description: "No sabe a caf\xE9, \npero te costo 1000 bitcoins."
+  Name: Cafe del Catbucks
+  Description: "No sabe a caf\xE9, pero te costo 1000 bitcoins."
   TechnicDescription: Aumenta tu vida en un 10%
   Type: 0
