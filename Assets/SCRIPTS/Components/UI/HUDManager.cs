@@ -71,7 +71,7 @@ namespace LSB.Components.UI {
 			
 			_timer.UpdateTimer();
 			
-			if (_timer.GetMinuteCount() >= 3) {
+			if (_timer.GetMinuteCount() >= 12) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}

@@ -19,7 +19,6 @@ namespace LSB.Classes.State {
         
         public void Enter() {
             _player = GameObject.FindWithTag("Player").transform;
-            _enemy.GetAnimation().StopAnimation();
         }
 
         public void Exit() { }
