@@ -279,7 +279,13 @@ namespace LSB.Components.Core {
 		private void generateTerrain(Vector3Int pos, Vector3Int deletePos) {
 			FloorTilemap.SetTile(pos, Grass);
 
-			if (DecorationTilemap.GetTile(pos) == Tree[1] || DecorationTilemap.GetTile(pos) == Lamp[1] || DecorationTilemap.GetTile(pos) == Tower[1]) {
+			if (DecorationTilemap.GetTile(pos) != null) {
+				FloorTilemap.SetTile(deletePos, null);
+				DecorationTilemap.SetTile(deletePos, null);
+				return;
+			}
+
+			if (DecorationTilemap.GetTile(pos + new Vector3Int(0, 1, 0)) != null) {
 				FloorTilemap.SetTile(deletePos, null);
 				DecorationTilemap.SetTile(deletePos, null);
 				return;
@@ -290,28 +296,36 @@ namespace LSB.Components.Core {
 			float[,] noiseMap = generatePerlinNoise();
 			
 			float value = noiseMap[Random.Range(0, MapWidth), Random.Range(0, MapHeight)];
-			if (value > _TREES_PROBABILITY && value <= _DECORATION_PROBABILITY) {
-				int index = Random.Range(0, Decoration.Length);
-				isFloor = true;
-				tile = Decoration[index];
-			} else if (value > _HEN_PROBABILITY && value <= _TREES_PROBABILITY) {
-				isDecoration = true;
-				tile = Tree[0];
-				DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tree[1]);
-			} else if (value <= _LAMP_PROBABILITY) {
-				isDecoration = true;
-				tile = Lamp[0];
-				DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Lamp[1]);
-			} else if (value > _LAMP_PROBABILITY && value <= _TOWER_PROBABILITY) {
-				isDecoration = true;
-				tile = Tower[0];
-				DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tower[1]);
-			} else if (value > _TOWER_PROBABILITY && value <= _CAR_PROBABILITY) {
-				isDecoration = true;
-				tile = Car;
-			} else if (value > _CAR_PROBABILITY && value <= _HEN_PROBABILITY) {
-				isDecoration = true;
-				tile = Hen;
+			
+			switch (value) {
+				case > _TREES_PROBABILITY and <= _DECORATION_PROBABILITY: 
+					int index = Random.Range(0, Decoration.Length);
+					isFloor = true;
+					tile = Decoration[index];
+					break;
+				case > _HEN_PROBABILITY and <= _TREES_PROBABILITY:
+					isDecoration = true;
+					tile = Tree[0];
+					DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tree[1]);
+					break;
+				case <= _LAMP_PROBABILITY:
+					isDecoration = true;
+					tile = Lamp[0];
+					DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Lamp[1]);
+					break;
+				case > _LAMP_PROBABILITY and <= _TOWER_PROBABILITY:
+					isDecoration = true;
+					tile = Tower[0];
+					DecorationTilemap.SetTile(pos + new Vector3Int(0, 1, 0), Tower[1]);
+					break;
+				case > _TOWER_PROBABILITY and <= _CAR_PROBABILITY:
+					isDecoration = true;
+					tile = Car;
+					break;
+				case > _CAR_PROBABILITY and <= _HEN_PROBABILITY:
+					isDecoration = true;
+					tile = Hen;
+					break;
 			}
 			
 			if(isFloor) FloorTilemap.SetTile(pos, tile);

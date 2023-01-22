@@ -3150,8 +3150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyGenerationCooldown: 3
   MaxEnemies: 2800000014000000
-  OrcPrefab: {fileID: 507024110704347947, guid: 77488009cd1329b46beb87069569c35a, type: 3}
-  WizardPrefab: {fileID: 1828492275894917167, guid: 2ab22bb875614a64fbfdc20c3cb92c44, type: 3}
+  OrcPrefab: {fileID: 507024110704347946, guid: 77488009cd1329b46beb87069569c35a, type: 3}
+  WizardPrefab: {fileID: -2407235474405418368, guid: 2ab22bb875614a64fbfdc20c3cb92c44, type: 3}
 --- !u!4 &1050759871
 Transform:
   m_ObjectHideFlags: 0

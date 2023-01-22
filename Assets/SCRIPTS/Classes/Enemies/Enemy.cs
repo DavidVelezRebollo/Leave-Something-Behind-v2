@@ -80,7 +80,6 @@ namespace LSB.Classes.Enemies {
         public void Die(GameObject enemy) {
             OnEnemyDie?.Invoke(enemy);
             Object.Destroy(enemy);
-            Debug.Log("Died");
         }
 
         public IEnumerator ChangeColor(Color color) {

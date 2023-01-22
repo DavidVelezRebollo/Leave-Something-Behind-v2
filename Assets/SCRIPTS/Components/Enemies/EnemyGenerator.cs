@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
-using LSB.Classes.Enemies;
+using LSB.Classes.ObjectPool;
 using LSB.Components.Core;
 using LSB.Components.Items;
 using LSB.Components.Player;
 using LSB.Components.UI;
+using LSB.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using LSB.Shared;
 
 namespace LSB.Components.Enemies {
 	public class EnemyGenerator : MonoBehaviour {
@@ -15,8 +15,11 @@ namespace LSB.Components.Enemies {
 		[SerializeField] private float EnemyGenerationCooldown;
 		[Range(1, 100)] [SerializeField] private int[] MaxEnemies;
 		[Header("Unity Prefabs")]
-		[SerializeField] private GameObject OrcPrefab;
-		[SerializeField] private GameObject WizardPrefab;
+		[SerializeField] private MonoBehaviour OrcPrefab;
+		[SerializeField] private MonoBehaviour WizardPrefab;
+
+		private ObjectPool _orcPool;
+		private ObjectPool _wizardPool;
 
 		private Transform _playerTransform;
 		private GameManager _gameManager;
@@ -35,6 +38,9 @@ namespace LSB.Components.Enemies {
 	        _gameManager = GameManager.Instance;
 	        _hud = FindObjectOfType<HUDManager>();
 	        BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
+
+	        _orcPool = new ObjectPool((IPooledObject)OrcPrefab, true);
+	        _wizardPool = new ObjectPool((IPooledObject)WizardPrefab, true);
 
 			_generationDelta = EnemyGenerationCooldown;
 			_canGenerate = false;
@@ -88,22 +94,22 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void handleWaves() {
-			if (_hud.GetMinutes() < 5f) {
-				StartCoroutine(generateEnemies(OrcPrefab, typeof(Orc), 10));
-			} else if (_hud.GetMinutes() >= 5f && _hud.GetMinutes() < 10f) {
-				StartCoroutine(generateEnemies(OrcPrefab, typeof(Orc), 15));
-				StartCoroutine(generateEnemies(WizardPrefab, typeof(Wizard), 3));
-			} else if (_hud.GetMinutes() >= 10f && _hud.GetMinutes() < 15f) {
-				StartCoroutine(generateEnemies(OrcPrefab, typeof(Orc), 8));
-				StartCoroutine(generateEnemies(WizardPrefab, typeof(Wizard), 5));
-			} else if (_hud.GetMinutes() >= 15f && _hud.GetMinutes() < 20f) {
-				StartCoroutine(generateEnemies(OrcPrefab, typeof(Orc), 5));
-				StartCoroutine(generateEnemies(WizardPrefab, typeof(Wizard), 8));
-			} else if (_hud.GetMinutes() >= 20f && _hud.GetMinutes() < 25f) {
-				StartCoroutine(generateEnemies(OrcPrefab, typeof(Orc), 3));
-				StartCoroutine(generateEnemies(WizardPrefab, typeof(Wizard), 15));
-			} else if (_hud.GetMinutes() >= 25f) {
-				StartCoroutine(generateEnemies(WizardPrefab, typeof(Wizard), 20));
+			if (_hud.GetMinutes() < 2f) {
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10));
+			} else if (_hud.GetMinutes() >= 2f && _hud.GetMinutes() < 4f) {
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 3));
+			} else if (_hud.GetMinutes() >= 4f && _hud.GetMinutes() < 6f) {
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 8));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5));
+			} else if (_hud.GetMinutes() >= 6f && _hud.GetMinutes() < 8f) {
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 5));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8));
+			} else if (_hud.GetMinutes() >= 8f && _hud.GetMinutes() < 10f) {
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 3));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 15));
+			} else if (_hud.GetMinutes() >= 10f) {
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 20));
 			}
 			
 			_generationDelta = EnemyGenerationCooldown;

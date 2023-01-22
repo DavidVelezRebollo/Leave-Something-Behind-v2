@@ -64,7 +64,7 @@ namespace LSB.Components.UI {
 			
 			_timer.UpdateTimer();
 			
-			if (_timer.GetMinuteCount() >= 30) {
+			if (_timer.GetMinuteCount() >= 12) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}
@@ -74,12 +74,15 @@ namespace LSB.Components.UI {
 			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetMinuteCount() == 0 || _itemDrop) return;
 
 			if (_backPack.ItemsRemaining() != 6) DisplayItemSelector();
-			else ObjectExplanationPanel.SetActive(true);
+			else {
+				_gameManager.SetGameState(GameState.Paused);
+				ObjectExplanationPanel.SetActive(true);
+			}
 			
 		}
 
 		public void DisplayItemSelector() {
-			GameManager.Instance.SetGameState(GameState.Paused);
+			_gameManager.SetGameState(GameState.Paused);
 			
 			ItemSelectorPanel.SetActive(true);
 			ItemContainers.SetActive(false);

@@ -1,12 +1,13 @@
 using System;
 using LSB.Classes.Enemies;
 using LSB.Classes.State;
+using LSB.Interfaces;
 using LSB.Shared;
 using UnityEngine;
 
 namespace LSB.Components.Enemies {
 	[RequireComponent(typeof(DistanceAttack))]
-	public class Wizard : MonoBehaviour {
+	public class Wizard : MonoBehaviour, IPooledObject {
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
 		[SerializeField] private float StopDistance = 5f;
@@ -28,6 +29,21 @@ namespace LSB.Components.Enemies {
 			
 			_enemy.Start();
 			_attack.SetEnemyStats(CurrentStats);
+		}
+		
+		public bool Active {
+			get => gameObject.activeSelf;
+			set => gameObject.SetActive(true);
+		}
+		
+		public void Reset() {
+			
+		}
+
+		public IPooledObject Clone() {
+			GameObject wizardGo = Instantiate(gameObject);
+			Wizard wizard = wizardGo.GetComponent<Wizard>();
+			return wizard;
 		}
 
 		private void FixedUpdate() {

@@ -1,12 +1,12 @@
 using System;
 using LSB.Classes.Enemies;
 using LSB.Components.Player;
+using LSB.Interfaces;
 using LSB.Shared;
 using UnityEngine;
-using LSB.Components.Combat;
 
 namespace LSB.Components.Enemies {
-	public class Orc : MonoBehaviour {
+	public class Orc : MonoBehaviour, IPooledObject {
 		private Chase _movement;
 		private MeleeAttack _attack;
 
@@ -14,6 +14,21 @@ namespace LSB.Components.Enemies {
 		[SerializeField] private Stats CurrentStats;
 
 		private Enemy _enemy;
+		
+		public bool Active {
+			get => gameObject.activeSelf;
+			set => gameObject.SetActive(true);
+		}
+
+		public void Reset() {
+			
+		}
+
+		public IPooledObject Clone() {
+			GameObject orcGo = Instantiate(gameObject);
+			Orc orc = orcGo.GetComponent<Orc>();
+			return orc;
+		}
 
 		private void OnEnable() {
 			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);

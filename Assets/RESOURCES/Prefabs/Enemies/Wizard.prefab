@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6051073299227498509}
   - component: {fileID: 4493124558228954610}
-  - component: {fileID: -3578447519916912779}
   - component: {fileID: -2407235474405418368}
+  - component: {fileID: -3578447519916912779}
   m_Layer: 9
   m_Name: Wizard
   m_TagString: Enemy
@@ -56,20 +56,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-3578447519916912779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828492275894917167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b025f4c9cfd825c4fb221c9137ee4e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 1619766739610770898, guid: 79fb393d959ed684aab404fcd9db25eb, type: 3}
-  AttackCooldown: 3.5
 --- !u!114 &-2407235474405418368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +71,20 @@ MonoBehaviour:
   BaseStats: {fileID: 11400000, guid: ea0af82c343b28b4fb70dfd1835e2ba4, type: 2}
   CurrentStats: {fileID: 11400000, guid: 1f820f00c20c03348a1e49394f65598f, type: 2}
   StopDistance: 5
+--- !u!114 &-3578447519916912779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828492275894917167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b025f4c9cfd825c4fb221c9137ee4e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 1619766739610770898, guid: 79fb393d959ed684aab404fcd9db25eb, type: 3}
+  AttackCooldown: 3.5
 --- !u!1 &4977447025618178865
 GameObject:
   m_ObjectHideFlags: 0
