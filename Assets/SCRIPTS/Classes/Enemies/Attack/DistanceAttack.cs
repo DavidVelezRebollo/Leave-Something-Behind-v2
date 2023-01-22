@@ -11,7 +11,7 @@ namespace LSB.Classes.Enemies {
         private Transform _playerTransform;
         private float _cooldownDelta;
 
-        private void OnEnable() {
+        private void Awake() {
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             ProjectilePrefab.GetComponent<ProjectileComponent>().Reset();
         }

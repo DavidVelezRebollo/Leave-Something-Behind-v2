@@ -25,6 +25,7 @@ namespace LSB.Components.Enemies {
 		private int _currentWave;
 
 		private void OnEnable() {
+			resetStats();
 	        _gameManager = GameManager.Instance;
 	        BackPack.Instance.OnItemInitialize += () => { _canGenerate = true; };
 
@@ -73,6 +74,12 @@ namespace LSB.Components.Enemies {
 
 		private void onEnemyDieInvoke() {
 			_enemyNumber--;
+		}
+
+		private void resetStats()
+        {
+			OrcPrefab.GetComponent<Orc>().ResetStats();
+			WizardPrefab.GetComponent<Wizard>().ResetStats();
 		}
 	}
 }

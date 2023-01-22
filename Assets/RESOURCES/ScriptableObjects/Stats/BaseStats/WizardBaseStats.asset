@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WizardBaseStats
   m_EditorClassIdentifier: 
   Damage: 3
-  MaxHp: 10
+  MaxHp: 30
   Speed: 1.5

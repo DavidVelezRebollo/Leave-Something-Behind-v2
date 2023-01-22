@@ -16,7 +16,6 @@ namespace LSB.Components.Enemies {
 		private Enemy _enemy;
 
 		private void OnEnable() {
-			resetStats();
 			
 			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
@@ -43,7 +42,7 @@ namespace LSB.Components.Enemies {
 			if (_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 
-		private void resetStats() {
+		public void ResetStats() {
 			CurrentStats.Damage = BaseStats.Damage;
 			CurrentStats.Speed = BaseStats.Speed;
 			CurrentStats.MaxHp = BaseStats.MaxHp;
