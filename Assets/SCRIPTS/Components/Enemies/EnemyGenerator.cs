@@ -94,21 +94,21 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void handleWaves() {
-			if (_hud.GetMinutes() < 2f) {
+			if (_hud.GetMinutes() > 9f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10));
-			} else if (_hud.GetMinutes() >= 2f && _hud.GetMinutes() < 4f) {
+			} else if (_hud.GetMinutes() <= 9f && _hud.GetMinutes() > 7f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 3));
-			} else if (_hud.GetMinutes() >= 4f && _hud.GetMinutes() < 6f) {
+			} else if (_hud.GetMinutes() <= 7f && _hud.GetMinutes() > 5f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 8));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5));
-			} else if (_hud.GetMinutes() >= 6f && _hud.GetMinutes() < 8f) {
+			} else if (_hud.GetMinutes() <= 5f && _hud.GetMinutes() > 3f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 5));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8));
-			} else if (_hud.GetMinutes() >= 8f && _hud.GetMinutes() < 10f) {
+			} else if (_hud.GetMinutes() <= 3f && _hud.GetMinutes() > 1f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 3));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 15));
-			} else if (_hud.GetMinutes() >= 10f) {
+			} else if (_hud.GetMinutes() < 1f) {
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 20));
 			}
 			

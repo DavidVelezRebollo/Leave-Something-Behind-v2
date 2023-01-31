@@ -55,7 +55,7 @@ namespace LSB.Components.UI {
 			_backPack = BackPack.Instance;
 			_input = InputHandler.Instance;
 
-			_timer = new Timer();
+			_timer = new Timer(12);
 			_player.OnTakeDamage += updateHpUI;
 			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
 		}
@@ -67,18 +67,19 @@ namespace LSB.Components.UI {
 			if (_input.OnPauseButton()) handlePauseMenu();
 			if (_gameManager.GamePaused() || _gameManager.GameEnded()) return;
 			
-			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
-			
 			_timer.UpdateTimer();
 			
-			if (_timer.GetMinuteCount() >= 12) {
+			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+			
+			if (_timer.GetMinuteCount() <= 0) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}
 
-			if (_timer.GetMinuteCount() % 2 != 0) _itemDrop = false;
+			if (_timer.GetMinuteCount() % 2 != 0 && _timer.GetSecondCount() != 0) _itemDrop = false;
 
-			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetMinuteCount() == 0 || _itemDrop) return;
+			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetSecondCount() != 0
+			    || _timer.GetMinuteCount() ==  _timer.GetTotalMinutes() || _itemDrop) return;
 
 			if (_backPack.ItemsRemaining() != 6) DisplayItemSelector();
 			else {
@@ -100,7 +101,8 @@ namespace LSB.Components.UI {
 				do {
 					_rightItem = Random.Range(0, _backPack.ItemsRemaining());
 					_leftItem = Random.Range(0, _backPack.ItemsRemaining());
-				} while (_rightItem == _leftItem && (!_backPack.ExistItem(_rightItem) || !_backPack.ExistItem(_leftItem)));
+					Debug.Log("Right Item: " + _rightItem + "; Left Item: " + _leftItem);
+				} while (_rightItem == _leftItem && !_backPack.ExistItem(_rightItem) && !_backPack.ExistItem(_leftItem));
 				
 				Item leftItem = _backPack.GetItem(_leftItem);
 				Item rightItem = _backPack.GetItem(_rightItem);
