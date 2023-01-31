@@ -32,7 +32,7 @@ namespace LSB.Classes.State {
                 _enemy.Attack();
             }
             else
-                _enemy.SetState(new Chasing(_enemy, _enemyTransform, _stopDistance, _rigidBody));
+                _enemy.SetCurrentState(new Chasing(_enemy, _enemyTransform, _stopDistance, _rigidBody));
         }
     }
 }

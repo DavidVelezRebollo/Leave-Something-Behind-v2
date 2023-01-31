@@ -31,13 +31,11 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void OnEnable() {
-			_movement = new Chase(transform,  GetComponent<Rigidbody2D>(), CurrentStats.Speed);
-			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
-				CurrentStats.MaxHp);
+			_movement = new Chase(transform, GetComponent<Rigidbody2D>(), CurrentStats.Speed);
+			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
+				gameObject, CurrentStats.MaxHp);
 			
 			_attack = new MeleeAttack();
-
-			_enemy.Start();
 		}
 
 		private void FixedUpdate() {
@@ -54,7 +52,7 @@ namespace LSB.Components.Enemies {
 				return;
 			}
 
-			if (_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
+			if (_enemy.OnCollide(collision)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 
 		public void ResetStats() {

@@ -18,16 +18,15 @@ namespace LSB.Components.Enemies {
 		private Enemy _enemy;
 
 		private void OnEnable() {
-			
 			_movement = new Chase(transform, GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_attack = GetComponent<DistanceAttack>();
 
-			_enemy = new Enemy(_movement, _attack, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), CurrentStats.MaxHp);
+			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
+				gameObject, CurrentStats.MaxHp);
 			
-			_enemy.SetState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
-			
-			_enemy.Start();
-			_attack.SetEnemyStats(CurrentStats);
+			_enemy.SetCurrentState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
+
+			_attack.SetDamage(CurrentStats.Damage);
 		}
 		
 		public bool Active {
@@ -54,7 +53,7 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void OnCollisionEnter2D(Collision2D collision) {
-			if (_enemy.OnCollide(collision, gameObject)) StartCoroutine(_enemy.ChangeColor(Color.red));
+			if (_enemy.OnCollide(collision)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 		
 		public void ResetStats() {

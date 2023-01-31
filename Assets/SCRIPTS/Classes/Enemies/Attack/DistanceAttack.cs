@@ -1,47 +1,72 @@
-using System;
 using LSB.Components.Combat;
 using LSB.Interfaces;
 using UnityEngine;
-using LSB.Shared;
 
 namespace LSB.Classes.Enemies {
     public class DistanceAttack : MonoBehaviour, IAttack {
-        [SerializeField] private GameObject ProjectilePrefab;
-        [SerializeField] private float AttackCooldown;
-        private Stats _enemyStats;
+        #region Serialized Fields
 
+        [Tooltip("Projectile that will be shot")]
+        [SerializeField] private GameObject ProjectilePrefab;
+        [Tooltip("Time between shooting one projectile and another")]
+        [SerializeField] private float AttackCooldown;
+        
+        #endregion
+
+        #region Private Fields
+
+        //Damage used to multiply the projectile damage
+        private float _enemyDamage;
+        //Player position
         private Transform _playerTransform;
+        // Used on the shoot cooldown
         private float _cooldownDelta;
+
+        #endregion
+
+        #region Unity Events
 
         private void Start() {
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             ProjectilePrefab.GetComponent<ProjectileComponent>().Reset();
-            ProjectilePrefab.GetComponent<ProjectileComponent>().MultiplyDamage(_enemyStats.Damage);
+            ProjectilePrefab.GetComponent<ProjectileComponent>().MultiplyDamage(_enemyDamage);
         }
 
-        public void SetEnemyStats(Stats enemyStats)
-        {
-            _enemyStats = enemyStats;   
+        #endregion
+
+        #region Getters & Setters
+
+        /// <summary>
+        /// Sets the enemy distance damage.
+        /// </summary>
+        /// <param name="damage">The distance damage</param>
+        public void SetDamage(float damage) {
+            _enemyDamage = damage;   
         }
 
+        #endregion
+
+        #region Interface Methods
+        
         public void Attack() {
+            // Reduce the cooldown timer.
             _cooldownDelta -= Time.deltaTime;
             if (_cooldownDelta > 0) return;
             
-            Vector3 position = transform.position;
+            Vector3 position = transform.position; // Position where the projectile is shot
+            Vector2 dir = _playerTransform.position - position; // Projectile direction
+            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg); // Rotation of the projectile
 
-            Vector2 dir = _playerTransform.position - position;
-            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg);
-
+            // Creation of the projectile
             GameObject projectile = Instantiate(ProjectilePrefab, position, rotation);
-            
             float speed = projectile.GetComponent<ProjectileComponent>().GetSpeed();
             projectile.GetComponent<Rigidbody2D>().velocity = dir.normalized * speed;
 
+            // Cooldown reset
             _cooldownDelta = AttackCooldown;
         }
 
-
+        #endregion
     }
 }
 

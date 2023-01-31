@@ -34,7 +34,7 @@ namespace LSB.Classes.State {
                 _enemy.Move();
             }
             else
-                _enemy.SetState(new Attacking(_enemy, _enemyTransform, _stopDistance, _rigidBody));
+                _enemy.SetCurrentState(new Attacking(_enemy, _enemyTransform, _stopDistance, _rigidBody));
         }
     }
     
