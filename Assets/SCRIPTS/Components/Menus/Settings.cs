@@ -12,7 +12,7 @@ namespace LSB.Components.Menus {
         [Tooltip("AudioMixer.")]
         public AudioMixer AudioMixer;
 
-        private Vector2 _soundRange = new Vector2(10, -20);
+        private Vector2 _soundRange = new Vector2(-10, -50);
 
         [Tooltip("Slider to change the general volume.")]
         public Slider GeneralSlider;

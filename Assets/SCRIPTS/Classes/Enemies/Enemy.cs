@@ -29,7 +29,7 @@ namespace LSB.Classes.Enemies {
         private bool _isAttacking; // Checks if the enemy is attacking
         private bool _dying; // Checks if the enemy is dead
 
-        private const float _POTION_DROP_PROBABILITY = 0.01f; // Probability for drop a potion
+        private const float _POTION_DROP_PROBABILITY = 0.05f; // Probability for drop a potion
         private const float _COIN_DROP_PROBABILITY = 0.05f; // Probability for drop a coin
         
         #endregion
