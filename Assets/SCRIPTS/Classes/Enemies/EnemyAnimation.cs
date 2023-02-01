@@ -9,11 +9,15 @@ namespace LSB.Classes.Enemies {
 		private Vector2 _moveDirection; // Move direction of the enemy
 		private Vector2 _lastMoveDirection; // Where the enemy moves at its last movement
 		private readonly Enemy _enemy; // Attributes of the enemy
+		private GameObject _enemyGameObject;
+		private bool _dying;
 		
 		private static readonly int XDirection = Animator.StringToHash("XDirection"); // XDirection Parameter in the Animator
 		private static readonly int Horizontal = Animator.StringToHash("Horizontal"); // Horizontal Parameter in the Animator
 		private static readonly int MovementAmount = Animator.StringToHash("MovementAmount"); // MovementAmount Parameter in the Animator
-		
+		private static readonly int Attacking = Animator.StringToHash("Attacking"); // IsAttacking Parameter in the Animator
+		private static readonly int Die = Animator.StringToHash("Die"); // IsAttacking Parameter in the Animator
+
 		#endregion
 
 		#region Constructor
@@ -26,6 +30,8 @@ namespace LSB.Classes.Enemies {
 		public EnemyAnimation(Animator animator, Enemy enemy) {
 			_animator = animator;
 			_enemy = enemy;
+
+			_enemy.OnEnemyDie += onEnemyDie;
 		}
 
 		#endregion
@@ -36,6 +42,13 @@ namespace LSB.Classes.Enemies {
 		/// Update of the Animator Handler
 		/// </summary>
 		public void TickUpdate() {
+			if (_dying) {
+				if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
+				if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+					Object.Destroy(_enemyGameObject);
+				return;
+			}
+			
 			if (_moveDirection.x != 0 || _moveDirection.y != 0)
 				_lastMoveDirection = _moveDirection;
 			
@@ -54,7 +67,14 @@ namespace LSB.Classes.Enemies {
 			
 			_animator.SetFloat(XDirection, _lastMoveDirection.x);
 			_animator.SetFloat(Horizontal, _moveDirection.x);
-			_animator.SetFloat(MovementAmount, Mathf.Clamp01(Mathf.Abs(_enemy.GetLastDirection().x) + Mathf.Abs(_enemy.GetLastDirection().y)));
+			_animator.SetFloat(MovementAmount, 1);
+			_animator.SetBool(Attacking, _enemy.IsAttacking());
+		}
+
+		private void onEnemyDie(GameObject enemy) {
+			_animator.SetTrigger(Die);
+			_enemyGameObject = enemy;
+			_dying = true;
 		}
 
 		/// <summary>

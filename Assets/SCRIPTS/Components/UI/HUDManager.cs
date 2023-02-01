@@ -101,8 +101,7 @@ namespace LSB.Components.UI {
 				do {
 					_rightItem = Random.Range(0, _backPack.ItemsRemaining());
 					_leftItem = Random.Range(0, _backPack.ItemsRemaining());
-					Debug.Log("Right Item: " + _rightItem + "; Left Item: " + _leftItem);
-				} while (_rightItem == _leftItem && !_backPack.ExistItem(_rightItem) && !_backPack.ExistItem(_leftItem));
+				} while (_rightItem == _leftItem || !_backPack.ExistItem(_rightItem) || !_backPack.ExistItem(_leftItem));
 				
 				Item leftItem = _backPack.GetItem(_leftItem);
 				Item rightItem = _backPack.GetItem(_rightItem);

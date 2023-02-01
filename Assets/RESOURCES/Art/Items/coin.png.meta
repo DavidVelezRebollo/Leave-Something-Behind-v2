@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 097bafe0882d9a444883d31c2e17c09c
+guid: efb47d4b8e651644a87438fccd5405b7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,10 +44,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 164
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,29 +101,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock_2
+      name: Coin_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 142df84a0ceda2c40a6be95908d9d0e5
-      internalID: 147465205
+      spriteID: 027af929ac1f4614291bfc0a002bec04
+      internalID: 1154204208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock_1
+      name: Coin_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 40
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb00e8b02e74b404584accaeb6d266f0
-      internalID: 212943388
+      spriteID: 77d84937ef8c66f4db32935e96109174
+      internalID: -913469387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_2
+      name: Coin_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 80
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d868cbe1a8abdf45bb2fea74bc53672
-      internalID: 2002385087
+      spriteID: d8c9aea2025d52749af248dddb0884fe
+      internalID: 447211921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock_0
+      name: Coin_3
       rect:
         serializedVersion: 2
-        x: 768
+        x: 120
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 898eccf3745a6a140a3a21107493b49b
-      internalID: -1575423888
+      spriteID: 249f17cce2ce3544394c56decc023ed4
+      internalID: -1882293689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_1
+      name: Coin_4
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 160
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6963985cc2ca1a9418f432a653073883
-      internalID: 1133718714
+      spriteID: ae471630345d7a54e984d422657b4a1a
+      internalID: 547924033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_0
+      name: Coin_5
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 200
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 261dd2ea75dc3e54fbe8d10a2d27901d
-      internalID: -1485880660
+      spriteID: 7e00b871ec2e2874189be2fecbe0bf46
+      internalID: -679721716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Default_Grass
+      name: Coin_6
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 240
         y: 0
-        width: 256
-        height: 256
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,8 +245,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca62de12a52d9d241ad3d2396f954917
-      internalID: -220966987
+      spriteID: 8f934fd900489354093d27bdf8b12a9b
+      internalID: 1352586887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coin_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3d453a48f8bd7c43860ada36e11dd6e
+      internalID: -1997599381
       vertices: []
       indices: 
       edges: []
@@ -274,13 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Grass_0: -1485880660
-      Grass_2: 2002385087
-      Default_Grass: -220966987
-      Grass_1: 1133718714
-      Rock_2: 147465205
-      Rock_0: -1575423888
-      Rock_1: 212943388
+      Coin_5: -679721716
+      Coin_7: -1997599381
+      Coin_0: 1154204208
+      Coin_6: 1352586887
+      Coin_2: 447211921
+      Coin_1: -913469387
+      Coin_3: -1882293689
+      Coin_4: 547924033
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

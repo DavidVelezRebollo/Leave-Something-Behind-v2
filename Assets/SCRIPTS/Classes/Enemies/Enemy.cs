@@ -18,10 +18,12 @@ namespace LSB.Classes.Enemies {
         private readonly EnemyAnimation _animation; // Animation Handler of the enemy
         private readonly SpriteRenderer _renderer; // Sprite Renderer Component of the enemy
 
-        private Transform _player; // Player's Transform Component
+        private readonly Transform _player; // Player's Transform Component
         private readonly Transform _transform; // Enemy's Transform Component
         private readonly GameObject _gameObject; // Enemy's GameObject
         private float _currentHp; // CurrentHP of the enemy
+        private bool _isAttacking;
+        private bool _dying;
         
         #endregion
 
@@ -105,9 +107,13 @@ namespace LSB.Classes.Enemies {
         /// Get the last direction the enemy was looking
         /// </summary>
         /// <returns>A Vector2 which indicates the last direction the enemy was looking</returns>
-        public Vector2 GetLastDirection() {
-            return _movement.GetLastDirection();
-        }
+        public Vector2 GetLastDirection() { return _movement.GetLastDirection(); }
+
+        /// <summary>
+        /// Checks if the enemy is currently attacking.
+        /// </summary>
+        /// <returns>True if its attacking. False otherwise</returns>
+        public bool IsAttacking() { return _isAttacking; }
 
         #endregion
 
@@ -117,22 +123,28 @@ namespace LSB.Classes.Enemies {
         /// Moves the enemy. Depends on the type of movement attached to the enemy
         /// </summary>
         public void Move() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
             if (Vector3.Distance(_player.position, _transform.position) >= 10) {
                 die(_gameObject);
                 return;
             }
             
             _movement?.Move(_player.position);
-            _animation.TickUpdate();
+            _isAttacking = false;
         }
         
         /// <summary>
         /// Attacks the player. Depends on the type of attack attached to the enemy
         /// </summary>
         public void Attack() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
             _attack?.Attack();
+            _isAttacking = true;
+        }
+
+        public void Animate() {
+            if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+            _animation.TickUpdate();
         }
         
         public IEnumerator ChangeColor(Color color) {
@@ -151,7 +163,9 @@ namespace LSB.Classes.Enemies {
         /// <param name="enemy">The enemy GameObject</param>
         private void die(GameObject enemy) {
             OnEnemyDie?.Invoke(enemy);
-            Object.Destroy(enemy);
+            
+            _gameObject.GetComponentInChildren<BoxCollider2D>().enabled = false;
+            _dying = true;
         }
 
         #endregion

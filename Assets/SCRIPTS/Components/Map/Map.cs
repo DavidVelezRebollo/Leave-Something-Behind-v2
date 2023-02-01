@@ -38,7 +38,7 @@ namespace LSB.Components.Core {
 		private const float _CAR_PROBABILITY = 0.10f;
 		private const float _HEN_PROBABILITY = 0.15f;
 		private const float _TREES_PROBABILITY = 0.25f;
-		private const float _DECORATION_PROBABILITY = 0.40f;
+		private const float _DECORATION_PROBABILITY = 0.35f;
 		
 		private Props[,] _cellMap;
 

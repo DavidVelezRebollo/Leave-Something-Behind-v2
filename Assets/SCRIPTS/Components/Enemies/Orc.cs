@@ -38,6 +38,10 @@ namespace LSB.Components.Enemies {
 			_attack = new MeleeAttack();
 		}
 
+		private void Update() {
+			_enemy.Animate();
+		}
+
 		private void FixedUpdate() {
 			_enemy.Move();
 		}

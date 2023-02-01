@@ -43,6 +43,10 @@ namespace LSB.Components.Enemies {
 			Wizard wizard = wizardGo.GetComponent<Wizard>();
 			return wizard;
 		}
+		
+		private void Update() {
+			_enemy.Animate();
+		}
 
 		private void FixedUpdate() {
 			_enemy.GetCurrentState().FixedUpdate();
