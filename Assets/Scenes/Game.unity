@@ -5646,6 +5646,165 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480628516}
   m_CullTransparentMesh: 1
+--- !u!1 &1487068066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487068070}
+  - component: {fileID: 1487068067}
+  - component: {fileID: 1487068069}
+  - component: {fileID: 1487068068}
+  - component: {fileID: 1487068071}
+  m_Layer: 0
+  m_Name: Corruption
+  m_TagString: Corruption
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1839735485 &1487068067
+Tilemap:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487068066}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_TileObjectToInstantiateArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+--- !u!19719996 &1487068068
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487068066}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
+--- !u!483693784 &1487068069
+TilemapRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487068066}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -2025723759
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_ChunkSize: {x: 32, y: 32, z: 32}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_MaxChunkCount: 16
+  m_MaxFrameAge: 16
+  m_SortOrder: 0
+  m_Mode: 0
+  m_DetectChunkCullingBounds: 0
+  m_MaskInteraction: 0
+--- !u!4 &1487068070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487068066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1660215224}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1487068071
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487068066}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1513143625
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,6 +6212,7 @@ Transform:
   m_Children:
   - {fileID: 1871632479}
   - {fileID: 1797098375}
+  - {fileID: 1487068070}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6070,6 +6230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorTilemap: {fileID: 1871632481}
   DecorationTilemap: {fileID: 1797098373}
+  CorruptionTilemap: {fileID: 1487068067}
   Grass: {fileID: 11400000, guid: 4ae0c947fb7e1784baa21dc80bc74dc5, type: 2}
   Decoration:
   - {fileID: 11400000, guid: cf405a7c1a1ae7d40886c7fdcd695220, type: 2}
@@ -6096,6 +6257,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7de0473d013ffc447832bcf5f940ed7e, type: 2}
   Car: {fileID: 11400000, guid: 1e85fe6cff9d30746a738b588b575ef8, type: 2}
   Hen: {fileID: 11400000, guid: 811d46424837ba548ac1c51e689e059e, type: 2}
+  CorruptedGrass: {fileID: 11400000, guid: e3c04c3824beb734496749050fe09c2c, type: 2}
+  CorruptedDecoration:
+  - {fileID: 11400000, guid: 0693c19eb4806874abd9204a3a08b3b3, type: 2}
+  - {fileID: 11400000, guid: b079d9427b1664249994496959333be2, type: 2}
+  - {fileID: 11400000, guid: 06d6f048a0e4b704593664933192fcb8, type: 2}
+  - {fileID: 11400000, guid: 274d3e333caa32148972c24c0a8c82bc, type: 2}
+  - {fileID: 11400000, guid: 96167408138c2e141b54ab3dc5fd0156, type: 2}
+  - {fileID: 11400000, guid: 4a980bb5f8e59b040afc61bec7bc6ef6, type: 2}
+  - {fileID: 11400000, guid: 2f2ae5dd8f300644596aab7599d7bedb, type: 2}
+  - {fileID: 11400000, guid: 1fe5466694fe03f40ab42256bb7ec440, type: 2}
+  - {fileID: 11400000, guid: a3010f94f782cb440be189e44235b663, type: 2}
+  - {fileID: 11400000, guid: 3ff112203e9de694f807cb92f7673270, type: 2}
+  - {fileID: 11400000, guid: a2d5f03caf635784bbb0552f6f9eefad, type: 2}
+  - {fileID: 11400000, guid: c2423258c8654f048a63ecaaa371542f, type: 2}
+  - {fileID: 11400000, guid: a9f11c4cfa09e174cb3c7f88911e1dba, type: 2}
   MapHeight: 50
   MapWidth: 50
   PlayerPrefab: {fileID: 121699565080281467, guid: 99995609e99c1324a8c2f1fa953fc69c, type: 3}

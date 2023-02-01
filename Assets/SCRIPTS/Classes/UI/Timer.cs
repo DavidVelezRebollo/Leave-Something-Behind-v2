@@ -5,13 +5,13 @@ namespace LSB.Classes.UI {
 		private float _timer;
 		private readonly int _totalMinutes;
 		private int _currentMinutes;
-		private float _currentSeconds;
+		private int _currentSeconds;
 
 		public Timer(int totalMinutes) {
 			_totalMinutes = totalMinutes * 60;
 			_timer = totalMinutes * 60;
 			_currentMinutes = totalMinutes * 60;
-			_currentSeconds = 0f;
+			_currentSeconds = 0;
 		}
 
 		public void UpdateTimer() {
@@ -22,7 +22,7 @@ namespace LSB.Classes.UI {
 
 		public int GetMinuteCount() { return _currentMinutes; }
 		
-		public float GetSecondCount() { return _currentSeconds; }
+		public int GetSecondCount() { return _currentSeconds; }
 
 		public int GetTotalMinutes() { return _totalMinutes; }
 	}

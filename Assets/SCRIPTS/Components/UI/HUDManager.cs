@@ -145,6 +145,10 @@ namespace LSB.Components.UI {
 			return _timer.GetMinuteCount();
 		}
 
+		public int GetSeconds() {
+			return _timer.GetSecondCount();
+		}
+
 		private void updateHpUI() {
 			float playerCurrentHp = _player.GetCurrentHp();
 			float playerMaxHp = _player.GetMaxHp();

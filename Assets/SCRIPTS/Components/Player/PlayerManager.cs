@@ -23,6 +23,7 @@ namespace LSB.Components.Player {
 		private PlayerMovement _movement;
 		private PlayerAnimation _animation;
 		private float _currentHp;
+		private float _immuneDelta;
 
 		public Action OnHpChange;
 
@@ -44,7 +45,7 @@ namespace LSB.Components.Player {
 		}
 
 		private void InitializeStats() {
-			_movement = new PlayerMovement(GetComponent<Rigidbody2D>(), CurrentStats.Speed);
+			_movement = new PlayerMovement(GetComponent<Rigidbody2D>());
 			_currentHp = CurrentStats.MaxHp;
 		}
 
@@ -56,7 +57,7 @@ namespace LSB.Components.Player {
 
 		private void FixedUpdate() {
 			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
-			_movement.Move();
+			_movement.Move(CurrentStats.Speed);
 		}
 
 		private void LateUpdate() {
@@ -80,6 +81,23 @@ namespace LSB.Components.Player {
 			if (col.GetComponent<Coin>() != null) {
 				Destroy(col.gameObject);
 			}
+		}
+
+		private void OnTriggerStay2D(Collider2D other) {
+			if (!other.CompareTag("Corruption")) return;
+			
+			if (_immuneDelta <= 0) {
+				TakeDamage(1f);
+				_immuneDelta = 0.2f;
+			}
+
+			_immuneDelta -= Time.deltaTime;
+		}
+
+		private void OnTriggerExit2D(Collider2D other) {
+			if (!other.CompareTag("Corruption")) return;
+
+			_immuneDelta = 0f;
 		}
 
 		public float GetMaxHp() {

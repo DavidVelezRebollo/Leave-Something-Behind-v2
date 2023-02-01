@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using LSB.Components.UI;
 using LSB.Shared;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,6 +12,7 @@ namespace LSB.Components.Core {
 		[Header("Tilemaps")]
 		[SerializeField] private Tilemap FloorTilemap;
 		[SerializeField] private Tilemap DecorationTilemap;
+		[SerializeField] private Tilemap CorruptionTilemap;
 
 		[Space(10)] [Header("Tiles")] 
 		[SerializeField] private TileBase Grass;
@@ -18,6 +23,10 @@ namespace LSB.Components.Core {
 		[SerializeField] private TileBase Car;
 		[SerializeField] private TileBase Hen;
 
+		[Space(10)] [Header("Corrupted Tiles")] 
+		[SerializeField] private TileBase CorruptedGrass;
+		[SerializeField] private TileBase[] CorruptedDecoration;
+		
 		[Space(10)] [Header("Map variables")] 
 		[SerializeField] private int MapHeight = 50;
 		[SerializeField] private int MapWidth = 50;
@@ -32,7 +41,13 @@ namespace LSB.Components.Core {
 		private int _currentGridHeightDown;
 		private int _currentGridWidthRight;
 		private int _currentGridWidthLeft;
-		
+
+		private bool _corrupted;
+		private bool _generating;
+		private int _lastSecond;
+		private List<Vector3Int> _expansionTiles;
+		private HUDManager _hudTimer;
+
 		private const float _LAMP_PROBABILITY = 0.01f;
 		private const float _TOWER_PROBABILITY = 0.05f;
 		private const float _CAR_PROBABILITY = 0.10f;
@@ -47,14 +62,31 @@ namespace LSB.Components.Core {
 
 			_currentGridHeightDown = _currentGridHeightUp = MapHeight / 2;
 			_currentGridWidthLeft = _currentGridWidthRight = MapWidth / 2;
-			
+			_expansionTiles = new List<Vector3Int>();
+
 			generateCellMap();
 			drawMap();
+		}
+
+		private void Start() {
+			_hudTimer = FindObjectOfType<HUDManager>();
 		}
 
 		private void Update() {
 			_playerCellPosition = FloorTilemap.WorldToCell(_player.position);
 			infiniteGeneration();
+
+			if (_lastSecond != _hudTimer.GetSeconds())
+				_corrupted = false;
+			
+			if (_generating == false)
+				StartCoroutine(CorruptTerrain());
+
+			if (_hudTimer.GetSeconds() % 30 != 0 || _corrupted || _hudTimer.GetSeconds() == 0) return;
+			
+			NewExpansionTile();
+			_corrupted = true;
+			_lastSecond = _hudTimer.GetSeconds();
 		}
 
 		private void generateCellMap() {
@@ -342,6 +374,55 @@ namespace LSB.Components.Core {
 			// TODO - Determine if the player can spawn
 			GameObject player = Instantiate(PlayerPrefab, new Vector3(0, 0), Quaternion.identity);
 			_player = player.transform;
+		}
+
+		private void NewExpansionTile() {
+			int x = Random.Range(-6, 7);
+			int y = Random.Range(-6, 7);
+			
+			_expansionTiles.Add(new Vector3Int(_playerCellPosition.x + x, _playerCellPosition.y + y, 0));
+		}
+
+		private IEnumerator CorruptTerrain() {
+			_generating = true;
+			int initCount = _expansionTiles.Count;
+
+			for (int i = 0; i < initCount; i++) {
+				int x = Random.Range(-1, 2);
+				int y = 0;
+
+				if (x == 0) y = Random.Range(-1, 2);
+				else {
+					do y = Random.Range(-1, 2);
+					while (y == 0);
+				}
+
+				Vector3Int tile = new Vector3Int(_expansionTiles[i].x + x, _expansionTiles[i].y + y, 0);
+				if (FloorTilemap.GetTile(tile) != Grass) {
+					bool found = false;
+					int a = 0;
+
+					while (a < Decoration.Length && !found) {
+						if (Decoration[a] == FloorTilemap.GetTile(tile)) {
+							CorruptionTilemap.SetTile(tile, CorruptedDecoration[a]);
+							found = true;
+						}
+
+						a++;
+					}
+				}
+				else {
+					CorruptionTilemap.SetTile(tile, CorruptedGrass);
+				}
+				
+				FloorTilemap.SetTile(tile, null);
+				
+				_expansionTiles.RemoveAt(i);
+				_expansionTiles.Add(tile);
+			}
+			yield return new WaitForSeconds(1f);
+			
+			_generating = false;
 		}
 	}
 }
