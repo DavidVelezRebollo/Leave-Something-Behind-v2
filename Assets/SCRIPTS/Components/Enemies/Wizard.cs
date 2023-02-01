@@ -8,9 +8,13 @@ using UnityEngine;
 namespace LSB.Components.Enemies {
 	[RequireComponent(typeof(DistanceAttack))]
 	public class Wizard : MonoBehaviour, IPooledObject {
+		[Header("Stats")]
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
 		[SerializeField] private float StopDistance = 5f;
+		[Header("Drop")] 
+		[SerializeField] private GameObject PotionPrefab;
+		[SerializeField] private GameObject CoinPrefab;
 		
 		private Chase _movement;
 		private DistanceAttack _attack;
@@ -22,7 +26,7 @@ namespace LSB.Components.Enemies {
 			_attack = GetComponent<DistanceAttack>();
 
 			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
-				gameObject, CurrentStats.MaxHp);
+				gameObject, CurrentStats.MaxHp, PotionPrefab, CoinPrefab);
 			
 			_enemy.SetCurrentState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
 

@@ -10,9 +10,13 @@ namespace LSB.Components.Enemies {
 		private Chase _movement;
 		private MeleeAttack _attack;
 
+		[Header("Stats")]
 		[SerializeField] private Stats BaseStats;
 		[SerializeField] private Stats CurrentStats;
-
+		[Header("Drop")] 
+		[SerializeField] private GameObject PotionPrefab;
+		[SerializeField] private GameObject CoinPrefab;
+		
 		private Enemy _enemy;
 		
 		public bool Active {
@@ -33,7 +37,7 @@ namespace LSB.Components.Enemies {
 		private void OnEnable() {
 			_movement = new Chase(transform, GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
-				gameObject, CurrentStats.MaxHp);
+				gameObject, CurrentStats.MaxHp, PotionPrefab, CoinPrefab);
 			
 			_attack = new MeleeAttack();
 		}

@@ -24,7 +24,7 @@ namespace LSB.Components.Player {
 		private PlayerAnimation _animation;
 		private float _currentHp;
 
-		public Action OnTakeDamage;
+		public Action OnHpChange;
 
 		private void OnEnable() {
 			CurrentStats.MaxHp = BaseStats.MaxHp;
@@ -67,6 +67,18 @@ namespace LSB.Components.Player {
 		private void OnCollisionEnter2D(Collision2D col) {
 			if(col.collider.CompareTag("EnemyProjectiles")) 
 				TakeDamage(col.collider.GetComponent<ProjectileComponent>().GetDamage());
+			
+		}
+
+		private void OnTriggerEnter2D(Collider2D col) {
+			if (col.GetComponent<Potion>() != null) {
+				recoverHp(col.GetComponent<Potion>().GetRecoveryAmount());
+				Destroy(col.gameObject);
+			}
+
+			if (col.GetComponent<Coin>() != null) {
+				Destroy(col.gameObject);
+			}
 		}
 
 		public float GetMaxHp() {
@@ -80,7 +92,16 @@ namespace LSB.Components.Player {
 		public void TakeDamage(float amount) {
 			StartCoroutine(ChangeColor(Color.red));
 			_currentHp -= amount;
-			OnTakeDamage?.Invoke();
+			OnHpChange?.Invoke();
+		}
+
+		private void recoverHp(float amount) {
+			if (_currentHp >= CurrentStats.MaxHp) return;
+			
+			_currentHp += amount;
+			if (_currentHp > CurrentStats.MaxHp) _currentHp = CurrentStats.MaxHp;
+			
+			OnHpChange?.Invoke();
 		}
 
 		private void die() {

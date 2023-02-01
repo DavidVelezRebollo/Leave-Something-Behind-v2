@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseStats: {fileID: 11400000, guid: 3dedb46a5eaafcf4a99cbd64e89b1bd3, type: 2}
   CurrentStats: {fileID: 11400000, guid: c4a20ab7e0f41494da89f8cd1de16a8b, type: 2}
+  PotionPrefab: {fileID: 4175265082170844889, guid: 5087c37e10835e64daf9566824fc006f, type: 3}
+  CoinPrefab: {fileID: 1064854211495384492, guid: 669d8356d9ef72940acb2dd912cdcf85, type: 3}
 --- !u!50 &4940126561131847530
 Rigidbody2D:
   serializedVersion: 4

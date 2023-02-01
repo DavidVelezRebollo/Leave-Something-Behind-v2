@@ -56,7 +56,7 @@ namespace LSB.Components.UI {
 			_input = InputHandler.Instance;
 
 			_timer = new Timer(12);
-			_player.OnTakeDamage += updateHpUI;
+			_player.OnHpChange += updateHpUI;
 			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
 		}
 

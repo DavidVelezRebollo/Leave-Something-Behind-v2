@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections;
 using LSB.Components.Core;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace LSB.Classes.Enemies {
     public class Enemy {
@@ -21,9 +22,15 @@ namespace LSB.Classes.Enemies {
         private readonly Transform _player; // Player's Transform Component
         private readonly Transform _transform; // Enemy's Transform Component
         private readonly GameObject _gameObject; // Enemy's GameObject
+        private readonly GameObject _potionPrefab; // Potion drop GameObject
+        private readonly GameObject _coinPrefab; // Coin drop GameObject
+        
         private float _currentHp; // CurrentHP of the enemy
-        private bool _isAttacking;
-        private bool _dying;
+        private bool _isAttacking; // Checks if the enemy is attacking
+        private bool _dying; // Checks if the enemy is dead
+
+        private const float _POTION_DROP_PROBABILITY = 0.01f; // Probability for drop a potion
+        private const float _COIN_DROP_PROBABILITY = 0.05f; // Probability for drop a coin
         
         #endregion
 
@@ -34,7 +41,7 @@ namespace LSB.Classes.Enemies {
         #endregion
 
         #region Constructor
-        
+
         /// <summary>
         /// Initializes an enemy
         /// </summary>
@@ -45,13 +52,18 @@ namespace LSB.Classes.Enemies {
         /// <param name="renderer">Enemy's SpriteRenderer Component</param>
         /// <param name="gameObject">Enemy's GameObject</param>
         /// <param name="maxHp">Enemy's MaxHp</param>
-        public Enemy(IEnemyMove movementType, IAttack attackType, Transform transform, Animator animator, SpriteRenderer renderer, GameObject gameObject, float maxHp) {
+        /// <param name="potion">Potion Prefab</param>
+        /// <param name="coin">Coin Prefab</param>
+        public Enemy(IEnemyMove movementType, IAttack attackType, Transform transform, Animator animator, SpriteRenderer renderer, 
+            GameObject gameObject, float maxHp, GameObject potion, GameObject coin) {
             _movement = movementType;
             _attack = attackType;
             _transform = transform;
             _renderer = renderer;
             _gameObject = gameObject;
             _currentHp = maxHp;
+            _coinPrefab = coin;
+            _potionPrefab = potion;
             
             _gameManager = GameManager.Instance;
             _animation = new EnemyAnimation(animator, this);
@@ -163,8 +175,18 @@ namespace LSB.Classes.Enemies {
         /// <param name="enemy">The enemy GameObject</param>
         private void die(GameObject enemy) {
             OnEnemyDie?.Invoke(enemy);
-            
             _gameObject.GetComponentInChildren<BoxCollider2D>().enabled = false;
+
+            float p = Random.Range(0f, 1f);
+
+            if(p <= _POTION_DROP_PROBABILITY) {
+                Object.Instantiate(_potionPrefab, _transform.position, Quaternion.identity);
+            }
+            
+            if (p > _POTION_DROP_PROBABILITY && p <= _COIN_DROP_PROBABILITY) {
+                Object.Instantiate(_coinPrefab, _transform.position, Quaternion.identity);
+            }
+            
             _dying = true;
         }
 
