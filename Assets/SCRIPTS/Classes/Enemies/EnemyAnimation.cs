@@ -14,8 +14,8 @@ namespace LSB.Classes.Enemies {
 		
 		private static readonly int XDirection = Animator.StringToHash("XDirection"); // XDirection Parameter in the Animator
 		private static readonly int Horizontal = Animator.StringToHash("Horizontal"); // Horizontal Parameter in the Animator
-		private static readonly int MovementAmount = Animator.StringToHash("MovementAmount"); // MovementAmount Parameter in the Animator
-		private static readonly int Attacking = Animator.StringToHash("Attacking"); // IsAttacking Parameter in the Animator
+		private static readonly int IsStop = Animator.StringToHash("IsStop"); // MovementAmount Parameter in the Animator
+		private static readonly int Attack = Animator.StringToHash("Attack"); // IsAttacking Parameter in the Animator
 		private static readonly int Die = Animator.StringToHash("Die"); // IsAttacking Parameter in the Animator
 
 		#endregion
@@ -58,6 +58,14 @@ namespace LSB.Classes.Enemies {
 
 		#endregion
 
+		#region Method
+
+		public void AttackAnimation() {
+			_animator.SetTrigger(Attack);
+		}
+
+		#endregion
+
 		#region Auxiliar Methods
 
 		/// <summary>
@@ -67,8 +75,7 @@ namespace LSB.Classes.Enemies {
 			
 			_animator.SetFloat(XDirection, _lastMoveDirection.x);
 			_animator.SetFloat(Horizontal, _moveDirection.x);
-			_animator.SetFloat(MovementAmount, 1);
-			_animator.SetBool(Attacking, _enemy.IsAttacking());
+			_animator.SetBool(IsStop, _enemy.IsStopped());
 		}
 
 		private void onEnemyDie(GameObject enemy) {

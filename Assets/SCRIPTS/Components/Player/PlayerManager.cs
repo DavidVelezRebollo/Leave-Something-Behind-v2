@@ -30,6 +30,7 @@ namespace LSB.Components.Player {
 			CurrentStats.MaxHp = BaseStats.MaxHp;
 			CurrentStats.Speed = BaseStats.Speed;
 			CurrentStats.Damage = BaseStats.Damage;
+			CurrentStats.AttackCooldown = BaseStats.AttackCooldown;
 			
 			BackPack.Instance.OnItemInitialize += InitializeStats;
 			

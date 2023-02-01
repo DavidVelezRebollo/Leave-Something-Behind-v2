@@ -6,5 +6,6 @@ namespace LSB.Shared {
         public float Damage;
         public float MaxHp;
         public float Speed;
+        public float AttackCooldown;
     }
 }

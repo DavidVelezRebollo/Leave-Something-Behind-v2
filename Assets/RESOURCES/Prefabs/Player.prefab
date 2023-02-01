@@ -193,9 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8a729b7e00b724ab67faa208185942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProyectilePrefab: {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
+  ProjectilePrefab: {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
   CurrentStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}
-  ShootCooldown: 0.3
 --- !u!50 &7817655970097789286
 Rigidbody2D:
   serializedVersion: 4

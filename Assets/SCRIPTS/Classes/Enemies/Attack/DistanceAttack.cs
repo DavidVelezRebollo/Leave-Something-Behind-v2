@@ -8,9 +8,7 @@ namespace LSB.Classes.Enemies {
 
         [Tooltip("Projectile that will be shot")]
         [SerializeField] private GameObject ProjectilePrefab;
-        [Tooltip("Time between shooting one projectile and another")]
-        [SerializeField] private float AttackCooldown;
-        
+
         #endregion
 
         #region Private Fields
@@ -19,8 +17,6 @@ namespace LSB.Classes.Enemies {
         private float _enemyDamage;
         //Player position
         private Transform _playerTransform;
-        // Used on the shoot cooldown
-        private float _cooldownDelta;
 
         #endregion
 
@@ -49,10 +45,6 @@ namespace LSB.Classes.Enemies {
         #region Interface Methods
         
         public void Attack() {
-            // Reduce the cooldown timer.
-            _cooldownDelta -= Time.deltaTime;
-            if (_cooldownDelta > 0) return;
-            
             Vector3 position = transform.position; // Position where the projectile is shot
             Vector2 dir = _playerTransform.position - position; // Projectile direction
             Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg); // Rotation of the projectile
@@ -61,9 +53,6 @@ namespace LSB.Classes.Enemies {
             GameObject projectile = Instantiate(ProjectilePrefab, position, rotation);
             float speed = projectile.GetComponent<ProjectileComponent>().GetSpeed();
             projectile.GetComponent<Rigidbody2D>().velocity = dir.normalized * speed;
-
-            // Cooldown reset
-            _cooldownDelta = AttackCooldown;
         }
 
         #endregion

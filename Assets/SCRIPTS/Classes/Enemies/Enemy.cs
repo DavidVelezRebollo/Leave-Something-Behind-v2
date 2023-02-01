@@ -24,9 +24,11 @@ namespace LSB.Classes.Enemies {
         private readonly GameObject _gameObject; // Enemy's GameObject
         private readonly GameObject _potionPrefab; // Potion drop GameObject
         private readonly GameObject _coinPrefab; // Coin drop GameObject
+        private readonly float _attackCooldown; //Time between attacking
         
         private float _currentHp; // CurrentHP of the enemy
-        private bool _isAttacking; // Checks if the enemy is attacking
+        private float _cooldownDelta; // Used on the shoot cooldown
+        private bool _isStopped; // Checks if the enemy is attacking
         private bool _dying; // Checks if the enemy is dead
 
         private const float _POTION_DROP_PROBABILITY = 0.05f; // Probability for drop a potion
@@ -52,22 +54,26 @@ namespace LSB.Classes.Enemies {
         /// <param name="renderer">Enemy's SpriteRenderer Component</param>
         /// <param name="gameObject">Enemy's GameObject</param>
         /// <param name="maxHp">Enemy's MaxHp</param>
+        /// <param name="attackCooldown">Time between attacking the player</param>
         /// <param name="potion">Potion Prefab</param>
         /// <param name="coin">Coin Prefab</param>
         public Enemy(IEnemyMove movementType, IAttack attackType, Transform transform, Animator animator, SpriteRenderer renderer, 
-            GameObject gameObject, float maxHp, GameObject potion, GameObject coin) {
+            GameObject gameObject, float maxHp, float attackCooldown, GameObject potion, GameObject coin) {
             _movement = movementType;
             _attack = attackType;
             _transform = transform;
             _renderer = renderer;
             _gameObject = gameObject;
             _currentHp = maxHp;
+            _attackCooldown = attackCooldown;
             _coinPrefab = coin;
             _potionPrefab = potion;
             
             _gameManager = GameManager.Instance;
             _animation = new EnemyAnimation(animator, this);
             _player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            _cooldownDelta = 0f;
         }
         
         #endregion
@@ -95,6 +101,8 @@ namespace LSB.Classes.Enemies {
         #endregion
 
         #region Getters & Setters
+        
+        public EnemyAnimation GetAnimation() { return _animation; }
 
         /// <summary>
         /// Gets the current state the enemy is.
@@ -125,7 +133,7 @@ namespace LSB.Classes.Enemies {
         /// Checks if the enemy is currently attacking.
         /// </summary>
         /// <returns>True if its attacking. False otherwise</returns>
-        public bool IsAttacking() { return _isAttacking; }
+        public bool IsStopped() { return _isStopped; }
 
         #endregion
 
@@ -135,14 +143,14 @@ namespace LSB.Classes.Enemies {
         /// Moves the enemy. Depends on the type of movement attached to the enemy
         /// </summary>
         public void Move() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
+            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying || _isStopped) return;
             if (Vector3.Distance(_player.position, _transform.position) >= 10) {
                 die(_gameObject);
                 return;
             }
             
             _movement?.Move(_player.position);
-            _isAttacking = false;
+            _isStopped = false;
         }
         
         /// <summary>
@@ -150,8 +158,16 @@ namespace LSB.Classes.Enemies {
         /// </summary>
         public void Attack() {
             if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
+            // Reduce the cooldown timer.
+            _cooldownDelta -= Time.deltaTime;
+            if(_cooldownDelta <= 0.8f && _cooldownDelta >= 0.78f) _animation.AttackAnimation();
+            if (_cooldownDelta > 0) return;
+            
             _attack?.Attack();
-            _isAttacking = true;
+            _isStopped = true;
+            
+            // Cooldown reset
+            _cooldownDelta = _attackCooldown;
         }
 
         public void Animate() {

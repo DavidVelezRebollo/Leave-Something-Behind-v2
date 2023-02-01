@@ -37,9 +37,9 @@ namespace LSB.Components.Enemies {
 		private void OnEnable() {
 			_movement = new Chase(transform, GetComponent<Rigidbody2D>(), CurrentStats.Speed);
 			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
-				gameObject, CurrentStats.MaxHp, PotionPrefab, CoinPrefab);
+				gameObject, CurrentStats.MaxHp, CurrentStats.AttackCooldown, PotionPrefab, CoinPrefab);
 			
-			_attack = new MeleeAttack();
+			_attack = new MeleeAttack(transform, 0.2f, _enemy.GetAnimation());
 		}
 
 		private void Update() {
@@ -57,6 +57,7 @@ namespace LSB.Components.Enemies {
 		private void OnCollisionEnter2D(Collision2D collision) {
 			if (collision.collider.CompareTag("Player")) {
 				collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+				_enemy.GetAnimation().AttackAnimation();
 				return;
 			}
 
@@ -67,6 +68,7 @@ namespace LSB.Components.Enemies {
 			CurrentStats.Damage = BaseStats.Damage;
 			CurrentStats.Speed = BaseStats.Speed;
 			CurrentStats.MaxHp = BaseStats.MaxHp;
+			CurrentStats.AttackCooldown = BaseStats.AttackCooldown;
 		}
 
 	}

@@ -8,25 +8,25 @@ using LSB.Shared;
 namespace LSB.Classes.Player {
 	public class PlayerAttack : MonoBehaviour, IShoot {
 		private InputHandler _input;
-		[SerializeField] private GameObject ProyectilePrefab;
+		[SerializeField] private GameObject ProjectilePrefab;
 		[SerializeField] private Stats CurrentStats;
 
-		[SerializeField] private float ShootCooldown;
+		private float _shootCooldown;
 		private float _shootDelta;
 
 		private void Awake() {
-			ProyectilePrefab.GetComponent<ProjectileComponent>().Reset();
+			ProjectilePrefab.GetComponent<ProjectileComponent>().Reset();
 		}
 
 		private void Start() {
 			_input = InputHandler.Instance;
 			_shootDelta = 0.5f;
-			ProyectilePrefab.GetComponent<ProjectileComponent>().MultiplyDamage(CurrentStats.Damage);
+			ProjectilePrefab.GetComponent<ProjectileComponent>().MultiplyDamage(CurrentStats.Damage);
 		}
 
 		public void SetProyectilePrefab(GameObject newProjectile)
         {
-			ProyectilePrefab = newProjectile;
+			ProjectilePrefab = newProjectile;
         }
 
 		public void TickUpdate() {
@@ -43,12 +43,12 @@ namespace LSB.Classes.Player {
 			Vector2 dir = mousePosition - new Vector2(position.x, position.y);
 			Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg);
 			
-			GameObject arrow = Instantiate(ProyectilePrefab, position, rotation);
+			GameObject arrow = Instantiate(ProjectilePrefab, position, rotation);
 
 			float speed = arrow.GetComponent<ProjectileComponent>().GetSpeed();
 			arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * speed;
 			
-			_shootDelta = ShootCooldown;
+			_shootDelta = CurrentStats.AttackCooldown;
 		}
 	}
 }

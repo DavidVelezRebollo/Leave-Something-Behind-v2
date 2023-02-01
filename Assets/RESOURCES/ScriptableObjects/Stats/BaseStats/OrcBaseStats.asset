@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: OrcBaseStats
   m_EditorClassIdentifier: 
   Damage: 3
-  MaxHp: 5
+  MaxHp: 20
   Speed: 1
+  AttackCooldown: 0.1

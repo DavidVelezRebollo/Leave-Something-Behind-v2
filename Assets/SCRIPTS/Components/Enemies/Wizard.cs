@@ -26,7 +26,7 @@ namespace LSB.Components.Enemies {
 			_attack = GetComponent<DistanceAttack>();
 
 			_enemy = new Enemy(_movement, _attack, transform, GetComponentInChildren<Animator>(), GetComponentInChildren<SpriteRenderer>(), 
-				gameObject, CurrentStats.MaxHp, PotionPrefab, CoinPrefab);
+				gameObject, CurrentStats.MaxHp, CurrentStats.AttackCooldown, PotionPrefab, CoinPrefab);
 			
 			_enemy.SetCurrentState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
 
@@ -68,6 +68,7 @@ namespace LSB.Components.Enemies {
 			CurrentStats.Damage = BaseStats.Damage;
 			CurrentStats.Speed = BaseStats.Speed;
 			CurrentStats.MaxHp = BaseStats.MaxHp;
+			CurrentStats.AttackCooldown = BaseStats.AttackCooldown;
 		}
 	}
 }
