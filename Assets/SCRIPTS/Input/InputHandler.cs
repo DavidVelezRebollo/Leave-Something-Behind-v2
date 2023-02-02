@@ -45,6 +45,10 @@ namespace LSB.Input {
 			return _input.Buttons.Pause.WasPressedThisFrame();
 		}
 
+		public bool OnShootButton() {
+			return _input.InputCharacter.InputShoot.WasPressedThisFrame();
+		}
+
 		public Vector2 GetMovement() {
 			return _movement;
 		}

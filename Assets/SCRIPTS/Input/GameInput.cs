@@ -44,6 +44,15 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InputShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4089b98-d992-490c-856f-de0d2f4791b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,28 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""InputShootPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e50a26a-cf97-4427-8e88-4d5e6ad2e936"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""InputShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf5e01c0-fa7d-4658-8a16-7ba51fe146c0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InputShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -261,6 +292,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_InputCharacter = asset.FindActionMap("InputCharacter", throwIfNotFound: true);
         m_InputCharacter_InputMovement = m_InputCharacter.FindAction("InputMovement", throwIfNotFound: true);
         m_InputCharacter_InputShootPosition = m_InputCharacter.FindAction("InputShootPosition", throwIfNotFound: true);
+        m_InputCharacter_InputShoot = m_InputCharacter.FindAction("InputShoot", throwIfNotFound: true);
         // Buttons
         m_Buttons = asset.FindActionMap("Buttons", throwIfNotFound: true);
         m_Buttons_Pause = m_Buttons.FindAction("Pause", throwIfNotFound: true);
@@ -325,12 +357,14 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private IInputCharacterActions m_InputCharacterActionsCallbackInterface;
     private readonly InputAction m_InputCharacter_InputMovement;
     private readonly InputAction m_InputCharacter_InputShootPosition;
+    private readonly InputAction m_InputCharacter_InputShoot;
     public struct InputCharacterActions
     {
         private @GameInput m_Wrapper;
         public InputCharacterActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @InputMovement => m_Wrapper.m_InputCharacter_InputMovement;
         public InputAction @InputShootPosition => m_Wrapper.m_InputCharacter_InputShootPosition;
+        public InputAction @InputShoot => m_Wrapper.m_InputCharacter_InputShoot;
         public InputActionMap Get() { return m_Wrapper.m_InputCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +380,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @InputShootPosition.started -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
                 @InputShootPosition.performed -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
                 @InputShootPosition.canceled -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShootPosition;
+                @InputShoot.started -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShoot;
+                @InputShoot.performed -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShoot;
+                @InputShoot.canceled -= m_Wrapper.m_InputCharacterActionsCallbackInterface.OnInputShoot;
             }
             m_Wrapper.m_InputCharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -356,6 +393,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @InputShootPosition.started += instance.OnInputShootPosition;
                 @InputShootPosition.performed += instance.OnInputShootPosition;
                 @InputShootPosition.canceled += instance.OnInputShootPosition;
+                @InputShoot.started += instance.OnInputShoot;
+                @InputShoot.performed += instance.OnInputShoot;
+                @InputShoot.canceled += instance.OnInputShoot;
             }
         }
     }
@@ -424,6 +464,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     {
         void OnInputMovement(InputAction.CallbackContext context);
         void OnInputShootPosition(InputAction.CallbackContext context);
+        void OnInputShoot(InputAction.CallbackContext context);
     }
     public interface IButtonsActions
     {

@@ -7,18 +7,21 @@ namespace LSB.Components.Items
 {
     public class WaterGun : Item
     {
-        [SerializeField] private PlayerAttack playerAttack;
+        private PlayerAttack _playerAttack;
         [SerializeField] private GameObject proyectilePrefab;
         [SerializeField] private GameObject defaultProyectilePrefab;
 
+        private void Start() {
+            _playerAttack = FindObjectOfType<PlayerAttack>();
+        }
         public override void UseItem()
         {
-            playerAttack.SetProyectilePrefab(proyectilePrefab);
+            _playerAttack.GetProyectilePrefab(proyectilePrefab);
         }
 
         public override void UndoItem()
         {
-            playerAttack.SetProyectilePrefab(defaultProyectilePrefab);
+            _playerAttack.GetProyectilePrefab(defaultProyectilePrefab);
         }
     }
 }

@@ -6,7 +6,6 @@ using LSB.Classes.Player;
 using LSB.Components.Combat;
 using LSB.Components.Core;
 using LSB.Components.Items;
-using LSB.Interfaces;
 using LSB.Shared;
 
 namespace LSB.Components.Player {
@@ -19,7 +18,7 @@ namespace LSB.Components.Player {
 		private SpriteRenderer _renderer;
 		private GameManager _gameManager;
 
-		private IShoot _shoot;
+		private PlayerAttack _shoot;
 		private PlayerMovement _movement;
 		private PlayerAnimation _animation;
 		private float _currentHp;
