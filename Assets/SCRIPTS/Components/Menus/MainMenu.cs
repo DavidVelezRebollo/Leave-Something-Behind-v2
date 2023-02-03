@@ -17,7 +17,6 @@ namespace LSB.Components.Menus
         /// Function that runs when the start button is clicked.
         /// </summary>
         public void OnStartButton() {
-            GameManager.Instance.SetGameState(GameState.Running);
             StartCoroutine(loadSceneAsync());
             PlayButton();
         }

@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using LSB.Classes.UI;
 using LSB.Input;
 using LSB.Components.Core;
 using LSB.Components.Player;
 using LSB.Components.Items;
+using LSB.Components.Audio;
 using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,15 +13,22 @@ using UnityEngine.SceneManagement;
 namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
 		[Header("UI Fields")] 
+		[SerializeField] private GameObject Tutorial;
 		[SerializeField] private GameObject ItemContainers;
 		[SerializeField] private GameObject ItemGrid;
 		[SerializeField] private TextMeshProUGUI TimerText;
-		[SerializeField] private GameObject PauseMenu;
 		[SerializeField] private GameObject Victory;
 		[SerializeField] private GameObject Defeat;
 		[Header("HP UI Fields")]
 		[SerializeField] private Image HpBar;
 		[SerializeField] private TextMeshProUGUI HpText;
+		[Space(15)]
+		[Header("Pause Menu UI Fields")]
+		[SerializeField] private GameObject PauseMenu;
+		[SerializeField] private TextMeshProUGUI MaxHpText;
+		[SerializeField] private TextMeshProUGUI AttackText;
+		[SerializeField] private TextMeshProUGUI SpeedText;
+		[SerializeField] private TextMeshProUGUI AttackSpeedText;
 		[Space(15)]
 		[Header("Item Selector Fields")]
 		[SerializeField] private GameObject ItemSelectorPanel;
@@ -55,6 +62,18 @@ namespace LSB.Components.UI {
 			_backPack = BackPack.Instance;
 			_input = InputHandler.Instance;
 
+			if (!PlayerPrefs.HasKey("Tutorial")) {
+				_gameManager.SetGameState(GameState.Paused);
+				Tutorial.SetActive(true);
+			} else if (PlayerPrefs.GetInt("Tutorial") == 1) {
+				_gameManager.SetGameState(GameState.Paused);
+				Tutorial.SetActive(true);
+			}
+			else {
+				_gameManager.SetGameState(GameState.Running);
+				Tutorial.SetActive(false);
+			}
+
 			_timer = new Timer(12);
 			_player.OnHpChange += updateHpUI;
 			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
@@ -86,7 +105,6 @@ namespace LSB.Components.UI {
 				_gameManager.SetGameState(GameState.Paused);
 				ObjectExplanationPanel.SetActive(true);
 			}
-			
 		}
 		
 
@@ -177,7 +195,23 @@ namespace LSB.Components.UI {
 			
 			PauseMenu.SetActive(!PauseMenu.activeSelf);
 			ItemContainers.SetActive(!ItemContainers.activeSelf);
+			ItemGrid.SetActive(!ItemContainers.activeSelf);
 			TimerText.enabled = !TimerText.IsActive();
+
+			AttackSpeedText.text = _player.GetAttackSpeed().ToString();
+			AttackText.text = _player.GetDamage().ToString();
+			SpeedText.text = _player.GetSpeed().ToString();
+			MaxHpText.text = _player.GetMaxHp().ToString();
+		}
+
+		public void ShowTutorialNextTime(bool show) {
+			PlayerPrefs.SetInt("Tutorial", !show ? 1 : 0);
+			PlayButtonSound();
+		}
+
+		public void OnStartButton() {
+			Tutorial.SetActive(false);
+			_gameManager.SetGameState(GameState.Running);
 		}
 
 		public void OnContinueButton() {
@@ -185,12 +219,13 @@ namespace LSB.Components.UI {
 			
 			PauseMenu.SetActive(false);
 			ItemContainers.SetActive(true);
+			ItemGrid.SetActive(true);
 			TimerText.enabled = true;
 		}
 
 		public void OnExitButton()
 		{
-			GameManager.Instance.SetGameState(GameState.Paused);
+			GameManager.Instance.SetGameState(GameState.Menu);
 			SceneManager.LoadScene(0);
 		}
 
@@ -206,6 +241,8 @@ namespace LSB.Components.UI {
 			_gameManager.SetGameState(GameState.Menu);
 			Defeat.SetActive(true);
 		}
+
+		public void PlayButtonSound() { SoundManager.Instance.PlayOneShot("Button"); }
 	}
 	
 }

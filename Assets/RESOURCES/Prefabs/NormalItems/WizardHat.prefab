@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Info: {fileID: 11400000, guid: b9f700142d020c8459a06507e54e1de1, type: 2}
-  WizardStats: {fileID: 11400000, guid: 1f820f00c20c03348a1e49394f65598f, type: 2}
+  WizardProjectileStats: {fileID: 11400000, guid: ebf9080bb09c0a0438bf0ae4b072169c, type: 2}

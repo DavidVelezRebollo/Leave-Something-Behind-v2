@@ -7,24 +7,23 @@ using LSB.Components.Audio;
 namespace LSB.Components.Menus {
     public class Settings : MonoBehaviour
     {
-        #region PublicVariables
-
+        #region Private Fields
+        
+        [Header("Unity Fields")]
         [Tooltip("AudioMixer.")]
-        public AudioMixer AudioMixer;
-
-        private Vector2 _soundRange = new Vector2(-10, -50);
-
+        [SerializeField] private AudioMixer AudioMixer;
+        
+        [Space(5)]
+        [Header("Sliders")]
         [Tooltip("Slider to change the general volume.")]
-        public Slider GeneralSlider;
+        [SerializeField] private Slider GeneralSlider;
         [Tooltip("Slider to change the music volume.")]
-        public Slider MusicSlider;
+        [SerializeField] private Slider MusicSlider;
         [Tooltip("Slider to change the sound effects volume.")]
-        public Slider EffectsSlider;
+        [SerializeField] private Slider EffectsSlider;
 
-        #endregion
-
-        #region _privateVariables
-
+        [Space(5)]
+        [Header("Text Fields")]
         [Tooltip("Text that shows the general volume value.")]
         [SerializeField] private TextMeshProUGUI GeneralVolumeText;
         [Tooltip("Text that shows the music volume value.")]
@@ -32,6 +31,15 @@ namespace LSB.Components.Menus {
         [Tooltip("Text that shows the sound effects volume value.")]
         [SerializeField] private TextMeshProUGUI SoundEffectsText;
 
+        [Space(5)]
+        [Header("Toggles")]
+        [Tooltip("Toggle which represents if the tutorial will show or not")]
+        [SerializeField] private Toggle TutorialToggle;
+        [Tooltip("Toggle which represents if the game is full screen or not")]
+        [SerializeField] private Toggle FullScreenToggle;
+
+        private readonly Vector2 _soundRange = new Vector2(-10, -50);
+        
         #endregion
 
         #region Unity Methods
@@ -39,8 +47,7 @@ namespace LSB.Components.Menus {
         /// <summary>
         /// When started, it calls for StartSounds() to initialize the values.
         /// </summary>
-        private void Start()
-        {
+        private void Start() {
             GeneralSlider.maxValue = _soundRange.x;
             GeneralSlider.minValue = _soundRange.y;
             MusicSlider.maxValue = _soundRange.x;
@@ -48,10 +55,10 @@ namespace LSB.Components.Menus {
             EffectsSlider.maxValue = _soundRange.x;
             EffectsSlider.minValue = _soundRange.y;
             StartSounds();
+            initializeToggles();
         }
 
-        private void Update()
-        {
+        private void Update() {
             UpdateText();
         }
 
@@ -64,8 +71,7 @@ namespace LSB.Components.Menus {
         /// To a preset value if the haven't been changed previously.
         /// Or to the saved values if they have been changed.
         /// </summary>
-        public void StartSounds()
-        {
+        private void StartSounds() {
             AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
             if (SoundManager.Instance.getMusicActive()) { AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); }
             else { AudioMixer.SetFloat("Music", 0); }
@@ -82,15 +88,30 @@ namespace LSB.Components.Menus {
         /// <summary>
         /// Updates the texts so the reflect the value of the volumes.
         /// </summary>
-        protected void UpdateText()
-        {
+        private void UpdateText() {
             GeneralVolumeText.text = Mathf.FloorToInt(GetRange(GeneralSlider.maxValue, GeneralSlider.minValue, GeneralSlider.value)).ToString();
             MusicText.text = Mathf.FloorToInt(GetRange(MusicSlider.maxValue, MusicSlider.minValue, MusicSlider.value)).ToString();
             SoundEffectsText.text = Mathf.FloorToInt(GetRange(EffectsSlider.maxValue, EffectsSlider.minValue, EffectsSlider.value)).ToString();
         }
+        
+        /// <summary>
+        /// Initializes the toggles state
+        /// </summary>
+        private void initializeToggles() {
+            if(PlayerPrefs.HasKey("Tutorial"))
+                TutorialToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Tutorial") != 0);
+            else TutorialToggle.SetIsOnWithoutNotify(true);
 
-        private float GetRange(float max, float min, float value)
-        {
+            if(PlayerPrefs.HasKey("FullScreen")) 
+                FullScreenToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("FullScreen") != 0);
+            else FullScreenToggle.SetIsOnWithoutNotify(true);
+        }
+        
+        #endregion
+        
+        #region Getters & Setters
+
+        private float GetRange(float max, float min, float value) {
             return Mathf.Abs(value - min) / (max - min) * 100;
         }
 
@@ -98,9 +119,14 @@ namespace LSB.Components.Menus {
         /// Changes the screen mode.
         /// </summary>
         /// <param name="fullScreen">Wether the screen is on full screen mode.</param>
-        public void SetFullScreen(bool fullScreen)
-        {
+        public void SetFullScreen(bool fullScreen) {
             Screen.SetResolution(Screen.width, Screen.height, fullScreen);
+            PlayerPrefs.SetInt("FullScreen", !fullScreen ? 0 : 1);
+            SoundManager.Instance.Play("Button");
+        }
+
+        public void SetTutorial(bool tutorial) {
+            PlayerPrefs.SetInt("Tutorial", !tutorial ? 0 : 1);
             SoundManager.Instance.Play("Button");
         }
 
@@ -108,8 +134,7 @@ namespace LSB.Components.Menus {
         /// 
         /// </summary>
         /// <param name="volume">New value of the general volume.</param>
-        public void SetVolume(float volume)
-        {
+        public void SetVolume(float volume) {
             AudioMixer.SetFloat("Volume", volume);
             PlayerPrefs.SetFloat("GeneralVolume", volume);
         }
@@ -117,20 +142,17 @@ namespace LSB.Components.Menus {
         /// 
         /// </summary>
         /// <param name="volume">New value of the music volume.</param>
-        public void SetMusicVolume(float volume)
-        {
-            if (SoundManager.Instance.getMusicActive())
-            {
-                AudioMixer.SetFloat("Music", volume);
-                PlayerPrefs.SetFloat("MusicVolume", volume);
-            }
+        public void SetMusicVolume(float volume) {
+            if (!SoundManager.Instance.getMusicActive()) return;
+            
+            AudioMixer.SetFloat("Music", volume);
+            PlayerPrefs.SetFloat("MusicVolume", volume);
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="volume">New value of the sound effects volume.</param>
-        public void SetSoundEffectsVolume(float volume)
-        {
+        public void SetSoundEffectsVolume(float volume) {
             AudioMixer.SetFloat("SoundEffects", volume);
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
         }

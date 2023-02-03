@@ -31,6 +31,12 @@ namespace LSB.Components.Core {
 		[SerializeField] private Texture2D HandleCursor;
 		[SerializeField] private Texture2D TargetCursor;
 
+		private SoundManager _soundManager;
+
+		private void Start() {
+			_soundManager = SoundManager.Instance;
+		}
+
 		public GameState GetGameState()
 		{
 			return _gameState;
@@ -38,30 +44,25 @@ namespace LSB.Components.Core {
 
 		public void SetGameState(GameState state) {
 			_gameState = state;
-			if (state == GameState.Paused || state == GameState.Menu)
-			{
+			if (state == GameState.Paused || state == GameState.Menu) {
 				Cursor.SetCursor(HandleCursor, new Vector2(0, 0), CursorMode.Auto);
-				SoundManager.Instance.Play("MenuSong");
-				SoundManager.Instance.Stop("ThemeSong");
+				_soundManager.Play("MenuSong");
+				
+				if(state == GameState.Paused) _soundManager.Pause("ThemeSong");
+				else _soundManager.Stop("ThemeSong");
 			}
-			else if (state == GameState.Running)
-			{
+			else if (state == GameState.Running) {
 				Cursor.SetCursor(TargetCursor, new Vector2(0, 0), CursorMode.Auto);
-				SoundManager.Instance.Play("ThemeSong");
-				SoundManager.Instance.Stop("MenuSong");
+				
+				if(!_soundManager.IsPlaying("ThemeSong")) _soundManager.Play("ThemeSong");
+				else _soundManager.Resume("ThemeSong");
+				
+				_soundManager.Stop("MenuSong");
 			}
 		}
 
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }
 
 		public bool GamePaused() { return _gameState == GameState.Paused; }
-
-		/*public void ResetGame()
-        {
-			OrcCurrentStats.Damage = OrcBaseStats.Damage;
-			OrcCurrentStats.Speed = OrcBaseStats.Speed;
-			OrcCurrentStats.MaxHp = OrcBaseStats.MaxHp;
-		}
-		*/
 	}
 }

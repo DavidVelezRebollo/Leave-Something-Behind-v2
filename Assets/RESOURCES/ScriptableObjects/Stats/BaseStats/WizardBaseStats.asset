@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b2da4d512a49b4fb68a784d21c4fc2, type: 3}
   m_Name: WizardBaseStats
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 10
   MaxHp: 30
   Speed: 1.5
   AttackCooldown: 2.5

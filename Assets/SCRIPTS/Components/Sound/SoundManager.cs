@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using LSB.Classes.Sound;
 using LSB.Shared;
 
 namespace LSB.Components.Audio {
 	public class SoundManager : MonoBehaviour {
         #region Instance
+        
         [Tooltip("Instance of SoundManager, so it can be accessed from other classes.")]
         public static SoundManager Instance;
-        private bool isMusicActive = true;
+        
         #endregion
 
-        #region _privateVariables
+        #region Private Fields
 
         [Tooltip("Group of general sounds. SerializeField: you can change it from the editor.")]
         [SerializeField] private AudioMixerGroup GeneralMixerGroup;
@@ -20,7 +22,9 @@ namespace LSB.Components.Audio {
         [Tooltip("Group of SoundEffect type sounds. SerializeField: you can change it from the editor.")]
         [SerializeField] private AudioMixerGroup SoundEffectsMixerGroup;
         [Tooltip("Array of sounds. SerializeField: you can change it from the editor.")]
-        [SerializeField] private Classes.Sound.Sound[] Sounds;
+        [SerializeField] private Sound[] Sounds;
+        
+        private bool _isMusicActive = true;
 
         #endregion
 
@@ -96,11 +100,11 @@ namespace LSB.Components.Audio {
         }
         public void SetMusicActive(bool active)
         {
-            isMusicActive = active;
+            _isMusicActive = active;
         }
         public bool getMusicActive()
         {
-            return isMusicActive;
+            return _isMusicActive;
         }
         /// <summary>
         /// Loads the volume of the mixers.
@@ -110,7 +114,7 @@ namespace LSB.Components.Audio {
             GeneralMixerGroup.audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
             SoundEffectsMixerGroup.audioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
 
-            if (isMusicActive) MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); 
+            if (_isMusicActive) MusicMixerGroup.audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); 
             else { MusicMixerGroup.audioMixer.SetFloat("Music", 0); }
         }
 
@@ -120,7 +124,7 @@ namespace LSB.Components.Audio {
         /// <param name="clipName">Name of the clip to Play.</param>
         public void Play(string clipName)
         {
-            Classes.Sound.Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
             if (s == null)
             {
                 Debug.LogError("Sound " + clipName + " not found");
@@ -131,7 +135,7 @@ namespace LSB.Components.Audio {
 
         public void PlayOneShot(string clipName)
         {
-            Classes.Sound.Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
             if (s == null)
             {
                 Debug.LogError("Sound " + clipName + " not found");
@@ -140,13 +144,40 @@ namespace LSB.Components.Audio {
             s.Source.PlayOneShot(s.AudioClip);
         }
 
+        public bool IsPlaying(string clipName) {
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            if (s != null) return s.Source.isPlaying;
+            
+            Debug.LogError("Sound " + clipName + " not found");
+            return false;
+
+        }
+
+        public void Resume(string clipName) {
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            if (s == null) {
+                Debug.LogError("Sound " + clipName + " not found");
+                return;
+            }
+            s.Source.UnPause();
+        }
+
+        public void Pause(string clipName) {
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            if (s == null) {
+                Debug.LogError("Sound " + clipName + " not found");
+                return;
+            }
+            s.Source.Pause();
+        }
+
         /// <summary>
         /// Finds the clip named "clipname" and stops it if it exists.
         /// </summary>
         /// <param name="clipName">Name of the clip to Stop.</param>
         public void Stop(string clipName)
         {
-            Classes.Sound.Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
+            Sound s = Array.Find(Sounds, dummySound => dummySound.ClipName == clipName);
             if (s == null)
             {
                 Debug.LogError("Sound " + clipName + " not found");
@@ -154,8 +185,7 @@ namespace LSB.Components.Audio {
             }
             s.Source.Stop();
         }
-
-
+        
         #endregion
     }
 }
