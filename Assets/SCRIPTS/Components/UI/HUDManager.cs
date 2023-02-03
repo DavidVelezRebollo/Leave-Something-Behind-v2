@@ -168,8 +168,8 @@ namespace LSB.Components.UI {
 		}
 
 		private void updateHpUI() {
-			float playerCurrentHp = _player.GetCurrentHp();
 			float playerMaxHp = _player.GetMaxHp();
+			float playerCurrentHp = _player.GetCurrentHp();
 			
 			HpText.text = Mathf.FloorToInt(playerCurrentHp).ToString();
 			HpBar.fillAmount = playerCurrentHp / playerMaxHp;
@@ -195,7 +195,7 @@ namespace LSB.Components.UI {
 			
 			PauseMenu.SetActive(!PauseMenu.activeSelf);
 			ItemContainers.SetActive(!ItemContainers.activeSelf);
-			ItemGrid.SetActive(!ItemContainers.activeSelf);
+			ItemGrid.SetActive(!ItemGrid.activeSelf);
 			TimerText.enabled = !TimerText.IsActive();
 
 			AttackSpeedText.text = _player.GetAttackSpeed().ToString();

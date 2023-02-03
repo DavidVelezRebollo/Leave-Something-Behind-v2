@@ -8,7 +8,7 @@ namespace LSB.Classes.State {
         private readonly float _stopDistance;
         private readonly Transform _enemyTransform;
         private Transform _player;
-        private Rigidbody2D _rigidBody;
+        private readonly Rigidbody2D _rigidBody;
 
         public Attacking(Enemy enemy, Transform transform, float stopDistance, Rigidbody2D rb) {
             _enemy = enemy;

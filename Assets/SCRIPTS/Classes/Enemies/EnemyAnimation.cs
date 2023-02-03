@@ -55,11 +55,10 @@ namespace LSB.Classes.Enemies {
 			_moveDirection = clamp(_enemy.GetLastDirection());
 			animate();
 		}
-
-		#endregion
-
-		#region Method
-
+		
+		/// <summary>
+		/// Executes the enemy attack animation
+		/// </summary>
 		public void AttackAnimation() {
 			_animator.SetTrigger(Attack);
 		}

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6553601195253685799
+--- !u!1 &1046420727514567084
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6553601195253685793}
-  - component: {fileID: 6553601195253685798}
+  - component: {fileID: 7308395207533866252}
+  - component: {fileID: 2058080753333282374}
   m_Layer: 0
-  m_Name: WizardHat
+  m_Name: Cigarettes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6553601195253685793
+--- !u!4 &7308395207533866252
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6553601195253685799}
+  m_GameObject: {fileID: 1046420727514567084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5092263, y: 0.90347695, z: -0.014116665}
+  m_LocalPosition: {x: 919.7109, y: 508.28577, z: -19.73561}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6553601195253685798
+--- !u!114 &2058080753333282374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6553601195253685799}
+  m_GameObject: {fileID: 1046420727514567084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a02a84290a5b949b890b2e65566a8a, type: 3}
+  m_Script: {fileID: 11500000, guid: e8954d7d5732ad54d8298aead14f980c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Info: {fileID: 11400000, guid: b9f700142d020c8459a06507e54e1de1, type: 2}
-  WizardCurrentStats: {fileID: 11400000, guid: 1f820f00c20c03348a1e49394f65598f, type: 2}
+  Info: {fileID: 11400000, guid: ec4dc5699747fdc4ca89fe998e4a6f8d, type: 2}
+  PlayerStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}

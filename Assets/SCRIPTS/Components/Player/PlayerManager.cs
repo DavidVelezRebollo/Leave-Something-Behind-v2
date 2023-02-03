@@ -23,6 +23,7 @@ namespace LSB.Components.Player {
 		private PlayerAnimation _animation;
 		private float _currentHp;
 		private float _immuneDelta;
+		private float _initialMaxHp;
 
 		public Action OnHpChange;
 
@@ -46,10 +47,17 @@ namespace LSB.Components.Player {
 		private void InitializeStats() {
 			_movement = new PlayerMovement(GetComponent<Rigidbody2D>());
 			_currentHp = CurrentStats.MaxHp;
+			_initialMaxHp = CurrentStats.MaxHp;
 		}
 
 		private void Update() {
 			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+			if (_initialMaxHp < CurrentStats.MaxHp || _initialMaxHp > CurrentStats.MaxHp) {
+				_currentHp *= CurrentStats.MaxHp / _initialMaxHp;
+				OnHpChange?.Invoke();
+				_initialMaxHp = CurrentStats.MaxHp;
+				return;
+			}
 			_shoot.TickUpdate();
 			_animation.TickUpdate();
 		}

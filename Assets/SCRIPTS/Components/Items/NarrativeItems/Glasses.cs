@@ -14,10 +14,7 @@ namespace LSB.Components.Items {
             _postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
         }
 
-        public override void UndoItem()
-        {
-            _postProcessVolume.weight = 1;
-        }
+        public override void UndoItem() { _postProcessVolume.weight = 1; }
     }
 }
 

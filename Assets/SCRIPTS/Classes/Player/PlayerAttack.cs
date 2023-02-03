@@ -1,23 +1,32 @@
-using System;
-using LSB.Interfaces;
+using System.Collections.Generic;
 using LSB.Input;
 using UnityEngine;
 using LSB.Components.Combat;
 using LSB.Shared;
-using UnityEngine.Serialization;
 
 namespace LSB.Classes.Player {
 	public class PlayerAttack : MonoBehaviour {
-		private InputHandler _input;
-		[SerializeField] private GameObject[] ProjectilePrefabs;
-		[SerializeField] private GameObject[] SpecialProjectilesPrefabs;
+		#region Public Fields
+		
+		[Header("Prefabs")]
+		[Tooltip("Projectiles which will be fired")]
+		[SerializeField] private List<GameObject> ProjectilePrefabs;
+
+		[Space(5)]
+		[Header("Stats")]
+		[Tooltip("Current stats of the player")]
 		[SerializeField] private Stats CurrentStats;
 
-		private float _shootCooldown;
-		private float _shootDelta;
-		
-		private float _specialShootCooldown;
-		private float _specialDelta;
+		#endregion
+
+		#region Private Fields
+
+		private InputHandler _input; // Player's Input
+		private float _shootDelta; // Time between shoots
+
+		#endregion
+
+		#region UnityEvents
 
 		private void Awake() {
 			foreach (GameObject projectile in ProjectilePrefabs)
@@ -27,24 +36,46 @@ namespace LSB.Classes.Player {
 		private void Start() {
 			_input = InputHandler.Instance;
 			_shootDelta = 0.5f;
-			_specialDelta = 0f;
-			
+
 			foreach(GameObject projectile in ProjectilePrefabs) 
 				projectile.GetComponent<ProjectileComponent>().MultiplyDamage(CurrentStats.Damage);
 		}
-
-		public GameObject[] GetProyectilePrefab(GameObject newProjectile) {
-			return ProjectilePrefabs;
-		}
-
+		
 		public void TickUpdate() {
 			_shootDelta -= Time.deltaTime;
 			if (_shootDelta > 0) return;
 			
 			Shoot();
 		}
+		
+		#endregion
 
-		public void Shoot() {
+		#region Getters & Setters
+
+		/// <summary>
+		/// Add a projectile to the projectile's list
+		/// </summary>
+		/// <param name="newProjectile">The projectile to be added</param>
+		public void AddProjectilePrefabs(GameObject newProjectile) {
+			ProjectilePrefabs.Add(newProjectile);
+		}
+
+		/// <summary>
+		/// Removes a projectile from the projectile's list
+		/// </summary>
+		/// <param name="removedProjectile">The projectile to be removed</param>
+		public void RemoveProjectilePrefabs(GameObject removedProjectile) {
+			ProjectilePrefabs.Remove(removedProjectile);
+		}
+
+		#endregion
+
+		#region Auxiliar Methods
+
+		/// <summary>
+		/// Shoots a projectile
+		/// </summary>
+		private void Shoot() {
 			Vector3 position = transform.position;
 			Vector2 mousePosition = _input.GetMousePosition();
 			
@@ -62,9 +93,8 @@ namespace LSB.Classes.Player {
 			}
 			_shootDelta = CurrentStats.AttackCooldown;
 		}
+		
+		#endregion
 
-		private void specialShoot() {
-			
-		}
 	}
 }
