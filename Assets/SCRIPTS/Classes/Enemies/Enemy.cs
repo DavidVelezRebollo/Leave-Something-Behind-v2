@@ -142,7 +142,7 @@ namespace LSB.Classes.Enemies {
         /// Moves the enemy. Depends on the type of movement attached to the enemy
         /// </summary>
         public void Move() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying || _isStopped) return;
+            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
             if (Vector3.Distance(_player.position, _transform.position) >= 10) {
                 die(_gameObject);
                 return;

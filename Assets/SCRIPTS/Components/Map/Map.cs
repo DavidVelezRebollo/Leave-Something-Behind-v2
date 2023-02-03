@@ -13,6 +13,7 @@ namespace LSB.Components.Core {
 		[SerializeField] private Tilemap FloorTilemap;
 		[SerializeField] private Tilemap DecorationTilemap;
 		[SerializeField] private Tilemap CorruptionTilemap;
+		[SerializeField] private Tilemap CorruptionDecorationTilemap;
 
 		[Space(10)] [Header("Tiles")] 
 		[SerializeField] private TileBase Grass;
@@ -26,7 +27,12 @@ namespace LSB.Components.Core {
 		[Space(10)] [Header("Corrupted Tiles")] 
 		[SerializeField] private TileBase CorruptedGrass;
 		[SerializeField] private TileBase[] CorruptedDecoration;
-		
+		[SerializeField] private TileBase[] CorruptedTree;
+		[SerializeField] private TileBase[] CorruptedLamp;
+		[SerializeField] private TileBase[] CorruptedTower;
+		[SerializeField] private TileBase CorruptedCar;
+		[SerializeField] private TileBase CorruptedHen;
+
 		[Space(10)] [Header("Map variables")] 
 		[SerializeField] private int MapHeight = 50;
 		[SerializeField] private int MapWidth = 50;
@@ -377,8 +383,8 @@ namespace LSB.Components.Core {
 		}
 
 		private void NewExpansionTile() {
-			int x = Random.Range(-6, 7);
-			int y = Random.Range(-6, 7);
+			int x = Random.Range(-4, 3);
+			int y = Random.Range(-4, 3);
 			
 			_expansionTiles.Add(new Vector3Int(_playerCellPosition.x + x, _playerCellPosition.y + y, 0));
 		}
@@ -414,13 +420,56 @@ namespace LSB.Components.Core {
 				else {
 					CorruptionTilemap.SetTile(tile, CorruptedGrass);
 				}
-				
+
+				if (DecorationTilemap.GetTile(tile)) {
+					if (DecorationTilemap.GetTile(tile) == Tower[0]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedTower[0]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), CorruptedTower[1]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), null);
+					}
+					
+					else if (DecorationTilemap.GetTile(tile) == Tower[1]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedTower[1]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), CorruptedTower[0]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), null);
+					}
+
+					else if (DecorationTilemap.GetTile(tile) == Tree[0]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedTree[0]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), CorruptedTree[1]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), null);
+					}
+					
+					else if (DecorationTilemap.GetTile(tile) == Tree[1]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedTree[1]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), CorruptedTree[0]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), null);
+					}
+					
+					else if (DecorationTilemap.GetTile(tile) == Lamp[0]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedLamp[0]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), CorruptedLamp[1]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, 1, 0), null);
+					}
+					
+					else if (DecorationTilemap.GetTile(tile) == Lamp[1]) {
+						CorruptionDecorationTilemap.SetTile(tile, CorruptedLamp[1]);
+						CorruptionDecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), CorruptedLamp[0]);
+						DecorationTilemap.SetTile(tile + new Vector3Int(0, -1, 0), null);
+					}
+					
+					else if (DecorationTilemap.GetTile(tile) == Car) CorruptionDecorationTilemap.SetTile(tile, CorruptedCar);
+					else if (DecorationTilemap.GetTile(tile) == Hen) CorruptionDecorationTilemap.SetTile(tile, CorruptedHen);
+					
+					DecorationTilemap.SetTile(tile, null);
+				}
+
 				FloorTilemap.SetTile(tile, null);
 				
 				_expansionTiles.RemoveAt(i);
 				_expansionTiles.Add(tile);
 			}
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(0.7f);
 			
 			_generating = false;
 		}

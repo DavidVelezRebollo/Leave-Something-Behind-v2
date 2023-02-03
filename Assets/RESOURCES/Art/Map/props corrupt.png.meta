@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CLamp_To
+      name: CLamp_Bot
       rect:
         serializedVersion: 2
         x: 768
@@ -285,8 +285,8 @@ TextureImporter:
     nameFileIdTable:
       CTree_Bot: -1113187337
       CHen: 1153041853
+      CLamp_Bot: 731180985
       CTower_Bot: 1608951923
-      CLamp_To: 731180985
       CCar: 1419624162
       CTower_Top: -2141845927
       CTree_Top: -14899111
