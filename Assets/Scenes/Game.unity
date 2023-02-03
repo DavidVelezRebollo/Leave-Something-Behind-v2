@@ -5821,7 +5821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Parece que te has viajado al pasado por accidente. Sin embargo, este pasado
+  m_text: "Parece que has viajado al pasado por accidente. Sin embargo, este pasado
     tiene algo extra\xF1o.\n\nTu objetivo es sobrevivir 12 minutos, evitando que
     te maten las criaturas hostiles que habitan en este mundo."
   m_isRightToLeft: 0

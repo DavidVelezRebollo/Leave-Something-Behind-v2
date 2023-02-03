@@ -23,6 +23,9 @@ namespace LSB.Components.Core {
 			Instance = this;
 
 			_gameState = GameState.Menu;
+			
+			if(PlayerPrefs.HasKey("FullScreen")) Screen.SetResolution(Screen.width, Screen.height, true);
+			else Screen.SetResolution(Screen.width, Screen.width, PlayerPrefs.GetInt("FullScreen") != 0);
 		}
 
 		#endregion

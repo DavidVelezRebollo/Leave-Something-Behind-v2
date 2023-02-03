@@ -38,8 +38,6 @@ namespace LSB.Components.Menus {
         [Tooltip("Toggle which represents if the game is full screen or not")]
         [SerializeField] private Toggle FullScreenToggle;
 
-        private readonly Vector2 _soundRange = new Vector2(-10, -50);
-        
         #endregion
 
         #region Unity Methods
@@ -48,12 +46,6 @@ namespace LSB.Components.Menus {
         /// When started, it calls for StartSounds() to initialize the values.
         /// </summary>
         private void Start() {
-            GeneralSlider.maxValue = _soundRange.x;
-            GeneralSlider.minValue = _soundRange.y;
-            MusicSlider.maxValue = _soundRange.x;
-            MusicSlider.minValue = _soundRange.y;
-            EffectsSlider.maxValue = _soundRange.x;
-            EffectsSlider.minValue = _soundRange.y;
             StartSounds();
             initializeToggles();
         }
@@ -73,11 +65,14 @@ namespace LSB.Components.Menus {
         /// </summary>
         private void StartSounds() {
             AudioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("GeneralVolume"));
-            if (SoundManager.Instance.getMusicActive()) { AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume")); }
-            else { AudioMixer.SetFloat("Music", 0); }
+            
+            if (SoundManager.Instance.getMusicActive()) 
+                AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
+            else 
+                AudioMixer.SetFloat("Music", 0); 
+            
             AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
-
-
+      
             GeneralSlider.value = PlayerPrefs.GetFloat("GeneralVolume");
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
             EffectsSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume");

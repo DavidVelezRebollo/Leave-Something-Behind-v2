@@ -396,15 +396,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1075859918}
   m_HandleRect: {fileID: 1763290162}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 5
+  m_MinValue: -50
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 239900966}
-        m_TargetAssemblyTypeName: Settings, Project.Components.UI
+        m_TargetAssemblyTypeName: LSB.Components.Menus.Settings, Project.Components.Menus
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -1006,10 +1006,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1784105455}
   m_HandleRect: {fileID: 1964104323}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 5
+  m_MinValue: -50
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1605,8 +1605,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1097520299}
   - {fileID: 1702989811}
+  - {fileID: 1097520299}
   m_Father: {fileID: 187256498}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4861,7 +4861,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 376555719}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5847,16 +5847,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 949132893}
-        m_TargetAssemblyTypeName: LSB.Components.Audio.SoundManager, Project.Components.Sound
-        m_MethodName: PlayOneShot
-        m_Mode: 5
+      - m_Target: {fileID: 1920124971}
+        m_TargetAssemblyTypeName: LSB.Components.Menus.MainMenu, Project.Components.Menus
+        m_MethodName: PlayButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Button
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1320435571
@@ -8571,7 +8571,7 @@ RectTransform:
   - {fileID: 425675658}
   - {fileID: 1422077596}
   m_Father: {fileID: 376555719}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8622,10 +8622,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2051094621}
   m_HandleRect: {fileID: 874555045}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 5
+  m_MinValue: -50
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

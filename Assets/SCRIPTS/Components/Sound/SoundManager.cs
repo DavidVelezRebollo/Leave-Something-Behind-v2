@@ -77,21 +77,15 @@ namespace LSB.Components.Audio {
         /// It checks if the settings of the mixers have been changed and if so, it assigns it values. 
         /// If not, it initializes the mixers volume.
         /// </summary>
-        private void Start()
-        {
-            
-            if (PlayerPrefs.HasKey("GeneralVolume") &&
-               PlayerPrefs.HasKey("SoundEffectsVolume") &&
-               PlayerPrefs.HasKey("MusicVolume"))
+        private void Start() {
+            if (PlayerPrefs.HasKey("GeneralVolume") && PlayerPrefs.HasKey("SoundEffectsVolume") &&
+                PlayerPrefs.HasKey("MusicVolume"))
                 LoadVolume();
-            
-            else
-            {
+            else {
                 PlayerPrefs.SetFloat("GeneralVolume", 0);
                 PlayerPrefs.SetFloat("SoundEffectsVolume", 0);
                 PlayerPrefs.SetFloat("MusicVolume", 0);
             }
-            
         }
 
         public void SetMusicVolume(float volume)
