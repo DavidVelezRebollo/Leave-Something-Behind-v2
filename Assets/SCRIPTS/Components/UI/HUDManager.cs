@@ -53,6 +53,7 @@ namespace LSB.Components.UI {
 		private Timer _timer;
 		private int _rightItem;
 		private int _leftItem;
+		private int _itemSelected;
 		private bool _itemDrop;
 		private bool _timerBlink;
 
@@ -143,20 +144,38 @@ namespace LSB.Components.UI {
 		}
 
 		public void OnLeftItemSelect() {
-			_backPack.DropItem(_leftItem);
-			_gameManager.SetGameState(GameState.Running);
-			ItemSelectorPanel.SetActive(false);
-			ItemContainers.SetActive(true);
-			ItemGrid.SetActive(true);
+			Item leftItem = _backPack.GetItem(_leftItem);
+			TechnicalDescription.text = leftItem.GetTechnicalDescription();
+			_itemSelected = _leftItem;
 		}
 
 		public void OnRightItemSelect() {
-			_backPack.DropItem(_rightItem);
-			_gameManager.SetGameState(GameState.Running);
-			ItemSelectorPanel.SetActive(false);
-			ItemContainers.SetActive(true);
-			ItemGrid.SetActive(true);
+			Item rightItem = _backPack.GetItem(_rightItem);
+			TechnicalDescription.text = rightItem.GetTechnicalDescription();
+			_itemSelected = _rightItem;
 		}
+
+		public void OnItemSelect()
+        {
+            if (_itemSelected == _leftItem)
+            {
+				_backPack.DropItem(_leftItem);
+				_gameManager.SetGameState(GameState.Running);
+				ItemSelectorPanel.SetActive(false);
+				ItemContainers.SetActive(true);
+				ItemGrid.SetActive(true);
+				_itemSelected = -1;
+			}
+			else if(_itemSelected == _rightItem)
+            {
+				_backPack.DropItem(_rightItem);
+				_gameManager.SetGameState(GameState.Running);
+				ItemSelectorPanel.SetActive(false);
+				ItemContainers.SetActive(true);
+				ItemGrid.SetActive(true);
+				_itemSelected = -1;
+			}
+        }
 
 		public float GetMinutes() {
 			return _timer.GetMinuteCount();
