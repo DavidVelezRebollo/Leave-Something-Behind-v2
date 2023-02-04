@@ -49,7 +49,6 @@ namespace LSB.Components.Core {
 		public void AddCorruptionDamage(float newDamage)
 		{
 			_corruptionDamage += newDamage;
-			Debug.Log(_corruptionDamage);
 		}
 
 		public float GetCorruptionDamage()
