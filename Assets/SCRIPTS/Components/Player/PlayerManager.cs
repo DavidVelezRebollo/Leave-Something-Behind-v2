@@ -83,7 +83,7 @@ namespace LSB.Components.Player {
 			if (!collision.collider.CompareTag("Corruption")) return;
 			
 			if (_immuneDelta <= 0) {
-				TakeDamage(1f);
+				TakeDamage(_gameManager.GetCorruptionDamage());
 				_immuneDelta = 0.2f;
 			}
 
@@ -137,6 +137,7 @@ namespace LSB.Components.Player {
 		public float GetCurrentHp() {
 			return _currentHp;
 		}
+
 
 		public void TakeDamage(float amount) {
 			StartCoroutine(ChangeColor(Color.red));

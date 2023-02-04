@@ -5404,6 +5404,8 @@ MonoBehaviour:
   - {fileID: 2087072363663054572, guid: 8682cfa65aaaec5439624127b9d48f79, type: 3}
   - {fileID: 6553601195253685798, guid: c35fb8116ae591c4abf3aca4ccad07de, type: 3}
   - {fileID: 2058080753333282374, guid: f8eead43e6d91764abea84d4683b0321, type: 3}
+  - {fileID: 5775447836507147644, guid: 5b5855eecdafee34bbe23fa46a1ee49e, type: 3}
+  - {fileID: 5319264304034183879, guid: 382c0fcbbd0f0b04e8d64d4080fdec9a, type: 3}
   NarrativeItems:
   - {fileID: 5281264619930722995, guid: 49d0440b84607ec4e924e4e037bb27de, type: 3}
   - {fileID: 6736183350168690814, guid: 1f92a6d03284e0c40855d0a199af3354, type: 3}

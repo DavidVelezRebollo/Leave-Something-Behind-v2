@@ -34,15 +34,27 @@ namespace LSB.Components.Core {
 		[SerializeField] private Texture2D HandleCursor;
 		[SerializeField] private Texture2D TargetCursor;
 
+		private float _corruptionDamage;
 		private SoundManager _soundManager;
 
 		private void Start() {
 			_soundManager = SoundManager.Instance;
+			_corruptionDamage = 2f;
 		}
 
 		public GameState GetGameState()
 		{
 			return _gameState;
+		}
+		public void AddCorruptionDamage(float newDamage)
+		{
+			_corruptionDamage += newDamage;
+			Debug.Log(_corruptionDamage);
+		}
+
+		public float GetCorruptionDamage()
+		{
+			return _corruptionDamage;
 		}
 
 		public void SetGameState(GameState state) {
