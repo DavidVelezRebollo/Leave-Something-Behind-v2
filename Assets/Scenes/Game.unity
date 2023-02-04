@@ -1353,10 +1353,10 @@ MonoBehaviour:
   LeftItemName: {fileID: 613176256}
   LeftItemDescription: {fileID: 197156219}
   LeftItemTechnicalDescription: {fileID: 2146465784}
-  RightItemImage: {fileID: 0}
-  RightItemName: {fileID: 0}
-  RightItemDescription: {fileID: 0}
-  RightItemTechnicalDescription: {fileID: 0}
+  RightItemImage: {fileID: 1490641429}
+  RightItemName: {fileID: 206543246}
+  RightItemDescription: {fileID: 49894384}
+  RightItemTechnicalDescription: {fileID: 2146465784}
   ObjectExplanationPanel: {fileID: 412365736}
 --- !u!1 &235310458
 GameObject:
@@ -11643,7 +11643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2076277754
 MonoBehaviour:
   m_ObjectHideFlags: 0
