@@ -6,7 +6,8 @@ namespace LSB.Components.Items {
         public override void UseItem() { }
 
         public override void UndoItem() {
-            SoundManager.Instance.Stop("ThemeSong");
+            SoundManager.Instance.SetMusicVolume(-50);
+            SoundManager.Instance.SetMusicActive(false);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using LSB.Classes.UI;
 using LSB.Input;
@@ -35,12 +36,12 @@ namespace LSB.Components.UI {
 		[SerializeField] private Image LeftItemImage;
 		[SerializeField] private TextMeshProUGUI LeftItemName;
 		[SerializeField] private TextMeshProUGUI LeftItemDescription;
-		[SerializeField] private TextMeshProUGUI LeftItemTechnicalDescription;
 		[Space(5)]
 		[SerializeField] private Image RightItemImage;
 		[SerializeField] private TextMeshProUGUI RightItemName;
 		[SerializeField] private TextMeshProUGUI RightItemDescription;
-		[SerializeField] private TextMeshProUGUI RightItemTechnicalDescription;
+		[Space(1)]
+		[SerializeField] private TextMeshProUGUI TechnicalDescription;
 
 		[SerializeField] private GameObject ObjectExplanationPanel;
 
@@ -48,12 +49,12 @@ namespace LSB.Components.UI {
 		private PlayerManager _player;
 		private BackPack _backPack;
 		private InputHandler _input;
-		
 
 		private Timer _timer;
 		private int _rightItem;
 		private int _leftItem;
 		private bool _itemDrop;
+		private bool _timerBlink;
 
 		private void Start() {
 			
@@ -88,7 +89,7 @@ namespace LSB.Components.UI {
 			
 			_timer.UpdateTimer();
 			
-			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+			handleTimerText();
 			
 			if (_timer.GetMinuteCount() <= 0) {
 				_gameManager.SetGameState(GameState.Won);
@@ -128,13 +129,11 @@ namespace LSB.Components.UI {
 				LeftItemImage.sprite = leftItem.GetSprite();
 				LeftItemName.text = leftItem.GetName();
 				LeftItemDescription.text = leftItem.GetDescription();
-				LeftItemTechnicalDescription.text = leftItem.GetTechnicalDescription();
 				
 				// RIGHT ITEM
 				RightItemImage.sprite = rightItem.GetSprite();
 				RightItemName.text = rightItem.GetName();
 				RightItemDescription.text = rightItem.GetDescription();
-				RightItemTechnicalDescription.text = rightItem.GetTechnicalDescription();
 			}
 			else {
 				_backPack.DropItem();
@@ -240,6 +239,30 @@ namespace LSB.Components.UI {
 		{
 			_gameManager.SetGameState(GameState.Menu);
 			Defeat.SetActive(true);
+		}
+
+		private void handleTimerText() {
+			if (_timer.GetMinuteCount() > 9) TimerText.color = new Color(0.82f, 0.94f, 0.93f);
+			else if (_timer.GetMinuteCount() <= 9 && _timer.GetMinuteCount() > 5) {
+				TimerText.color = new Color(0.78f, 0.65f, 0.91f);
+			} else if (_timer.GetMinuteCount() <= 5 && _timer.GetMinuteCount() > 1) {
+				TimerText.color = new Color(0.89f, 0.5f, 0.84f);
+			} else if (_timer.GetMinuteCount() <= 1 && !_timerBlink) {
+				_timerBlink = true;
+				StartCoroutine(timerBlink());
+			}
+			
+			// TODO - Timer blink
+			
+			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+		}
+
+		private IEnumerator timerBlink() {
+			TimerText.color = new Color(0.88f, 0.22f, 0.31f);
+			yield return new WaitForSeconds(1f);
+			TimerText.color = new Color(0.82f, 0.94f, 0.93f);
+			yield return new WaitForSeconds(1f);
+			_timerBlink = false;
 		}
 
 		public void PlayButtonSound() { SoundManager.Instance.PlayOneShot("Button"); }
