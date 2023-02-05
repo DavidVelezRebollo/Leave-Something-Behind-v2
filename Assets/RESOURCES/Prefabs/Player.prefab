@@ -114,7 +114,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!95 &166904244039016322
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,7 +131,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &121699565080281467
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,8 +195,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefabs:
   - {fileID: 6069141356650026330, guid: f533a63d280b793409f69b1f47c8a0ec, type: 3}
-  SpecialProjectilesPrefabs: []
+  SpecialProjectilePrefab: {fileID: 1619766739610770898, guid: 67b901eea88f0bd4caa2dc587801dfe0, type: 3}
   CurrentStats: {fileID: 11400000, guid: fe46acff9b12b9848874edd1128fd1f1, type: 2}
+  TotalEnergy: 200
+  EnergyPerSecond: 0.05
 --- !u!50 &7817655970097789286
 Rigidbody2D:
   serializedVersion: 4

@@ -20,9 +20,10 @@ namespace LSB.Components.UI {
 		[SerializeField] private TextMeshProUGUI TimerText;
 		[SerializeField] private GameObject Victory;
 		[SerializeField] private GameObject Defeat;
-		[Header("HP UI Fields")]
+		[Header("HP & Energy UI Fields")]
 		[SerializeField] private Image HpBar;
 		[SerializeField] private TextMeshProUGUI HpText;
+		[SerializeField] private Image EnergyBar;
 		[Space(15)]
 		[Header("Pause Menu UI Fields")]
 		[SerializeField] private GameObject PauseMenu;
@@ -56,6 +57,7 @@ namespace LSB.Components.UI {
 		private int _itemSelected;
 		private bool _itemDrop;
 		private bool _timerBlink;
+		private bool _rechargeEnergy;
 
 		private void Start() {
 			
@@ -78,6 +80,7 @@ namespace LSB.Components.UI {
 
 			_timer = new Timer(12);
 			_player.OnHpChange += updateHpUI;
+			_player.SubscribeSpecialAttack(() => { _rechargeEnergy = true; });
 			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
 		}
 
@@ -91,6 +94,8 @@ namespace LSB.Components.UI {
 			_timer.UpdateTimer();
 			
 			handleTimerText();
+
+			EnergyBar.fillAmount = _player.GetCurrentEnergyAmount() / _player.GetTotalEnergy();
 			
 			if (_timer.GetMinuteCount() <= 0) {
 				_gameManager.SetGameState(GameState.Won);
@@ -108,7 +113,6 @@ namespace LSB.Components.UI {
 				ObjectExplanationPanel.SetActive(true);
 			}
 		}
-		
 
 		public void DisplayItemSelector() {
 			_gameManager.SetGameState(GameState.Paused);

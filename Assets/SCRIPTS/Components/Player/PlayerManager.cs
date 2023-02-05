@@ -137,12 +137,28 @@ namespace LSB.Components.Player {
 		public float GetCurrentHp() {
 			return _currentHp;
 		}
+		
+		public float GetTotalEnergy() {
+			return _shoot.GetTotalEnergy();
+		}
+
+		public float GetCurrentEnergyAmount() {
+			return _shoot.GetCurrentEnergyAmount();
+		}
+
+		public float GetEnergyPerSeconds() {
+			return _shoot.GetEnergyPerSeconds();
+		}
 
 
 		public void TakeDamage(float amount) {
 			StartCoroutine(ChangeColor(Color.red));
 			_currentHp -= amount;
 			OnHpChange?.Invoke();
+		}
+
+		public void SubscribeSpecialAttack(Action action) {
+			_shoot.OnSpecialAttack += action;
 		}
 
 		private void recoverHp(float amount) {

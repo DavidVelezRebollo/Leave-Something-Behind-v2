@@ -64,6 +64,10 @@ namespace LSB.Components.Enemies {
 			if (_enemy.OnCollide(collision)) StartCoroutine(_enemy.ChangeColor(Color.red));
 		}
 
+		private void OnTriggerEnter2D(Collider2D col) {
+			if (_enemy.OnTrigger(col)) StartCoroutine(_enemy.ChangeColor(Color.red));
+		}
+
 		public void ResetStats() {
 			CurrentStats.Damage = BaseStats.Damage;
 			CurrentStats.Speed = BaseStats.Speed;

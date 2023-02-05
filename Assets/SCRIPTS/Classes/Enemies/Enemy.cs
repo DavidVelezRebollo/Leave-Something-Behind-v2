@@ -88,12 +88,16 @@ namespace LSB.Classes.Enemies {
         public bool OnCollide(Collision2D col) {
             if (!col.collider.CompareTag("Bullets")) return false;
 
-            _currentHp -= col.collider.GetComponent<ProjectileComponent>().GetDamage();
+            takeDamage(col.collider.GetComponent<ProjectileComponent>().GetDamage());
 
-            if (_currentHp <= 0) {
-                die(_gameObject);
-            }
+            return true;
+        }
 
+        public bool OnTrigger(Collider2D col) {
+            if (!col.CompareTag("Bullets")) return false;
+
+            takeDamage(col.GetComponentInParent<ProjectileComponent>().GetDamage());
+            
             return true;
         }
 
@@ -183,6 +187,18 @@ namespace LSB.Classes.Enemies {
         #endregion
 
         #region Auxiliar Methods
+
+        /// <summary>
+        /// Makes the enemy take a certain amount of damage
+        /// </summary>
+        /// <param name="amount">The amount of damage</param>
+        private void takeDamage(float amount) {
+            _currentHp -= amount;
+
+            if (_currentHp <= 0) {
+                die(_gameObject);
+            }
+        }
 
         /// <summary>
         /// Handles what to do when the enemy dies.

@@ -4,31 +4,30 @@ using LSB.Shared;
 using UnityEngine;
 
 namespace LSB.Components.Combat {
-	[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 	public class ProjectileComponent : MonoBehaviour {
-		[SerializeField] private Projectile BaseStats;
-		[SerializeField] private Projectile CurrentStats;
+		[SerializeField] protected Projectile BaseStats;
+		[SerializeField] protected Projectile CurrentStats;
 
-		private GameManager _gameManager;
-		private Rigidbody2D _rb;
+		protected GameManager GameManager;
+		protected Rigidbody2D Rb;
+		protected Vector2 Velocity;
 		private float _deltaAir;
-		private Vector2 _velocity;
 
 		private void Start() {
-			_rb = GetComponent<Rigidbody2D>();
-			_gameManager = GameManager.Instance;
+			Rb = GetComponent<Rigidbody2D>();
+			GameManager = GameManager.Instance;
 			
-			_velocity = _rb.velocity;
+			Velocity = Rb.velocity;
 			_deltaAir = CurrentStats.AirTime;
 		}
 
-		private void Update() {
-			if (_gameManager.GamePaused() || _gameManager.GameEnded()) {
-				_rb.velocity = Vector2.zero;
+		protected virtual void Update() {
+			if (GameManager.GamePaused() || GameManager.GameEnded()) {
+				Rb.velocity = Vector2.zero;
 				return;
 			}
 
-			_rb.velocity = _velocity;
+			Rb.velocity = Velocity;
 			_deltaAir -= Time.deltaTime;
 			
 			if(_deltaAir <= 0) Destroy(gameObject);
