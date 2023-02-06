@@ -1,6 +1,7 @@
 using System;
 using LSB.Classes.Enemies;
 using LSB.Classes.State;
+using LSB.Components.Player;
 using LSB.Interfaces;
 using LSB.Shared;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace LSB.Components.Enemies {
 		
 		private Chase _movement;
 		private DistanceAttack _attack;
+		private float _damageTimer;
 		
 		private Enemy _enemy;
 
@@ -60,8 +62,23 @@ namespace LSB.Components.Enemies {
 			_enemy.OnEnemyDie += function;
 		}
 
-		private void OnCollisionEnter2D(Collision2D collision) {
-			if (_enemy.OnCollide(collision)) StartCoroutine(_enemy.ChangeColor(Color.red));
+		private void OnCollisionEnter2D(Collision2D col) {
+			if (_enemy.OnCollide(col)) StartCoroutine(_enemy.ChangeColor(Color.red));
+		}
+		
+		private void OnCollisionStay2D(Collision2D collision) {
+			_damageTimer -= Time.deltaTime;
+			if (!collision.collider.CompareTag("Player") || _damageTimer > 0) return;
+
+			_damageTimer = 0.3f;
+			collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+			_enemy.GetAnimation().AttackAnimation();
+		}
+
+		private void OnCollisionExit2D(Collision2D other) {
+			if (!other.collider.CompareTag("Player")) return;
+
+			_damageTimer = 0f;
 		}
 		
 		private void OnTriggerEnter2D(Collider2D col) {

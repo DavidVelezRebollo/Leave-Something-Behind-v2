@@ -15,6 +15,6 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: 8764150e7f584b644b23bc810c2cd4ee, type: 3}
   Name: Cajetilla de cigarrillos
   Description: Fumar mata. Por favor, no fumes.
-  TechnicDescription: Reduce tu vida en un 5% pero aumenta en un 15% tu velocidad
-    de ataque
+  TechnicDescription: Reduce tu vida en un 5%. Aumenta en un 15% tu velocidad de
+    ataque
   Type: 0

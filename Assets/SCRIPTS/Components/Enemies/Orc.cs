@@ -9,6 +9,7 @@ namespace LSB.Components.Enemies {
 	public class Orc : MonoBehaviour, IPooledObject {
 		private Chase _movement;
 		private MeleeAttack _attack;
+		private float _damageTimer;
 
 		[Header("Stats")]
 		[SerializeField] private Stats BaseStats;
@@ -54,18 +55,28 @@ namespace LSB.Components.Enemies {
 			_enemy.OnEnemyDie += function;
 		}
 
-		private void OnCollisionEnter2D(Collision2D collision) {
-			if (collision.collider.CompareTag("Player")) {
-				collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
-				_enemy.GetAnimation().AttackAnimation();
-				return;
-			}
-
-			if (_enemy.OnCollide(collision)) StartCoroutine(_enemy.ChangeColor(Color.red));
-		}
-
 		private void OnTriggerEnter2D(Collider2D col) {
 			if (_enemy.OnTrigger(col)) StartCoroutine(_enemy.ChangeColor(Color.red));
+		}
+		
+		private void OnCollisionEnter2D(Collision2D col) {
+			if (_enemy.OnCollide(col)) StartCoroutine(_enemy.ChangeColor(Color.red));
+		}
+		
+		private void OnCollisionStay2D(Collision2D collision) {
+			_damageTimer -= Time.deltaTime;
+
+			if (!collision.collider.CompareTag("Player") || _damageTimer > 0) return;
+			
+			_damageTimer = 0.3f;
+			collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+			_enemy.GetAnimation().AttackAnimation();
+		}
+
+		private void OnCollisionExit2D(Collision2D other) {
+			if (!other.collider.CompareTag("Player")) return;
+
+			_damageTimer = 0f;
 		}
 
 		public void ResetStats() {

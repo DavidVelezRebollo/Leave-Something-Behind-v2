@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -24,6 +25,7 @@ namespace LSB.Components.Items {
         [Tooltip("Narrative Items List")]
         [SerializeField] private List<Item> NarrativeItems;
         [SerializeField] private GameObject ItemContainer;
+        [SerializeField] private GameObject ItemMenuGrid;
 
         public Action OnItemInitialize;
 
@@ -98,6 +100,9 @@ namespace LSB.Components.Items {
 
             itemToDrop.UndoItem();
             ItemContainer.gameObject.transform.GetChild(index).GetComponent<Image>().color = Color.black;
+            ItemMenuGrid.gameObject.transform.GetChild(index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+            ItemMenuGrid.gameObject.transform.GetChild(index).GetComponentInChildren<TextMeshProUGUI>().fontStyle =
+                FontStyles.Strikethrough;
             _playerItems.Remove(index);
         }
 

@@ -15,8 +15,12 @@ namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
 		[Header("UI Fields")] 
 		[SerializeField] private GameObject Tutorial;
+		[SerializeField] private GameObject InitialTutorial;
+		[SerializeField] private GameObject ItemsPanel;
+		[SerializeField] private GameObject Settings;
 		[SerializeField] private GameObject ItemContainers;
 		[SerializeField] private GameObject ItemGrid;
+		[SerializeField] private GameObject ItemPanelGrid;
 		[SerializeField] private TextMeshProUGUI TimerText;
 		[SerializeField] private GameObject Victory;
 		[SerializeField] private GameObject Defeat;
@@ -68,20 +72,23 @@ namespace LSB.Components.UI {
 
 			if (!PlayerPrefs.HasKey("Tutorial")) {
 				_gameManager.SetGameState(GameState.Paused);
-				Tutorial.SetActive(true);
+				InitialTutorial.SetActive(true);
 			} else if (PlayerPrefs.GetInt("Tutorial") == 1) {
 				_gameManager.SetGameState(GameState.Paused);
-				Tutorial.SetActive(true);
+				InitialTutorial.SetActive(true);
 			}
 			else {
 				_gameManager.SetGameState(GameState.Running);
-				Tutorial.SetActive(false);
+				InitialTutorial.SetActive(false);
 			}
 
 			_timer = new Timer(12);
 			_player.OnHpChange += updateHpUI;
 			_player.SubscribeSpecialAttack(() => { _rechargeEnergy = true; });
-			_backPack.OnItemInitialize += () => { HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString(); };
+			_backPack.OnItemInitialize += () => {
+				HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString();
+				initializeItemPanel();
+			};
 		}
 
 		private void Update() {
@@ -215,15 +222,18 @@ namespace LSB.Components.UI {
 		private void handlePauseMenu() {
 			_gameManager.SetGameState(_gameManager.GamePaused() ? GameState.Running : GameState.Paused);
 			
-			PauseMenu.SetActive(!PauseMenu.activeSelf);
-			ItemContainers.SetActive(!ItemContainers.activeSelf);
-			ItemGrid.SetActive(!ItemGrid.activeSelf);
+			PauseMenu.SetActive(_gameManager.GamePaused());
+			ItemContainers.SetActive(!_gameManager.GamePaused());
+			ItemGrid.SetActive(!_gameManager.GamePaused());
 			TimerText.enabled = !TimerText.IsActive();
+			
+			ItemsPanel.SetActive(false);
+			Tutorial.SetActive(false);
 
-			AttackSpeedText.text = _player.GetAttackSpeed().ToString();
-			AttackText.text = _player.GetDamage().ToString();
-			SpeedText.text = _player.GetSpeed().ToString();
-			MaxHpText.text = _player.GetMaxHp().ToString();
+			AttackSpeedText.text = _player.GetAttackSpeed().ToString("0.00");
+			AttackText.text = _player.GetDamage().ToString("0");
+			SpeedText.text = _player.GetSpeed().ToString("0.0");
+			MaxHpText.text = _player.GetMaxHp().ToString("0");
 		}
 
 		public void ShowTutorialNextTime(bool show) {
@@ -232,7 +242,7 @@ namespace LSB.Components.UI {
 		}
 
 		public void OnStartButton() {
-			Tutorial.SetActive(false);
+			InitialTutorial.SetActive(false);
 			_gameManager.SetGameState(GameState.Running);
 		}
 
@@ -251,6 +261,14 @@ namespace LSB.Components.UI {
 			SceneManager.LoadScene(0);
 		}
 
+		private void initializeItemPanel() {
+			for (int i = 0; i < ItemPanelGrid.transform.childCount; i++) {
+				ItemPanelGrid.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+					_backPack.GetItem(i).GetSprite();
+				ItemPanelGrid.transform.transform.GetChild(i).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text =
+					_backPack.GetItem(i).GetTechnicalDescription();
+			}
+		}
 
 		private void handleVictory()
 		{
