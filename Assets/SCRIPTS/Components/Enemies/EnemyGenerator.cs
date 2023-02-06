@@ -67,9 +67,13 @@ namespace LSB.Components.Enemies {
 
 			while (i < numEnemies && follow) {
 				Vector3 playerPosition = _playerTransform.position;
-				x = playerPosition.x + (Random.value < 0.5f ? -5f : 5f);
-				y = playerPosition.y + Random.Range(-5f, 5f);
+				x = playerPosition.x + (Random.value < 0.5f ? -8f : 8f);
+				y = playerPosition.y + Random.Range(-8f, 8f);
 				_generating = true;
+
+				do {
+					yield return null;
+				} while (_gameManager.GamePaused());
 
 				GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, y), Quaternion.identity);
 				if (enemyType == typeof(Orc)) {

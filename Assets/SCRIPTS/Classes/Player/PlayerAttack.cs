@@ -58,7 +58,7 @@ namespace LSB.Classes.Player {
 		}
 		
 		public void TickUpdate() {
-			if (_currentEnergy < TotalEnergy) _currentEnergy += EnergyPerSecond;
+			if (_currentEnergy < TotalEnergy) _currentEnergy += EnergyPerSecond * Time.deltaTime;
 
 			if (_input.OnShootButton() && _currentEnergy >= TotalEnergy) {
 				_currentEnergy = 0;

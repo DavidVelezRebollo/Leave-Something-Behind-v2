@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 1
   Speed: 2
-  AirTime: 1
+  AirTime: 10

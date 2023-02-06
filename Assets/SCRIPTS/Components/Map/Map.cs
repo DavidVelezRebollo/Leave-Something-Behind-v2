@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using LSB.Components.UI;
@@ -55,10 +54,10 @@ namespace LSB.Components.Core {
 		private HUDManager _hudTimer;
 
 		private const float _LAMP_PROBABILITY = 0.01f;
-		private const float _TOWER_PROBABILITY = 0.05f;
-		private const float _CAR_PROBABILITY = 0.10f;
-		private const float _HEN_PROBABILITY = 0.15f;
-		private const float _TREES_PROBABILITY = 0.25f;
+		private const float _TOWER_PROBABILITY = 0.04f;
+		private const float _CAR_PROBABILITY = 0.05f;
+		private const float _HEN_PROBABILITY = 0.1f;
+		private const float _TREES_PROBABILITY = 0.15f;
 		private const float _DECORATION_PROBABILITY = 0.35f;
 		
 		private Props[,] _cellMap;
@@ -383,9 +382,14 @@ namespace LSB.Components.Core {
 		}
 
 		private void NewExpansionTile() {
-			int x = Random.Range(-4, 3);
-			int y = Random.Range(-4, 3);
-			
+			int x;
+			int y;
+
+			do {
+				x = Random.Range(-4, 5);
+				y = Random.Range(-4, 5);
+			} while ((x > -2 && x < 2) || (y > -2 && y < 2));
+
 			_expansionTiles.Add(new Vector3Int(_playerCellPosition.x + x, _playerCellPosition.y + y, 0));
 		}
 
@@ -402,6 +406,10 @@ namespace LSB.Components.Core {
 					do y = Random.Range(-1, 2);
 					while (y == 0);
 				}
+
+				do {
+					yield return null;
+				} while (GameManager.Instance.GamePaused());
 
 				Vector3Int tile = new Vector3Int(_expansionTiles[i].x + x, _expansionTiles[i].y + y, 0);
 				if (FloorTilemap.GetTile(tile) != Grass) {

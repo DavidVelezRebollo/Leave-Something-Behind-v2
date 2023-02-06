@@ -1,3 +1,4 @@
+using LSB.Components.Core;
 using UnityEngine;
 
 namespace LSB.Classes.Enemies {
@@ -53,6 +54,12 @@ namespace LSB.Classes.Enemies {
 				_lastMoveDirection = _moveDirection;
 			
 			_moveDirection = clamp(_enemy.GetLastDirection());
+
+			if (GameManager.Instance.GamePaused()) {
+				_animator.SetBool(IsStop, true);
+				return;
+			}
+			
 			animate();
 		}
 		
