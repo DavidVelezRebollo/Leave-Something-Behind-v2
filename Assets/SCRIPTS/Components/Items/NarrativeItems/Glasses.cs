@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 namespace LSB.Components.Items {
     public class Glasses : Item {
-        private PostProcessVolume _postProcessVolume;
+        private Blur _blur;
 
         public override void UseItem() {
-            if (Camera.main == null) {
-                Debug.LogWarning("Main Camera null exception");
-                return;
-            }
-                
-            _postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
+            _blur = Camera.main.GetComponent<Blur>();
+            _blur.enabled = false;
         }
 
-        public override void UndoItem() { _postProcessVolume.weight = 1; }
+        public override void UndoItem() {
+            _blur.enabled = true;
+        }
     }
 }
 
