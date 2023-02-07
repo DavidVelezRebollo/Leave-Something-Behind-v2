@@ -14,9 +14,10 @@ namespace LSB.Components.Enemies {
 		[Header("Numeric Fields")]
 		[SerializeField] private float EnemyGenerationCooldown;
 		[Range(1, 100)] [SerializeField] private int[] MaxEnemies;
-		[Header("Unity Prefabs")]
+		[Header("Enemies Prefabs")]
 		[SerializeField] private MonoBehaviour OrcPrefab;
 		[SerializeField] private MonoBehaviour WizardPrefab;
+		[SerializeField] private MonoBehaviour GoblinPrefab;
 
 		private ObjectPool _orcPool;
 		private ObjectPool _wizardPool;
@@ -30,6 +31,7 @@ namespace LSB.Components.Enemies {
 
 		private int _wizardNumber;
 		private int _orcNumber;
+		private int _goblinNumber;
 		
 		private int _currentWave;
 
@@ -60,7 +62,7 @@ namespace LSB.Components.Enemies {
 			handleWaves();
 		}
 
-		private IEnumerator generateEnemies(GameObject enemyPrefab, Type enemyType, int numEnemies) {
+		private IEnumerator generateEnemies(GameObject enemyPrefab, Type enemyType, int numEnemies, float respawnTime) {
 			float x, y;
 			int i = 0;
 			bool follow = true;
@@ -87,10 +89,16 @@ namespace LSB.Components.Enemies {
 					_wizardNumber++;
 					if (_wizardNumber >= MaxEnemies[1]) follow = false;
 				}
+
+				if (enemyType == typeof(Goblin)) {
+					enemy.GetComponent<Goblin>().SubscribeEvent(onEnemyDieInvoke);
+					_goblinNumber++;
+					if (_goblinNumber >= MaxEnemies[2]) follow = false;
+				}
 				
 				i++;
 
-				yield return new WaitForSeconds(0.5f);
+				yield return new WaitForSeconds(respawnTime);
 			}
 			
 			_canGenerate = false;
@@ -99,21 +107,24 @@ namespace LSB.Components.Enemies {
 
 		private void handleWaves() {
 			if (_hud.GetMinutes() > 9f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10, 0.5f));
 			} else if (_hud.GetMinutes() <= 9f && _hud.GetMinutes() > 7f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 3));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 1f));
 			} else if (_hud.GetMinutes() <= 7f && _hud.GetMinutes() > 5f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 8));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 2, 0.3f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5, 2f));
 			} else if (_hud.GetMinutes() <= 5f && _hud.GetMinutes() > 3f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 5));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 5, 0.2f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 1.5f));
 			} else if (_hud.GetMinutes() <= 3f && _hud.GetMinutes() > 1f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 3));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 15));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 4, 0.5f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 2, 1f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 0.5f));
 			} else if (_hud.GetMinutes() < 1f) {
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 20));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 15, 0.5f));
 			}
 			
 			_generationDelta = EnemyGenerationCooldown;
@@ -124,12 +135,15 @@ namespace LSB.Components.Enemies {
 				_orcNumber--;
 			else if (enemy.GetComponent<Wizard>())
 				_wizardNumber--;
+			else if (enemy.GetComponent<Goblin>())
+				_goblinNumber--;
 		}
 
 		private void resetStats()
         {
 			OrcPrefab.GetComponent<Orc>().ResetStats();
 			WizardPrefab.GetComponent<Wizard>().ResetStats();
+			GoblinPrefab.GetComponent<Goblin>().ResetStats();
 		}
 	}
 }
