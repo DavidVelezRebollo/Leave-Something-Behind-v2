@@ -3,6 +3,7 @@ using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using LSB.Classes.Player;
+using LSB.Components.Audio;
 using LSB.Components.Combat;
 using LSB.Components.Core;
 using LSB.Components.Items;
@@ -92,13 +93,15 @@ namespace LSB.Components.Player {
 
 		private void OnTriggerEnter2D(Collider2D col) {
 			if (col.GetComponent<Potion>() != null) {
+				SoundManager.Instance.Play("Potion");
 				recoverHp(col.GetComponent<Potion>().GetRecoveryAmount());
 				Destroy(col.gameObject);
 			}
 
-			if (col.GetComponent<Coin>() != null) {
-				Destroy(col.gameObject);
-			}
+			if (col.GetComponent<Coin>() == null) return;
+			
+			SoundManager.Instance.Play("Coin");
+			Destroy(col.gameObject);
 		}
 
 		private void OnTriggerStay2D(Collider2D other) {

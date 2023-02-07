@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using LSB.Components.Audio;
 using LSB.Components.Core;
 using UnityEngine;
 
@@ -36,6 +37,7 @@ namespace LSB.Components.Combat {
             ExplosionArea.SetActive(true);
             Rb.velocity = Vector2.zero;
             _projectileRenderer.sprite = null;
+            SoundManager.Instance.Play("Explosion");
             yield return new WaitForSeconds(0.1f);
             Destroy(gameObject);
         }

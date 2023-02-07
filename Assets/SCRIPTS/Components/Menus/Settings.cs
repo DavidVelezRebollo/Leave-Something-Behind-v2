@@ -93,9 +93,11 @@ namespace LSB.Components.Menus {
         /// Initializes the toggles state
         /// </summary>
         private void initializeToggles() {
-            if(PlayerPrefs.HasKey("Tutorial"))
-                TutorialToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Tutorial") != 0);
-            else TutorialToggle.SetIsOnWithoutNotify(true);
+            if (TutorialToggle != null) {
+                if (PlayerPrefs.HasKey("Tutorial"))
+                    TutorialToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Tutorial") != 0);
+                else TutorialToggle.SetIsOnWithoutNotify(true);
+            }
 
             if(PlayerPrefs.HasKey("FullScreen")) 
                 FullScreenToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("FullScreen") != 0);

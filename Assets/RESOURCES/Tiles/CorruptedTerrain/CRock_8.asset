@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: CRock_8
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1568834177, guid: 6e740e7503a98bf4198e14cb905ecf87, type: 3}
+  m_Sprite: {fileID: 817983919, guid: e0edb254a9bc1214cbd2cbf809d9525c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

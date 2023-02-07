@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using DG.Tweening;
 using LSB.Components.Audio;
+using LSB.Components.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +14,13 @@ namespace LSB.Components.UI {
         [SerializeField] private Image[] Images;
 
         private Queue<string> _texts;
-        private bool _finished = false;
-        private Tween _typeWrite;
+        private bool _finished;
+        private SoundManager _soundManager;
 
         private void OnEnable() {
+            _soundManager = SoundManager.Instance;
             _texts = new Queue<string>();
-            
+
             if (!PlayerPrefs.HasKey("Tutorial") || PlayerPrefs.GetInt("Tutorial") == 1) {
                 StartCoroutine(displayTutorial());
                 if (Images.Length > 0) StartCoroutine(displayImages());
@@ -55,9 +55,10 @@ namespace LSB.Components.UI {
 
         private IEnumerator displayImages() {
             foreach (Image image in Images) {
-                for (float i = 0; image.fillAmount < 1; i += 0.001f * Images.Length) {
+                _soundManager.Play("TutorialImage");
+                for (float i = 0; image.fillAmount < 1; i += 0.5f * Images.Length * Time.deltaTime) {
                     image.fillAmount += i;
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.05f);
                 }
             }
         }
@@ -67,6 +68,7 @@ namespace LSB.Components.UI {
 
             foreach (char c in text) {
                 container.text += c;
+                _soundManager.Play(Random.Range(0f, 1f) < 0.5f ? "Keypress" : "Keypress2");
                 yield return new WaitForSeconds(0.07f);
             }
 
@@ -94,9 +96,15 @@ namespace LSB.Components.UI {
                 return;
             }
 
-            NextTutorial.SetActive(true);
-            gameObject.SetActive(false);
-            SoundManager.Instance.Play("Button");
+            if (NextTutorial != null) {
+                NextTutorial.SetActive(true);
+                gameObject.SetActive(false);
+                _soundManager.Play("Button");
+            }
+            else {
+                transform.parent.gameObject.SetActive(false);
+                GameManager.Instance.SetGameState(GameState.Running);
+            }
         }
     }
 }

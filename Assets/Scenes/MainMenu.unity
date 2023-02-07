@@ -4054,6 +4054,83 @@ MonoBehaviour:
     PlayOnAwake: 0
     Volume: 0.2
     Source: {fileID: 0}
+  - ClipName: Keypress
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: c076df8346a4cc94daf7a480306dd881, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: Keypress2
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: cdee20e15d3766d4297f7b001442ccb8, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: TutorialImage
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 30feeb226dc716b40a7aa3e90acb1566, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.1
+    Source: {fileID: 0}
+  - ClipName: Coin
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 4ad2c2dcd80346c40943848d25278a61, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: EnergyFull
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: e3b3aa70e0dd11c4790a3123bb0cb7a6, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: Potion
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 5a7abc455b4f4d4439da6bd8657a8ec4, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: Laser
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: b5fea63087a96d74cbf7737d04688fe5, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.1
+    Source: {fileID: 0}
+  - ClipName: Explosion
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 358f9a64c26a3e3468dce961e47d0e56, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.3
+    Source: {fileID: 0}
+  - ClipName: SpecialAttack
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 453e551710a935f4d9f47bf5a3b4cde5, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: OrcAttack
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 62ecb77ae0f62334aaa20d638f11e17a, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: OrcDie
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 42d8e547592904e4f9121746367eab89, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.8
+    Source: {fileID: 0}
 --- !u!114 &949132894
 MonoBehaviour:
   m_ObjectHideFlags: 0

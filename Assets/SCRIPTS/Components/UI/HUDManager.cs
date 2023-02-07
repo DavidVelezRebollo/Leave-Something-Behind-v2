@@ -47,6 +47,7 @@ namespace LSB.Components.UI {
 		[SerializeField] private TextMeshProUGUI RightItemDescription;
 		[Space(1)]
 		[SerializeField] private TextMeshProUGUI TechnicalDescription;
+		[SerializeField] private Button SelectItemButton;
 
 		[SerializeField] private GameObject ObjectExplanationPanel;
 
@@ -146,6 +147,9 @@ namespace LSB.Components.UI {
 				RightItemImage.sprite = rightItem.GetSprite();
 				RightItemName.text = rightItem.GetName();
 				RightItemDescription.text = rightItem.GetDescription();
+
+				SelectItemButton.interactable = false;
+				SelectItemButton.gameObject.GetComponent<Image>().color = new Color(0.22f, 0.22f, 0.22f);
 			}
 			else {
 				_backPack.DropItem();
@@ -158,12 +162,16 @@ namespace LSB.Components.UI {
 			Item leftItem = _backPack.GetItem(_leftItem);
 			TechnicalDescription.text = leftItem.GetTechnicalDescription();
 			_itemSelected = _leftItem;
+			SelectItemButton.interactable = true;
+			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
 		}
 
 		public void OnRightItemSelect() {
 			Item rightItem = _backPack.GetItem(_rightItem);
 			TechnicalDescription.text = rightItem.GetTechnicalDescription();
 			_itemSelected = _rightItem;
+			SelectItemButton.interactable = true;
+			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
 		}
 
 		public void OnItemSelect()
@@ -228,6 +236,7 @@ namespace LSB.Components.UI {
 			TimerText.enabled = !TimerText.IsActive();
 			
 			ItemsPanel.SetActive(false);
+			Settings.SetActive(false);
 			Tutorial.SetActive(false);
 
 			AttackSpeedText.text = _player.GetAttackSpeed().ToString("0.00");
@@ -239,11 +248,6 @@ namespace LSB.Components.UI {
 		public void ShowTutorialNextTime(bool show) {
 			PlayerPrefs.SetInt("Tutorial", !show ? 1 : 0);
 			PlayButtonSound();
-		}
-
-		public void OnStartButton() {
-			InitialTutorial.SetActive(false);
-			_gameManager.SetGameState(GameState.Running);
 		}
 
 		public void OnContinueButton() {

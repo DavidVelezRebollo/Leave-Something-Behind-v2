@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LSB.Components.Audio;
 using LSB.Input;
 using UnityEngine;
 using LSB.Components.Combat;
@@ -58,7 +59,10 @@ namespace LSB.Classes.Player {
 		}
 		
 		public void TickUpdate() {
-			if (_currentEnergy < TotalEnergy) _currentEnergy += EnergyPerSecond * Time.deltaTime;
+			if (_currentEnergy < TotalEnergy) {
+				_currentEnergy += EnergyPerSecond * Time.deltaTime;
+				if (_currentEnergy >= TotalEnergy) SoundManager.Instance.Play("EnergyFull");
+			}
 
 			if (_input.OnShootButton() && _currentEnergy >= TotalEnergy) {
 				_currentEnergy = 0;
@@ -121,6 +125,7 @@ namespace LSB.Classes.Player {
 				Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg);
 				i++;
 				
+				SoundManager.Instance.Play("Laser");
 				GameObject arrow = Instantiate(proyectile, position, rotation);
 
 				float speed = arrow.GetComponent<ProjectileComponent>().GetSpeed();
@@ -138,6 +143,7 @@ namespace LSB.Classes.Player {
 			Vector2 dir = mousePosition - new Vector2(position.x, position.y);
 			Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)  * Mathf.Rad2Deg);
 			
+			SoundManager.Instance.Play("SpecialAttack");
 			GameObject specialProjectile = Instantiate(SpecialProjectilePrefab, position, rotation);
 			
 			float speed = specialProjectile.GetComponent<ProjectileComponent>().GetSpeed();

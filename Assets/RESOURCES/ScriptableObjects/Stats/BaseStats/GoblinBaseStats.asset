@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4b2da4d512a49b4fb68a784d21c4fc2, type: 3}
-  m_Name: OrcBaseStats
+  m_Name: GoblinBaseStats
   m_EditorClassIdentifier: 
-  Damage: 3
-  MaxHp: 20
-  Speed: 1
+  Damage: 5
+  MaxHp: 5
+  Speed: 2
   AttackCooldown: 0.3

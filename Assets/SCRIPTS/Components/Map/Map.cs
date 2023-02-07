@@ -25,6 +25,7 @@ namespace LSB.Components.Core {
 
 		[Space(10)] [Header("Corrupted Tiles")] 
 		[SerializeField] private TileBase CorruptedGrass;
+		[SerializeField] private TileBase CorruptedGrassGlitched;
 		[SerializeField] private TileBase[] CorruptedDecoration;
 		[SerializeField] private TileBase[] CorruptedTree;
 		[SerializeField] private TileBase[] CorruptedLamp;
@@ -87,7 +88,7 @@ namespace LSB.Components.Core {
 			if (_generating == false)
 				StartCoroutine(CorruptTerrain());
 
-			if (_hudTimer.GetSeconds() % 30 != 0 || _corrupted || _hudTimer.GetSeconds() == 0) return;
+			if (_hudTimer.GetSeconds() % 59 != 0 || _hudTimer.GetMinutes() > 9f || _corrupted || _hudTimer.GetSeconds() == 0) return;
 			
 			NewExpansionTile();
 			_corrupted = true;
@@ -426,7 +427,7 @@ namespace LSB.Components.Core {
 					}
 				}
 				else {
-					CorruptionTilemap.SetTile(tile, CorruptedGrass);
+					CorruptionTilemap.SetTile(tile, Random.Range(0f, 1f) > 0.3f ? CorruptedGrass : CorruptedGrassGlitched);
 				}
 
 				if (DecorationTilemap.GetTile(tile)) {

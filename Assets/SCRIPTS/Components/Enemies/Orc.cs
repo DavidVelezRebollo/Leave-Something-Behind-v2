@@ -1,5 +1,6 @@
 using System;
 using LSB.Classes.Enemies;
+using LSB.Components.Audio;
 using LSB.Components.Player;
 using LSB.Interfaces;
 using LSB.Shared;
@@ -41,6 +42,7 @@ namespace LSB.Components.Enemies {
 				gameObject, CurrentStats.MaxHp, CurrentStats.AttackCooldown, PotionPrefab, CoinPrefab);
 			
 			_attack = new MeleeAttack(transform, 0.2f, _enemy.GetAnimation());
+			_enemy.OnEnemyDie += (o => { SoundManager.Instance.Play("OrcDie"); });
 		}
 
 		private void Update() {
@@ -68,7 +70,8 @@ namespace LSB.Components.Enemies {
 
 			if (!collision.collider.CompareTag("Player") || _damageTimer > 0) return;
 			
-			_damageTimer = 0.3f;
+			_damageTimer = CurrentStats.AttackCooldown;
+			SoundManager.Instance.Play("OrcAttack");
 			collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
 			_enemy.GetAnimation().AttackAnimation();
 		}
