@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 4786b7abc1f0bca41abdce536debd7f4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 23828529152
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101326684160
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 184264851456
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 232121860096
+    m_Localized: COLLECTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305102749696
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3992890015744
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4087211524096
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4308339425280
+    m_Localized: Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4379994914816
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4452610899968
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11055053570048
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

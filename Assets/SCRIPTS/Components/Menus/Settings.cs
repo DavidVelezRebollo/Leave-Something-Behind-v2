@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
@@ -37,6 +39,8 @@ namespace LSB.Components.Menus {
         [SerializeField] private Toggle TutorialToggle;
         [Tooltip("Toggle which represents if the game is full screen or not")]
         [SerializeField] private Toggle FullScreenToggle;
+
+        private bool _languageActive = false;
 
         #endregion
 
@@ -152,6 +156,25 @@ namespace LSB.Components.Menus {
         public void SetSoundEffectsVolume(float volume) {
             AudioMixer.SetFloat("SoundEffects", volume);
             PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
+        }
+
+        public void ChangeLocale(int localeId) {
+            if (_languageActive) return;
+            
+            StartCoroutine(setLocale(localeId));
+        }
+
+        #endregion
+
+        #region Auxiliar Methods
+
+        private IEnumerator setLocale(int localeId) {
+            _languageActive = true;
+            yield return LocalizationSettings.InitializationOperation;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+            PlayerPrefs.SetInt("LocalKey", localeId);
+            _languageActive = false;
+
         }
 
         #endregion

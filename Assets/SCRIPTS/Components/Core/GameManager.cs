@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using LSB.Components.Audio;
+using UnityEngine.Localization.Settings;
 
 namespace LSB.Components.Core {
 	public enum GameState {
@@ -24,8 +26,10 @@ namespace LSB.Components.Core {
 
 			_gameState = GameState.Menu;
 			
-			if(PlayerPrefs.HasKey("FullScreen")) Screen.SetResolution(Screen.width, Screen.height, true);
+			if(!PlayerPrefs.HasKey("FullScreen")) Screen.SetResolution(Screen.width, Screen.height, true);
 			else Screen.SetResolution(Screen.width, Screen.width, PlayerPrefs.GetInt("FullScreen") != 0);
+			
+			StartCoroutine(initializeLanguage());
 		}
 
 		#endregion
@@ -73,6 +77,12 @@ namespace LSB.Components.Core {
 				
 				_soundManager.Stop("MenuSong");
 			}
+		}
+
+		private IEnumerator initializeLanguage() {
+			yield return LocalizationSettings.InitializationOperation;
+			LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[
+				PlayerPrefs.HasKey("LocalKey") ? PlayerPrefs.GetInt("LocalKey") : 0];
 		}
 
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }

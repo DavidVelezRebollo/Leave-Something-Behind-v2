@@ -2,6 +2,8 @@
     "name": "Project.Components.Core",
     "rootNamespace": "",
     "references": [
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5",
+        "GUID:84651a3751eca9349aac36a66bba901b",
         "GUID:1b335920b13fdbb47837d192aba62242"
     ],
     "includePlatforms": [],
