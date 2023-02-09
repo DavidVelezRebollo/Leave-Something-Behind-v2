@@ -1276,6 +1276,7 @@ MonoBehaviour:
   GeneralVolumeText: {fileID: 1332496387}
   MusicText: {fileID: 1727212375}
   SoundEffectsText: {fileID: 1097520297}
+  LanguageDropdown: {fileID: 159703314}
   TutorialToggle: {fileID: 663486888}
   FullScreenToggle: {fileID: 611288062}
 --- !u!1 &264464446

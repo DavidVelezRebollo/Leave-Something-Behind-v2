@@ -1,19 +1,10 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using LSB.Components.Audio;
+using LSB.Shared;
 using UnityEngine.Localization.Settings;
 
 namespace LSB.Components.Core {
-	public enum GameState {
-		Menu,
-		Paused,
-		Running,
-		Lost,
-		Won
-	}
-	
 	public class GameManager : MonoBehaviour {
 		#region Singleton
 		private GameState _gameState;
@@ -40,6 +31,7 @@ namespace LSB.Components.Core {
 
 		private float _corruptionDamage;
 		private SoundManager _soundManager;
+		private Language _language;
 
 		private void Start() {
 			_soundManager = SoundManager.Instance;
@@ -50,6 +42,11 @@ namespace LSB.Components.Core {
 		{
 			return _gameState;
 		}
+
+		public Language GetCurrentLanguage() {
+			return _language;
+		}
+		
 		public void AddCorruptionDamage(float newDamage)
 		{
 			_corruptionDamage += newDamage;
@@ -83,6 +80,7 @@ namespace LSB.Components.Core {
 			yield return LocalizationSettings.InitializationOperation;
 			LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[
 				PlayerPrefs.HasKey("LocalKey") ? PlayerPrefs.GetInt("LocalKey") : 0];
+			_language = PlayerPrefs.HasKey("LocalKey") ? (Language) PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
 		}
 
 		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }

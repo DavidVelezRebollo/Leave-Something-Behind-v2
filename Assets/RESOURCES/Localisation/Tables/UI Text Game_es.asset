@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Text Game_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 7855ace4c29f2fe4195f18ec7a0acfb5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 13523124224
+    m_Localized: Objetos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1375048728576
+    m_Localized: Selecciona un objeto para ver su efecto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2374673006592
+    m_Localized: PAUSA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2392020647936
+    m_Localized: OBJETOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2628868800512
+    m_Localized: OPCIONES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2491740225536
+    m_Localized: SALIR DE LA PARTIDA
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

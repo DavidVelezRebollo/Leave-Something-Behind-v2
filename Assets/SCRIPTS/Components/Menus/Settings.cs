@@ -5,6 +5,8 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using LSB.Components.Audio;
+using LSB.Components.Core;
+using LSB.Shared;
 
 namespace LSB.Components.Menus {
     public class Settings : MonoBehaviour
@@ -33,6 +35,10 @@ namespace LSB.Components.Menus {
         [Tooltip("Text that shows the sound effects volume value.")]
         [SerializeField] private TextMeshProUGUI SoundEffectsText;
 
+        [Space(5)] [Header("Dropdowns")] 
+        [Tooltip("Dropdown of the languages")] 
+        [SerializeField] private TMP_Dropdown LanguageDropdown;
+
         [Space(5)]
         [Header("Toggles")]
         [Tooltip("Toggle which represents if the tutorial will show or not")]
@@ -52,6 +58,7 @@ namespace LSB.Components.Menus {
         private void Start() {
             StartSounds();
             initializeToggles();
+            initializeDropdowns();
         }
 
         private void Update() {
@@ -106,6 +113,10 @@ namespace LSB.Components.Menus {
             if(PlayerPrefs.HasKey("FullScreen")) 
                 FullScreenToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("FullScreen") != 0);
             else FullScreenToggle.SetIsOnWithoutNotify(true);
+        }
+
+        private void initializeDropdowns() {
+            LanguageDropdown.value = GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? 0 : 1;
         }
         
         #endregion

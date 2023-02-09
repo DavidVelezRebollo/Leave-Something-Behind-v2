@@ -6,6 +6,7 @@ using LSB.Components.Core;
 using LSB.Components.Player;
 using LSB.Components.Items;
 using LSB.Components.Audio;
+using LSB.Shared;
 using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;

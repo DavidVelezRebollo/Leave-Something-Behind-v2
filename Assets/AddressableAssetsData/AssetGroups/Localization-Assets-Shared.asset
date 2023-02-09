@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Assets/RESOURCES/Localisation/Tables/UI Table Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 7855ace4c29f2fe4195f18ec7a0acfb5
+    m_Address: Assets/RESOURCES/Localisation/Tables/UI Text Game Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: f5794e9cff837a946994ff15f27f3044
+    m_Address: Assets/RESOURCES/Localisation/Tables/UI Tutorial Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 9d4edf2a277a233418b38516292f881f, type: 2}
   m_SchemaSet:

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LSB.Components.Audio;
 using LSB.Components.Core;
+using LSB.Shared;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,15 +11,18 @@ namespace LSB.Components.UI {
     public class Tutorial : MonoBehaviour {
         [SerializeField] private GameObject NextTutorial;
         [SerializeField] private TextMeshProUGUI[] TextToDisplay;
-        [SerializeField] [TextArea(3, 10)] private string[] TextToWrite;
+        [SerializeField] [TextArea(3, 10)] private string[] SpanishTextToWrite;
+        [SerializeField] [TextArea(3, 10)] private string[] EnglishTextToWrite;
         [SerializeField] private Image[] Images;
 
         private Queue<string> _texts;
         private bool _finished;
         private SoundManager _soundManager;
+        private GameManager _gameManager;
 
         private void OnEnable() {
             _soundManager = SoundManager.Instance;
+            _gameManager = GameManager.Instance;
             _texts = new Queue<string>();
 
             if (!PlayerPrefs.HasKey("Tutorial") || PlayerPrefs.GetInt("Tutorial") == 1) {
@@ -27,7 +31,7 @@ namespace LSB.Components.UI {
             }
             else {
                 foreach (TextMeshProUGUI textContainer in TextToDisplay)
-                    foreach (string text in TextToWrite) {
+                    foreach (string text in SpanishTextToWrite) {
                         textContainer.text = text;
                     }
             }
@@ -36,7 +40,7 @@ namespace LSB.Components.UI {
         private IEnumerator displayTutorial() {
             _texts.Clear();
 
-            foreach (string text in TextToWrite) {
+            foreach (string text in _gameManager.GetCurrentLanguage() == Language.Spanish ? SpanishTextToWrite : EnglishTextToWrite) {
                 _texts.Enqueue(text);
             }
 
@@ -81,7 +85,7 @@ namespace LSB.Components.UI {
                 int i = 0;
 
                 foreach (TextMeshProUGUI container in TextToDisplay) {
-                    container.text = TextToWrite[i];
+                    container.text = _gameManager.GetCurrentLanguage() == Language.Spanish ? SpanishTextToWrite[i] : EnglishTextToWrite[i];
                     i++;
                 }
                 
@@ -103,7 +107,7 @@ namespace LSB.Components.UI {
             }
             else {
                 transform.parent.gameObject.SetActive(false);
-                GameManager.Instance.SetGameState(GameState.Running);
+                _gameManager.SetGameState(GameState.Running);
             }
         }
     }
