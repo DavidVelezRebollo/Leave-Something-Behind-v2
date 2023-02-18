@@ -61,6 +61,7 @@ namespace LSB.Components.UI {
 		private int _rightItem;
 		private int _leftItem;
 		private int _itemSelected;
+		private bool _inItemSelection;
 		private bool _itemDrop;
 		private bool _timerBlink;
 		private bool _spanish;
@@ -97,7 +98,7 @@ namespace LSB.Components.UI {
 			if (_gameManager.GetGameState() == GameState.Lost) { handleDefeat(); return; }
 			if (_gameManager.GetGameState() == GameState.Won) { handleVictory(); return; }
 
-			if (_input.OnPauseButton()) handlePauseMenu();
+			if (_input.OnPauseButton() && !_inItemSelection) handlePauseMenu();
 			if (_gameManager.GamePaused() || _gameManager.GameEnded()) return;
 			
 			_timer.UpdateTimer();
@@ -125,6 +126,7 @@ namespace LSB.Components.UI {
 
 		public void DisplayItemSelector() {
 			_gameManager.SetGameState(GameState.Paused);
+			_inItemSelection = true;
 			
 			ItemSelectorPanel.SetActive(true);
 			ItemContainers.SetActive(false);
@@ -195,6 +197,8 @@ namespace LSB.Components.UI {
 				ItemGrid.SetActive(true);
 				_itemSelected = -1;
 			}
+
+			_inItemSelection = false;
         }
 
 		public float GetMinutes() {
