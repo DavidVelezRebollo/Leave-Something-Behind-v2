@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: PykeShoes
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: acd2eddfe94abfa4d854a979fd1b58af, type: 3}
-  Name: PykeShoes
-  EnglishName: 
-  Description: ...
-  EnglishDescription: 
+  Name: Zapatillas marca Pyke
+  EnglishName: Pyke Brand Shoes
+  Description: "Las compraste en China. Por alg\xFAn motivo, el nombre de la marca
+    te suena."
+  EnglishDescription: You bought them in China. For some reason, you recognize the
+    brand name.
   TechnicDescription: Aumenta tu velocidad en un 10%.
-  EnglishTechnicDescription: Increase you
+  EnglishTechnicDescription: Increase your speed by 10%
   Type: 0
