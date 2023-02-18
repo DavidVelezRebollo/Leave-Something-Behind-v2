@@ -85,7 +85,7 @@ namespace LSB.Components.UI {
 				InitialTutorial.SetActive(false);
 			}
 
-			_timer = new Timer(1);
+			_timer = new Timer(12);
 			_player.OnHpChange += updateHpUI;
 			_backPack.OnItemInitialize += () => {
 				HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString();
