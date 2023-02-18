@@ -17,7 +17,100 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f5794e9cff837a946994ff15f27f3044, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2919957781442560
+    m_Localized: "Press here to continue \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920288997240832
+    m_Localized: THE TIME TRAVEL GONE WRONG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920376142295040
+    m_Localized: 'CURRENT OBJECTIVE:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920413748424704
+    m_Localized: Survive until the internal diagnosis is completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920456303833088
+    m_Localized: LIFE FORMS DETECTED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920504928399360
+    m_Localized: Hostile creatures have been detected nearby.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920534418550784
+    m_Localized: Proceed with caution.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920622784147456
+    m_Localized: TERRAIN ANALYSYS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920673187098624
+    m_Localized: "Space-time anomalies approaching.\n\nLos procedimientos sugieren
+      mantener la m\xE1xima distancia posible..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920724139503616
+    m_Localized: TRYING TO CONTACT THE A.A.E.T...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920775498756096
+    m_Localized: TOOLS ANALYSIS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920809581670400
+    m_Localized: '6 possible tools have been detected that will facilitate your survival.
+
+
+      If
+      the anomalies persists, it is recommended to leave them behind to avoid disappearing'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920864795488256
+    m_Localized: STATS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920900094750720
+    m_Localized: Check the pause menu to see your stats.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920949763698688
+    m_Localized: Attack Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920973608316928
+    m_Localized: Max Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921005849931776
+    m_Localized: Attack Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921037030387712
+    m_Localized: Movement Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921073814433792
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921096639836160
+    m_Localized: Use the mouse to aim. With the left click, fires a charged attack.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921115757473792
+    m_Localized: Use the keys to move around the terrain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2924875263143936
+    m_Localized: Don't show again
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -14,11 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 8d60c15b8f9f829429bb66787a6661c4, type: 3}
   Name: Sombrero de mago
-  Description: 'Son el nuevo abracadabra
+  EnglishName: Wizard hat
+  Description: 'Son el nuevo abracadabra.
 
-    Zoom, zoom, faradio, faradio
+    Zoom, zoom, faradio, faradio.
 
     Zoom,
-    zoom y me importa un vatio'
+    zoom y me importa un vatio.'
+  EnglishDescription: 'They are the new abracadabra.
+
+    Zoom, zoom, farad, farad,
+    farad.
+
+    Zoom, zoom and I don''t give a watt.'
   TechnicDescription: "Reduce el da\xF1o de los magos en un 10%"
+  EnglishTechnicDescription: Reduces mage damage by 10%.
   Type: 0

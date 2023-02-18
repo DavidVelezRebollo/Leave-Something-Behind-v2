@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: acd2eddfe94abfa4d854a979fd1b58af, type: 3}
   Name: PykeShoes
+  EnglishName: 
   Description: ...
+  EnglishDescription: 
   TechnicDescription: Aumenta tu velocidad en un 10%.
+  EnglishTechnicDescription: Increase you
   Type: 0

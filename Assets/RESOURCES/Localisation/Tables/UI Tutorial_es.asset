@@ -17,7 +17,99 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f5794e9cff837a946994ff15f27f3044, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2919957781442560
+    m_Localized: "Presiona aqu\xED para continuar \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920288997240832
+    m_Localized: VIAJE EN EL TIEMPO FALLIDO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920376142295040
+    m_Localized: 'OBJETIVO ACTUAL:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920413748424704
+    m_Localized: "Sobrevivir hasta que el diagn\xF3stico interno sea completado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920456303833088
+    m_Localized: FORMAS DE VIDA DETECTADAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920504928399360
+    m_Localized: Se han detectado criaturas hostiles en las proximidades.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920534418550784
+    m_Localized: "Proceda con precauci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920622784147456
+    m_Localized: "AN\xC1LISIS DEL TERRENO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920673187098624
+    m_Localized: "Se aproximan anomal\xEDas espaciotemporales. \n\nLos procedimientos
+      sugieren mantener la m\xE1xima distancia posible..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920724139503616
+    m_Localized: INTENTANDO CONTACTAR CON LA A.A.E.T...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920775498756096
+    m_Localized: ANALIZANDO HERRAMIENTAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920809581670400
+    m_Localized: "Se han detectado 6 posibles herramientas que facilitaran su supervivencia.
+      \n\nSi las anomal\xEDas persisten se recomienda dejarlas atr\xE1s para evitar
+      desaparecer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920864795488256
+    m_Localized: "ESTAD\xCDSTICAS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920900094750720
+    m_Localized: "Comprueba el men\xFA de pausa para conocer tus estad\xEDsticas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920949763698688
+    m_Localized: Velocidad de ataque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920973608316928
+    m_Localized: "Vida m\xE1xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921005849931776
+    m_Localized: "Da\xF1o de ataque"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921037030387712
+    m_Localized: Velocidad de movimiento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921073814433792
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921096639836160
+    m_Localized: Utilice el mouse para apuntar. Con click izquierdo dispara un ataque
+      cargado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921115757473792
+    m_Localized: Utilice las teclas para desplazarse por el terreno.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2924875263143936
+    m_Localized: No mostrar de nuevo
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

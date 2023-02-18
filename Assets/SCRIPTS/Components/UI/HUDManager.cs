@@ -63,7 +63,7 @@ namespace LSB.Components.UI {
 		private int _itemSelected;
 		private bool _itemDrop;
 		private bool _timerBlink;
-		private bool _rechargeEnergy;
+		private bool _spanish;
 
 		private void Start() {
 			
@@ -71,6 +71,7 @@ namespace LSB.Components.UI {
 			_player = FindObjectOfType<PlayerManager>();
 			_backPack = BackPack.Instance;
 			_input = InputHandler.Instance;
+			_spanish = _gameManager.GetCurrentLanguage() == Language.Spanish;
 
 			if (!PlayerPrefs.HasKey("Tutorial")) {
 				_gameManager.SetGameState(GameState.Paused);
@@ -84,9 +85,8 @@ namespace LSB.Components.UI {
 				InitialTutorial.SetActive(false);
 			}
 
-			_timer = new Timer(12);
+			_timer = new Timer(1);
 			_player.OnHpChange += updateHpUI;
-			_player.SubscribeSpecialAttack(() => { _rechargeEnergy = true; });
 			_backPack.OnItemInitialize += () => {
 				HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString();
 				initializeItemPanel();
@@ -106,7 +106,7 @@ namespace LSB.Components.UI {
 
 			EnergyBar.fillAmount = _player.GetCurrentEnergyAmount() / _player.GetTotalEnergy();
 			
-			if (_timer.GetMinuteCount() <= 0) {
+			if (_timer.GetMinuteCount() <= 0 && _timer.GetSecondCount() <= 0) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}
@@ -116,7 +116,7 @@ namespace LSB.Components.UI {
 			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetSecondCount() != 0
 			    || _timer.GetMinuteCount() ==  _timer.GetTotalMinutes() || _itemDrop) return;
 
-			if (_backPack.ItemsRemaining() != 6) DisplayItemSelector();
+			if (_backPack.ItemsRemaining() != 6 && _backPack.ItemsRemaining() > 0) DisplayItemSelector();
 			else {
 				_gameManager.SetGameState(GameState.Paused);
 				ObjectExplanationPanel.SetActive(true);
@@ -141,13 +141,13 @@ namespace LSB.Components.UI {
 
 				// LEFT ITEM
 				LeftItemImage.sprite = leftItem.GetSprite();
-				LeftItemName.text = leftItem.GetName();
-				LeftItemDescription.text = leftItem.GetDescription();
+				LeftItemName.text = _spanish ? leftItem.GetName() : leftItem.GetEnglishName();
+				LeftItemDescription.text = _spanish ? leftItem.GetDescription() : leftItem.GetEnglishDescription();
 				
 				// RIGHT ITEM
 				RightItemImage.sprite = rightItem.GetSprite();
-				RightItemName.text = rightItem.GetName();
-				RightItemDescription.text = rightItem.GetDescription();
+				RightItemName.text = _spanish ? rightItem.GetName() : rightItem.GetEnglishName();
+				RightItemDescription.text = _spanish ? rightItem.GetDescription() : rightItem.GetEnglishDescription();
 
 				SelectItemButton.interactable = false;
 				SelectItemButton.gameObject.GetComponent<Image>().color = new Color(0.22f, 0.22f, 0.22f);
@@ -161,7 +161,7 @@ namespace LSB.Components.UI {
 
 		public void OnLeftItemSelect() {
 			Item leftItem = _backPack.GetItem(_leftItem);
-			TechnicalDescription.text = leftItem.GetTechnicalDescription();
+			TechnicalDescription.text = _spanish ? leftItem.GetTechnicalDescription() : leftItem.GetEnglishTechnicalDescription();
 			_itemSelected = _leftItem;
 			SelectItemButton.interactable = true;
 			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
@@ -169,7 +169,7 @@ namespace LSB.Components.UI {
 
 		public void OnRightItemSelect() {
 			Item rightItem = _backPack.GetItem(_rightItem);
-			TechnicalDescription.text = rightItem.GetTechnicalDescription();
+			TechnicalDescription.text = _spanish ? rightItem.GetTechnicalDescription() : rightItem.GetEnglishTechnicalDescription();
 			_itemSelected = _rightItem;
 			SelectItemButton.interactable = true;
 			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
@@ -263,7 +263,15 @@ namespace LSB.Components.UI {
 		public void OnExitButton()
 		{
 			GameManager.Instance.SetGameState(GameState.Menu);
-			SceneManager.LoadScene(0);
+			StartCoroutine(loadSceneAsync());
+		}
+
+		private IEnumerator loadSceneAsync() {
+			AsyncOperation loadScene = SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+
+			while (!loadScene.isDone) {
+				yield return null;
+			}
 		}
 
 		private void initializeItemPanel() {
@@ -271,19 +279,20 @@ namespace LSB.Components.UI {
 				ItemPanelGrid.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
 					_backPack.GetItem(i).GetSprite();
 				ItemPanelGrid.transform.transform.GetChild(i).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text =
-					_backPack.GetItem(i).GetTechnicalDescription();
+					_gameManager.GetCurrentLanguage() == Language.Spanish ? 
+					_backPack.GetItem(i).GetTechnicalDescription() : _backPack.GetItem(i).GetEnglishTechnicalDescription();
 			}
 		}
 
 		private void handleVictory()
 		{
-			_gameManager.SetGameState(GameState.Menu);
+			_gameManager.SetGameState(GameState.Paused);
 			Victory.SetActive(true);
 		}
 
 		private void handleDefeat()
 		{
-			_gameManager.SetGameState(GameState.Menu);
+			_gameManager.SetGameState(GameState.Paused);
 			Defeat.SetActive(true);
 		}
 
@@ -297,8 +306,6 @@ namespace LSB.Components.UI {
 				_timerBlink = true;
 				StartCoroutine(timerBlink());
 			}
-			
-			// TODO - Timer blink
 			
 			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
 		}

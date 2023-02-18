@@ -57,6 +57,9 @@ namespace LSB.Components.Menus {
         /// </summary>
         private void Start() {
             StartSounds();
+        }
+
+        private void OnEnable() {
             initializeToggles();
             initializeDropdowns();
         }
@@ -184,6 +187,7 @@ namespace LSB.Components.Menus {
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
             PlayerPrefs.SetInt("LocalKey", localeId);
+            GameManager.Instance.SetLanguage(localeId == 0 ? Language.Spanish : Language.English);
             _languageActive = false;
 
         }

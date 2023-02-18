@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Collections;
+using LSB.Components.Core;
+using LSB.Shared;
 using TMPro;
-using DG.Tweening;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +13,13 @@ namespace RoundTableStudio.UI
 	{
 		[Header("Text fields")]
 		[Tooltip("Text that will appear")]
-		[TextArea(3, 10)] public string[] Sentences;
+		[TextArea(3, 10)] public string[] SpanishSentences;
+		[TextArea(3, 10)] public string[] EnglishSentences;
 		[Space(10)]
 		[Header("Reference fields")]
 		public TextMeshProUGUI CinematicText;
+		public GameObject LoadingScreen;
+		public Image LoadingBar;
 		
 		private Queue<string> _sentences;
 		private bool _finished;
@@ -29,7 +34,7 @@ namespace RoundTableStudio.UI
 		private IEnumerator StartCinematic() {
 			_sentences.Clear();
 
-			foreach (string sentence in Sentences)
+			foreach (string sentence in GameManager.Instance.GetCurrentLanguage() == Language.Spanish ? SpanishSentences : EnglishSentences)
 			{
 				_sentences.Enqueue(sentence);
 			}
@@ -49,7 +54,7 @@ namespace RoundTableStudio.UI
 			}
 
 			//EndCinematic();
-			if (SceneManager.GetActiveScene().buildIndex == 0) SceneManager.LoadScene(1);
+			if (SceneManager.GetActiveScene().buildIndex == 0) StartCoroutine(loadSceneAsync());
 			else if (ContinueButton!=null) ContinueButton.SetActive(true);
 		}
 
@@ -62,10 +67,22 @@ namespace RoundTableStudio.UI
 
 			foreach (char letter in sentence) {
 				CinematicText.text += letter;
-				yield return new WaitForSeconds(0.1f);
+				yield return new WaitForSeconds(0.07f);
 			}
 
 			_finished = true;
+		}
+
+		private IEnumerator loadSceneAsync() {
+			AsyncOperation loadScene = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+			LoadingScreen.SetActive(true);
+
+			while (!loadScene.isDone) {
+				float progressValue = Mathf.Clamp01(loadScene.progress / 0.09f);
+				LoadingBar.fillAmount = progressValue;
+
+				yield return null;
+			}
 		}
 	}
 }

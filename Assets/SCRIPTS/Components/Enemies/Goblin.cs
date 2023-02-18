@@ -53,7 +53,7 @@ namespace LSB.Components.Enemies {
 
             _damageTimer = CurrentStats.AttackCooldown;
             // SoundManager.Instance.Play("GoblinAttack");
-            collision.collider.GetComponent<PlayerManager>().TakeDamage(CurrentStats.Damage);
+            collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
             _enemy.GetAnimation().AttackAnimation();
         }
 

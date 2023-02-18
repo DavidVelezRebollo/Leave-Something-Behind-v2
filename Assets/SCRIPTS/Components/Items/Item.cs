@@ -31,23 +31,51 @@ namespace LSB.Components.Items {
         }
 
         /// <summary>
-        /// Gets the name of the item
+        /// Gets the name of the item in Spanish
         /// </summary>
-        /// <returns>The name of the item</returns>
+        /// <returns>The name of the item in Spanish</returns>
         public string GetName() {
             return Info.Name;
         }
 
+        /// <summary>
+        /// Gets the name of the item in English
+        /// </summary>
+        /// <returns>The name of the item in English</returns>
+        public string GetEnglishName() {
+            return Info.EnglishName;
+        }
+
+        /// <summary>
+        /// Gets the technical description of the item in Spanish
+        /// </summary>
+        /// <returns>The technical description in Spanish</returns>
         public string GetTechnicalDescription() {
             return Info.TechnicDescription;
         }
 
         /// <summary>
-        /// Gets the description of the item
+        /// Gets the technical description of the item in Spanish
         /// </summary>
-        /// <returns>The description of the item</returns>
+        /// <returns>The technical description in English</returns>
+        public string GetEnglishTechnicalDescription() {
+            return Info.EnglishTechnicDescription;
+        }
+
+        /// <summary>
+        /// Gets the spanish description of the item
+        /// </summary>
+        /// <returns>The spanish description of the item</returns>
         public string GetDescription() {
             return Info.Description;
+        }
+
+        /// <summary>
+        /// Gets the english description of the item
+        /// </summary>
+        /// <returns>The english description of the item</returns>
+        public string GetEnglishDescription() {
+            return Info.EnglishDescription;
         }
 
         #endregion

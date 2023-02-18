@@ -2512,15 +2512,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41a40ff7c0979040bb9e163a6fbffbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sentences:
+  SpanishSentences:
   - "\xBFD\xF3nde estoy?"
   - Esto no parece el 2048
   - "Lo de viajar en el tiempo cada vez da m\xE1s problemas"
-  - "\xBFEs eso un goblin? "
-  - Si se extinguieron en el 454
-  - Parece que no le caigo muy bien
+  - "\xA1\xBFEs eso... un goblin?!"
+  - Si se extinguieron en el 454!
+  - Parece que no le caigo muy bien...
+  - "\xA1\xA1\xA1\xA1\xA1\xA1\xA1AHHHHH!!!!!!!"
+  EnglishSentences:
+  - Where I am?
+  - This does not look like 2048
+  - Time travel is becoming more and more problematic.
+  - Is that... a goblin?!
+  - They became extinct in 454!
+  - He doesn't seem to like me very much...
   - "\xA1\xA1\xA1\xA1\xA1\xA1\xA1AHHHHH!!!!!!!"
   CinematicText: {fileID: 1661558128}
+  LoadingScreen: {fileID: 1325389492}
+  LoadingBar: {fileID: 1927394594}
   ContinueButton: {fileID: 0}
 --- !u!1 &513803451
 GameObject:
@@ -7468,6 +7478,7 @@ GameObject:
   - component: {fileID: 1341840346}
   - component: {fileID: 1341840348}
   - component: {fileID: 1341840347}
+  - component: {fileID: 1341840349}
   m_Layer: 5
   m_Name: LoadingText
   m_TagString: Untagged
@@ -7592,6 +7603,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341840345}
   m_CullTransparentMesh: 1
+--- !u!114 &1341840349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341840345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:4786b7abc1f0bca41abdce536debd7f4
+    m_TableEntryReference:
+      m_KeyId: 3240085517660160
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1341840347}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1385885038
 GameObject:
   m_ObjectHideFlags: 0
@@ -12295,6 +12346,7 @@ GameObject:
   - component: {fileID: 2008432860}
   - component: {fileID: 2008432862}
   - component: {fileID: 2008432861}
+  - component: {fileID: 2008432863}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12419,6 +12471,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008432859}
   m_CullTransparentMesh: 1
+--- !u!114 &2008432863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008432859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:4786b7abc1f0bca41abdce536debd7f4
+    m_TableEntryReference:
+      m_KeyId: 3239910531297280
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2008432861}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &2039533987
 GameObject:
   m_ObjectHideFlags: 0

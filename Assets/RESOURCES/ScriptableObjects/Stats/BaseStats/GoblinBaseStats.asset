@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 5
   MaxHp: 5
-  Speed: 3
+  Speed: 2.5
   AttackCooldown: 0.3

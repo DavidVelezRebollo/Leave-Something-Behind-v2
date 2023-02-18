@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: EXIT THE GAME
     m_Metadata:
       m_Items: []
+  - m_Id: 2960539123871744
+    m_Localized: LEAVE ALL BEHIND
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

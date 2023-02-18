@@ -6,7 +6,10 @@ using UnityEngine;
 
 namespace LSB.Components.Combat {
     public class SpecialProjectile : ProjectileComponent {
+        [Tooltip("Area affected by the projectile explosion")]
         [SerializeField] private GameObject ExplosionArea;
+        [Tooltip("Special Projectile explosion prefab")]
+        [SerializeField] private GameObject ExplosionPrefab;
         private Vector3 _targetPosition;
         private SpriteRenderer _projectileRenderer;
 
@@ -37,7 +40,9 @@ namespace LSB.Components.Combat {
             ExplosionArea.SetActive(true);
             Rb.velocity = Vector2.zero;
             _projectileRenderer.sprite = null;
+            GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             SoundManager.Instance.Play("Explosion");
+            Destroy(explosion, 1f);
             yield return new WaitForSeconds(0.1f);
             Destroy(gameObject);
         }

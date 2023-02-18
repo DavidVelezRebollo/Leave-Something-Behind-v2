@@ -32,8 +32,6 @@ namespace LSB.Components.Enemies {
 		private int _wizardNumber;
 		private int _orcNumber;
 		private int _goblinNumber;
-		
-		private int _currentWave;
 
 		private void OnEnable() {
 			resetStats();
@@ -121,7 +119,7 @@ namespace LSB.Components.Enemies {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 4, 0.5f));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 2, 1f));
 				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 0.5f));
-			} else if (_hud.GetMinutes() < 1f) {
+			} else if (_hud.GetMinutes() <= 1f) {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
 				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 15, 0.5f));

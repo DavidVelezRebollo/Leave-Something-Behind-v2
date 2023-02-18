@@ -171,3 +171,4 @@ MonoBehaviour:
   BaseStats: {fileID: 11400000, guid: d88600834cc76784e80e18d5be163576, type: 2}
   CurrentStats: {fileID: 11400000, guid: 6d072d7a00fd82742a340b2d8bb85154, type: 2}
   ExplosionArea: {fileID: 953523177062556155}
+  ExplosionPrefab: {fileID: 972882473233288092, guid: 7187589c1105c854da3a8a51213ab812, type: 3}

@@ -76,6 +76,10 @@ namespace LSB.Components.Core {
 			}
 		}
 
+		public void SetLanguage(Language language) {
+			_language = language;
+        }
+
 		private IEnumerator initializeLanguage() {
 			yield return LocalizationSettings.InitializationOperation;
 			LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[

@@ -14,7 +14,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: UI Tutorial
   m_TableCollectionNameGuidString: f5794e9cff837a946994ff15f27f3044
-  m_Entries: []
+  m_Entries:
+  - m_Id: 2919957781442560
+    m_Key: t_press
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920288997240832
+    m_Key: t_01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920376142295040
+    m_Key: t_02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920413748424704
+    m_Key: t_03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920456303833088
+    m_Key: t_04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920504928399360
+    m_Key: t_05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920534418550784
+    m_Key: t_06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920622784147456
+    m_Key: t_07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920673187098624
+    m_Key: t_08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920724139503616
+    m_Key: t_09
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920775498756096
+    m_Key: t_10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920809581670400
+    m_Key: t_11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920864795488256
+    m_Key: t_12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920900094750720
+    m_Key: t_13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920949763698688
+    m_Key: t_14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2920973608316928
+    m_Key: t_15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921005849931776
+    m_Key: t_16
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921037030387712
+    m_Key: t_17
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921073814433792
+    m_Key: t_18
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921096639836160
+    m_Key: t_19
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2921115757473792
+    m_Key: t_20
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2924875263143936
+    m_Key: t_show
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
