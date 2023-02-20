@@ -22,23 +22,19 @@ namespace LSB.Components.Items {
 
         [Tooltip("Normal Items List")]
         [SerializeField] private List<Item> NormalItems;
-        [Tooltip("Narrative Items List")]
-        [SerializeField] private List<Item> NarrativeItems;
         [SerializeField] private GameObject ItemContainer;
         [SerializeField] private GameObject ItemMenuGrid;
 
         public Action OnItemInitialize;
 
         [Tooltip("Player Items List")]
-        private Dictionary<int, Item> _playerItems;
+        private List<Item> _playerItems;
 
         [Tooltip("Number of Normal Items which the player will have")]
-        private const int _NORMAL_ITEMS_COUNT = 4;
-        [Tooltip("Number of Narrative Items which the player will have")]
-        private const int _NARRATIVE_ITEMS_COUNT = 2;
+        private const int _ITEMS_COUNT = 6;
 
         private void Start() {
-            _playerItems = new Dictionary<int, Item>();
+            _playerItems = new List<Item>();
             fillBackPack();
         }
 
@@ -46,29 +42,19 @@ namespace LSB.Components.Items {
         /// Fills the player's items with items
         /// </summary>
         private void fillBackPack() {
-            if (NormalItems.Count < _NORMAL_ITEMS_COUNT && NarrativeItems.Count < _NARRATIVE_ITEMS_COUNT) {
+            if (NormalItems.Count < _ITEMS_COUNT) {
                 Debug.LogError("Not enough items to fill the backpack");
                 return;
             }
             
             // Add Normal Items to the player's items
-            for (int i = 0; i < _NORMAL_ITEMS_COUNT; i++) {
+            for (int i = 0; i < _ITEMS_COUNT; i++) {
                 int index = Random.Range(0, NormalItems.Count);
                 
-                _playerItems.Add(i, NormalItems[index]);
+                _playerItems.Add(NormalItems[index]);
                 NormalItems[index].UseItem();
                 ItemContainer.gameObject.transform.GetChild(i).GetComponent<Image>().sprite = NormalItems[index].GetSprite();
                 NormalItems.RemoveAt(index);
-            }
-
-            // Add Narrative Items to the player's items
-            for (int i = 0; i < _NARRATIVE_ITEMS_COUNT; i++) {
-                int index = Random.Range(0, NarrativeItems.Count);
-                
-                _playerItems.Add(i + _NORMAL_ITEMS_COUNT, NarrativeItems[index]);
-                NarrativeItems[index].UseItem();
-                ItemContainer.gameObject.transform.GetChild(i + _NORMAL_ITEMS_COUNT).GetComponent<Image>().sprite = NarrativeItems[index].GetSprite();
-                NarrativeItems.RemoveAt(index);
             }
 
             OnItemInitialize?.Invoke();
@@ -77,8 +63,6 @@ namespace LSB.Components.Items {
         public int ItemsRemaining() { return _playerItems.Count; }
 
         public Item GetItem(int index) { return _playerItems[index]; }
-
-        public bool ExistItem(int index) { return _playerItems.ContainsKey(index); }
         
         /// <summary>
         /// Drops an item and undo its function
@@ -86,8 +70,8 @@ namespace LSB.Components.Items {
         /// <param name="index">The key used to identify the item</param>
         public void DropItem(int index = 0) {
             if (_playerItems.Count == 1) {
-                _playerItems.Last().Value.UndoItem();
-                _playerItems.Remove(_playerItems.Last().Key);
+                _playerItems.Last().UndoItem();
+                _playerItems.Remove(_playerItems.Last());
                 return;
             }
             
@@ -103,7 +87,7 @@ namespace LSB.Components.Items {
             ItemMenuGrid.gameObject.transform.GetChild(index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
             ItemMenuGrid.gameObject.transform.GetChild(index).GetComponentInChildren<TextMeshProUGUI>().fontStyle =
                 FontStyles.Strikethrough;
-            _playerItems.Remove(index);
+            _playerItems.RemoveAt(index);
         }
 
     }

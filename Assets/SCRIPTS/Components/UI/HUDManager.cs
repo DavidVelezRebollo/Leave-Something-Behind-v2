@@ -132,11 +132,11 @@ namespace LSB.Components.UI {
 			ItemContainers.SetActive(false);
 			ItemGrid.SetActive(false);
 			
-			if (_backPack.ItemsRemaining() > 1) {
+			if (_backPack.ItemsRemaining() >= 2) {
 				do {
 					_rightItem = Random.Range(0, _backPack.ItemsRemaining());
 					_leftItem = Random.Range(0, _backPack.ItemsRemaining());
-				} while (_rightItem == _leftItem || !_backPack.ExistItem(_rightItem) || !_backPack.ExistItem(_leftItem));
+				} while (_rightItem == _leftItem);
 				
 				Item leftItem = _backPack.GetItem(_leftItem);
 				Item rightItem = _backPack.GetItem(_rightItem);

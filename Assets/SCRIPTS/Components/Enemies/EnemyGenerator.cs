@@ -110,19 +110,19 @@ namespace LSB.Components.Enemies {
 				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
 				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 1f));
 			} else if (_hud.GetMinutes() <= 7f && _hud.GetMinutes() > 5f) {
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 2, 0.3f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5, 2f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 6, 0.3f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
 			} else if (_hud.GetMinutes() <= 5f && _hud.GetMinutes() > 3f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 5, 0.2f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 13, 0.2f));
 				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 1.5f));
 			} else if (_hud.GetMinutes() <= 3f && _hud.GetMinutes() > 1f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 4, 0.5f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 2, 1f));
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 0.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 7, 0.5f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5, 1f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.5f));
 			} else if (_hud.GetMinutes() <= 1f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 15, 0.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10, 0.5f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 1f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.5f));
 			}
 			
 			_generationDelta = EnemyGenerationCooldown;

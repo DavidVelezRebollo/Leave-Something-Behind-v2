@@ -51,6 +51,7 @@ namespace LSB.Components.Core {
 		private bool _corrupted;
 		private bool _generating;
 		private int _lastSecond;
+		private int _timeBetweenCorruption;
 		private List<Vector3Int> _expansionTiles;
 		private HUDManager _hudTimer;
 
@@ -68,6 +69,7 @@ namespace LSB.Components.Core {
 
 			_currentGridHeightDown = _currentGridHeightUp = MapHeight / 2;
 			_currentGridWidthLeft = _currentGridWidthRight = MapWidth / 2;
+			_timeBetweenCorruption = 59;
 			_expansionTiles = new List<Vector3Int>();
 
 			generateCellMap();
@@ -88,7 +90,13 @@ namespace LSB.Components.Core {
 			if (_generating == false)
 				StartCoroutine(CorruptTerrain());
 
-			if (_hudTimer.GetSeconds() % 59 != 0 || _hudTimer.GetMinutes() > 9f || _corrupted || _hudTimer.GetSeconds() == 0) return;
+			if (_hudTimer.GetMinutes() <= 5 && _hudTimer.GetMinutes() > 2)
+				_timeBetweenCorruption = 30;
+
+			if (_hudTimer.GetMinutes() <= 2)
+				_timeBetweenCorruption = 10;
+
+			if (_hudTimer.GetSeconds() % _timeBetweenCorruption != 0 || _hudTimer.GetMinutes() > 9f || _corrupted || _hudTimer.GetSeconds() == 0) return;
 			
 			NewExpansionTile();
 			_corrupted = true;
@@ -387,9 +395,9 @@ namespace LSB.Components.Core {
 			int y;
 
 			do {
-				x = Random.Range(-4, 5);
-				y = Random.Range(-4, 5);
-			} while ((x > -2 && x < 2) || (y > -2 && y < 2));
+				x = Random.Range(-5, 6);
+				y = Random.Range(-5, 6);
+			} while ((x > -3 && x < 3) || (y > -3 && y < 3));
 
 			_expansionTiles.Add(new Vector3Int(_playerCellPosition.x + x, _playerCellPosition.y + y, 0));
 		}

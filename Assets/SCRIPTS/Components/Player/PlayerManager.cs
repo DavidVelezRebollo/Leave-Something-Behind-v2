@@ -108,8 +108,8 @@ namespace LSB.Components.Player {
 			if (!other.CompareTag("Corruption")) return;
 			
 			if (_immuneDelta <= 0) {
-				TakeDamage(1f);
-				_immuneDelta = 0.2f;
+				TakeDamage(_gameManager.GetCorruptionDamage());
+				_immuneDelta = 0.1f;
 			}
 
 			_immuneDelta -= Time.deltaTime;

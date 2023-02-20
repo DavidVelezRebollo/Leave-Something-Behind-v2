@@ -31,7 +31,7 @@ namespace LSB.Classes.Enemies {
         private bool _isStopped; // Checks if the enemy is attacking
         private bool _dying; // Checks if the enemy is dead
 
-        private const float _DROP_PROBABILITY = 0.05f; // Probability for drop a potion
+        private const float _DROP_PROBABILITY = 0.03f; // Probability for drop a potion
 
         #endregion
 
@@ -209,18 +209,13 @@ namespace LSB.Classes.Enemies {
 
             float p = Random.Range(0f, 1f);
 
-            if(p <= _DROP_PROBABILITY) {
-                float r = Random.Range(0f, 1f);
-
-                Object.Instantiate(r <= 0.5f ? _potionPrefab : _coinPrefab, _transform.position, Quaternion.identity);
+            if(p < _DROP_PROBABILITY) {
+                Object.Instantiate(_potionPrefab, _transform.position, Quaternion.identity);
             }
 
             _dying = true;
         }
 
         #endregion
-
-
-        
     }
 }
