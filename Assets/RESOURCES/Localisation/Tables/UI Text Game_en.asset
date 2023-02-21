@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: LEAVE ALL BEHIND
     m_Metadata:
       m_Items: []
+  - m_Id: 4303561870700544
+    m_Localized: LEAVE SOMETHING BEHIND
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

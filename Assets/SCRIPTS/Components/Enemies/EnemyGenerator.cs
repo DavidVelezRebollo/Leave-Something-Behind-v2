@@ -67,8 +67,14 @@ namespace LSB.Components.Enemies {
 
 			while (i < numEnemies && follow) {
 				Vector3 playerPosition = _playerTransform.position;
-				x = playerPosition.x + (Random.value < 0.5f ? -8f : 8f);
-				y = playerPosition.y + Random.Range(-8f, 8f);
+				if(Random.value < 0.5f) {
+					x = playerPosition.x + Random.Range(-7f, 7f);
+					y = playerPosition.y + (Random.value < 0.5f ? -7f : 7f);
+				} else {
+					x = playerPosition.x + (Random.value < 0.5f ? -7f : 7f);
+					y = playerPosition.y + Random.Range(-7f, 7f);
+				}
+				
 				_generating = true;
 
 				do {
@@ -105,24 +111,24 @@ namespace LSB.Components.Enemies {
 
 		private void handleWaves() {
 			if (_hud.GetMinutes() > 9f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10, 0.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 20, 0.2f));
 			} else if (_hud.GetMinutes() <= 9f && _hud.GetMinutes() > 7f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.5f));
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 5, 1f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.3f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 7, 0.8f));
 			} else if (_hud.GetMinutes() <= 7f && _hud.GetMinutes() > 5f) {
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 6, 0.3f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.3f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 0.7f));
 			} else if (_hud.GetMinutes() <= 5f && _hud.GetMinutes() > 3f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 13, 0.2f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 1.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.2f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 10, 1f));
 			} else if (_hud.GetMinutes() <= 3f && _hud.GetMinutes() > 1f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 7, 0.5f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 5, 1f));
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10, 0.3f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 7, 0.8f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 12, 0.3f));
 			} else if (_hud.GetMinutes() <= 1f) {
-				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 10, 0.5f));
-				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 1f));
-				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.5f));
+				StartCoroutine(generateEnemies(OrcPrefab.gameObject, typeof(Orc), 15, 0.3f));
+				StartCoroutine(generateEnemies(WizardPrefab.gameObject, typeof(Wizard), 8, 0.8f));
+				StartCoroutine(generateEnemies(GoblinPrefab.gameObject, typeof(Goblin), 10, 0.4f));
 			}
 			
 			_generationDelta = EnemyGenerationCooldown;

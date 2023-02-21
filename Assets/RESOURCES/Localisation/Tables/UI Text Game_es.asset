@@ -43,7 +43,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2960539123871744
-    m_Localized: "DEJARLO TODO ATR\xC1S"
+    m_Localized: DEJARLO TODO ATRAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4303561870700544
+    m_Localized: DEJA ALGO ATRAS
     m_Metadata:
       m_Items: []
   references:

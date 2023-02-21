@@ -147,7 +147,7 @@ namespace LSB.Classes.Enemies {
         /// </summary>
         public void Move() {
             if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
-            if (Vector3.Distance(_player.position, _transform.position) >= 15) {
+            if (Vector3.Distance(_player.position, _transform.position) >= 10) {
                 die(_gameObject);
                 return;
             }
