@@ -51,7 +51,7 @@ namespace LSB.Components.Enemies {
 		}
 
 		private void Update() {
-			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+			if (_gameManager.GamePaused()) return;
 			
 			_generationDelta -= Time.deltaTime;
 			if (_generationDelta <= 0) _canGenerate = true;

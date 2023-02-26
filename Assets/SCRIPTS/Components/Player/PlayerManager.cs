@@ -52,7 +52,7 @@ namespace LSB.Components.Player {
 		}
 
 		private void Update() {
-			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+			if (_gameManager.GamePaused()) return;
 			if (_initialMaxHp < CurrentStats.MaxHp || _initialMaxHp > CurrentStats.MaxHp) {
 				_currentHp *= CurrentStats.MaxHp / _initialMaxHp;
 				OnHpChange?.Invoke();
@@ -64,7 +64,7 @@ namespace LSB.Components.Player {
 		}
 
 		private void FixedUpdate() {
-			if (_gameManager.GameEnded() || _gameManager.GamePaused()) return;
+			if (_gameManager.GamePaused()) return;
 			_movement.Move(CurrentStats.Speed);
 		}
 

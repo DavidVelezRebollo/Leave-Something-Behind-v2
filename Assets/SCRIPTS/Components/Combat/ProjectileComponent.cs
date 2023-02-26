@@ -22,7 +22,7 @@ namespace LSB.Components.Combat {
 		}
 
 		protected virtual void Update() {
-			if (GameManager.GamePaused() || GameManager.GameEnded()) {
+			if (GameManager.GamePaused()) {
 				Rb.velocity = Vector2.zero;
 				return;
 			}

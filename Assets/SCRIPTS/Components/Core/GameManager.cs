@@ -94,8 +94,6 @@ namespace LSB.Components.Core {
 			_language = PlayerPrefs.HasKey("LocalKey") ? (Language) PlayerPrefs.GetInt("LocalKey") : Language.Spanish;
 		}
 
-		public bool GameEnded() { return _gameState == GameState.Lost || _gameState == GameState.Won; }
-
-		public bool GamePaused() { return _gameState == GameState.Paused; }
+		public bool GamePaused() { return _gameState != GameState.Running; }
 	}
 }

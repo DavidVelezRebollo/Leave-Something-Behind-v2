@@ -14,78 +14,60 @@ using UnityEngine.SceneManagement;
 
 namespace LSB.Components.UI {
 	public class HUDManager : MonoBehaviour {
-		[Header("UI Fields")] 
-		[SerializeField] private GameObject Tutorial;
+        #region Serialize Fields
+
+        [Header("UI Fields")] 
 		[SerializeField] private GameObject InitialTutorial;
-		[SerializeField] private GameObject ItemsPanel;
-		[SerializeField] private GameObject Settings;
 		[SerializeField] private GameObject ItemContainers;
 		[SerializeField] private GameObject ItemGrid;
 		[SerializeField] private GameObject ItemPanelGrid;
-		[SerializeField] private TextMeshProUGUI TimerText;
+		[SerializeField] private GameObject TimerContainer;
 		[SerializeField] private GameObject Victory;
 		[SerializeField] private GameObject Defeat;
+		[SerializeField] private GameObject ObjectExplanationPanel;
+		[SerializeField] private TextMeshProUGUI TimerText;
+		[Space(15)]
 		[Header("HP & Energy UI Fields")]
 		[SerializeField] private Image HpBar;
 		[SerializeField] private TextMeshProUGUI HpText;
 		[SerializeField] private Image EnergyBar;
 		[Space(15)]
-		[Header("Pause Menu UI Fields")]
-		[SerializeField] private GameObject PauseMenu;
-		[SerializeField] private TextMeshProUGUI MaxHpText;
-		[SerializeField] private TextMeshProUGUI AttackText;
-		[SerializeField] private TextMeshProUGUI SpeedText;
-		[SerializeField] private TextMeshProUGUI AttackSpeedText;
-		[Space(15)]
-		[Header("Item Selector Fields")]
-		[SerializeField] private GameObject ItemSelectorPanel;
-		[SerializeField] private Image LeftItemImage;
-		[SerializeField] private TextMeshProUGUI LeftItemName;
-		[SerializeField] private TextMeshProUGUI LeftItemDescription;
-		[Space(5)]
-		[SerializeField] private Image RightItemImage;
-		[SerializeField] private TextMeshProUGUI RightItemName;
-		[SerializeField] private TextMeshProUGUI RightItemDescription;
-		[Space(1)]
-		[SerializeField] private TextMeshProUGUI TechnicalDescription;
-		[SerializeField] private Button SelectItemButton;
+		[Header("UI Scripts")]
+		[SerializeField] private ItemSelector ItemSelector;
+		[SerializeField] private Pause Pause;
 
-		[SerializeField] private GameObject ObjectExplanationPanel;
+        #endregion
 
-		private GameManager _gameManager;
+        #region Private Fields
+
+        private GameManager _gameManager;
 		private PlayerManager _player;
 		private BackPack _backPack;
 		private InputHandler _input;
 
 		private Timer _timer;
-		private int _rightItem;
-		private int _leftItem;
-		private int _itemSelected;
-		private bool _inItemSelection;
-		private bool _itemDrop;
 		private bool _timerBlink;
 		private bool _spanish;
 
-		private void Start() {
-			
+        #endregion
+
+        #region Unity Events
+
+        private void Start() {
 			_gameManager = GameManager.Instance;
 			_player = FindObjectOfType<PlayerManager>();
 			_backPack = BackPack.Instance;
 			_input = InputHandler.Instance;
+			_timer = new Timer(12);
 
-			if (!PlayerPrefs.HasKey("Tutorial")) {
+			if (!PlayerPrefs.HasKey("Tutorial") || PlayerPrefs.GetInt("Tutorial") == 1) {
 				_gameManager.SetGameState(GameState.Paused);
 				InitialTutorial.SetActive(true);
-			} else if (PlayerPrefs.GetInt("Tutorial") == 1) {
-				_gameManager.SetGameState(GameState.Paused);
-				InitialTutorial.SetActive(true);
-			}
-			else {
+			} else {
 				_gameManager.SetGameState(GameState.Running);
 				InitialTutorial.SetActive(false);
 			}
 
-			_timer = new Timer(12);
 			_player.OnHpChange += updateHpUI;
 			_backPack.OnItemInitialize += () => {
 				HpText.text = Mathf.FloorToInt(_player.GetMaxHp()).ToString();
@@ -94,128 +76,100 @@ namespace LSB.Components.UI {
 		}
 
 		private void Update() {
-			if (_gameManager.GetGameState() == GameState.Lost) { handleDefeat(); return; }
-			if (_gameManager.GetGameState() == GameState.Won) { handleVictory(); return; }
+			if (handleEndStates()) return;
 
-			if (_input.OnPauseButton() && !_inItemSelection) handlePauseMenu();
-			if (_gameManager.GamePaused() || _gameManager.GameEnded()) return;
-			
+			if (_input.OnPauseButton() && !ItemSelector.InItemSelection()) {
+				Pause.HandlePauseMenu();
+				TimerContainer.SetActive(!_gameManager.GamePaused());
+				ShowUiItems(!_gameManager.GamePaused());
+			}
+			if (_gameManager.GamePaused()) return;
+
 			_timer.UpdateTimer();
-			
+
 			handleTimerText();
 
 			EnergyBar.fillAmount = _player.GetCurrentEnergyAmount() / _player.GetTotalEnergy();
-			
+
 			if (_timer.GetMinuteCount() <= 0 && _timer.GetSecondCount() <= 0) {
 				_gameManager.SetGameState(GameState.Won);
 				return;
 			}
 
-			if (_timer.GetMinuteCount() % 2 != 0 && _timer.GetSecondCount() != 0) _itemDrop = false;
+			if (_timer.GetMinuteCount() % 1 != 0 && _timer.GetSecondCount() != 0) ItemSelector.SetItemDrop(false);
 
-			if (_timer.GetMinuteCount() % 2 != 0 || _timer.GetSecondCount() != 0
-			    || _timer.GetMinuteCount() ==  _timer.GetTotalMinutes() || _itemDrop) return;
+			if (_timer.GetMinuteCount() % 1 != 0 || _timer.GetSecondCount() != 0 || _timer.GetMinuteCount() == _timer.GetTotalMinutes() 
+				|| ItemSelector.ItemDrop()) return;
 
-			if (_backPack.ItemsRemaining() != 6 && _backPack.ItemsRemaining() > 0) DisplayItemSelector();
-			else {
+			if (_backPack.ItemsRemaining() != 6 && _backPack.ItemsRemaining() > 0) {
+				ShowUiItems(false);
+				ItemSelector.DisplayItemSelector();
+			} else {
 				_gameManager.SetGameState(GameState.Paused);
 				ObjectExplanationPanel.SetActive(true);
 			}
 		}
 
-		public void DisplayItemSelector() {
-			_gameManager.SetGameState(GameState.Paused);
-			_inItemSelection = true;
-			_spanish = _gameManager.GetCurrentLanguage() == Language.Spanish;
-			
-			ItemSelectorPanel.SetActive(true);
-			ItemContainers.SetActive(false);
-			ItemGrid.SetActive(false);
-			
-			if (_backPack.ItemsRemaining() >= 2) {
-				do {
-					_rightItem = Random.Range(0, _backPack.ItemsRemaining());
-					_leftItem = Random.Range(0, _backPack.ItemsRemaining());
-				} while (_rightItem == _leftItem);
-				
-				Item leftItem = _backPack.GetItem(_leftItem);
-				Item rightItem = _backPack.GetItem(_rightItem);
+        #endregion
 
-				// LEFT ITEM
-				LeftItemImage.sprite = leftItem.GetSprite();
-				LeftItemName.text = _spanish ? leftItem.GetName() : leftItem.GetEnglishName();
-				LeftItemDescription.text = _spanish ? leftItem.GetDescription() : leftItem.GetEnglishDescription();
-				
-				// RIGHT ITEM
-				RightItemImage.sprite = rightItem.GetSprite();
-				RightItemName.text = _spanish ? rightItem.GetName() : rightItem.GetEnglishName();
-				RightItemDescription.text = _spanish ? rightItem.GetDescription() : rightItem.GetEnglishDescription();
+        #region Getters
 
-				SelectItemButton.interactable = false;
-				SelectItemButton.gameObject.GetComponent<Image>().color = new Color(0.22f, 0.22f, 0.22f);
-			}
-			else {
-				_backPack.DropItem();
-			}
-
-			_itemDrop = true;
-		}
-
-		public void OnLeftItemSelect() {
-			Item leftItem = _backPack.GetItem(_leftItem);
-			TechnicalDescription.text = _spanish ? leftItem.GetTechnicalDescription() : leftItem.GetEnglishTechnicalDescription();
-			_itemSelected = _leftItem;
-			SelectItemButton.interactable = true;
-			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
-		}
-
-		public void OnRightItemSelect() {
-			Item rightItem = _backPack.GetItem(_rightItem);
-			TechnicalDescription.text = _spanish ? rightItem.GetTechnicalDescription() : rightItem.GetEnglishTechnicalDescription();
-			_itemSelected = _rightItem;
-			SelectItemButton.interactable = true;
-			SelectItemButton.gameObject.GetComponent<Image>().color = Color.white;
-		}
-
-		public void OnItemSelect()
-        {
-            if (_itemSelected == _leftItem)
-            {
-				_backPack.DropItem(_leftItem);
-				_gameManager.SetGameState(GameState.Running);
-				ItemSelectorPanel.SetActive(false);
-				ItemContainers.SetActive(true);
-				ItemGrid.SetActive(true);
-				_itemSelected = -1;
-			}
-			else if(_itemSelected == _rightItem)
-            {
-				_backPack.DropItem(_rightItem);
-				_gameManager.SetGameState(GameState.Running);
-				ItemSelectorPanel.SetActive(false);
-				ItemContainers.SetActive(true);
-				ItemGrid.SetActive(true);
-				_itemSelected = -1;
-			}
-
-			_inItemSelection = false;
-        }
-
-		public float GetMinutes() {
+		/// <summary>
+		/// Gets the current minutes of the timer
+		/// </summary>
+		/// <returns>The current minutes of the timer</returns>
+        public float GetMinutes() {
 			return _timer.GetMinuteCount();
 		}
 
+		/// <summary>
+		/// Gets the current seconds of the timer
+		/// </summary>
+		/// <returns>The current seconds of the timer</returns>
 		public int GetSeconds() {
 			return _timer.GetSecondCount();
 		}
 
+		#endregion
+
+		#region Public Methods
+
+		public void ShowTutorialNextTime(bool show) {
+			PlayerPrefs.SetInt("Tutorial", !show ? 1 : 0);
+			PlayButtonSound();
+		}
+
+		public void OnContinueButton() {
+			_gameManager.SetGameState(GameState.Running);
+
+			Pause.ShowPause(false);
+			ShowUiItems(true);
+			TimerText.enabled = true;
+		}
+
+		public void OnExitButton() {
+			GameManager.Instance.SetGameState(GameState.Menu);
+			StartCoroutine(loadSceneAsync());
+		}
+
+		public void PlayButtonSound() { SoundManager.Instance.PlayOneShot("Button"); }
+
+		public void ShowUiItems(bool show) {
+			ItemContainers.SetActive(show);
+			ItemGrid.SetActive(show);
+		}
+
+		#endregion
+
+		#region Auxiliar Methods
+
 		private void updateHpUI() {
 			float playerMaxHp = _player.GetMaxHp();
 			float playerCurrentHp = _player.GetCurrentHp();
-			
+
 			HpText.text = Mathf.FloorToInt(playerCurrentHp).ToString();
 			HpBar.fillAmount = playerCurrentHp / playerMaxHp;
-			
+
 			switch (HpBar.fillAmount) {
 				case <= 0.75f and > 0.5f:
 					HpBar.color = Color.yellow;
@@ -232,50 +186,37 @@ namespace LSB.Components.UI {
 			}
 		}
 
-		private void handlePauseMenu() {
-			_gameManager.SetGameState(_gameManager.GamePaused() ? GameState.Running : GameState.Paused);
-			
-			PauseMenu.SetActive(_gameManager.GamePaused());
-			ItemContainers.SetActive(!_gameManager.GamePaused());
-			ItemGrid.SetActive(!_gameManager.GamePaused());
-			TimerText.enabled = !TimerText.IsActive();
-			
-			ItemsPanel.SetActive(false);
-			Settings.SetActive(false);
-			Tutorial.SetActive(false);
-
-			AttackSpeedText.text = _player.GetAttackSpeed().ToString("0.00");
-			AttackText.text = _player.GetDamage().ToString("0");
-			SpeedText.text = _player.GetSpeed().ToString("0.0");
-			MaxHpText.text = _player.GetMaxHp().ToString("0");
-		}
-
-		public void ShowTutorialNextTime(bool show) {
-			PlayerPrefs.SetInt("Tutorial", !show ? 1 : 0);
-			PlayButtonSound();
-		}
-
-		public void OnContinueButton() {
-			_gameManager.SetGameState(GameState.Running);
-			
-			PauseMenu.SetActive(false);
-			ItemContainers.SetActive(true);
-			ItemGrid.SetActive(true);
-			TimerText.enabled = true;
-		}
-
-		public void OnExitButton()
-		{
-			GameManager.Instance.SetGameState(GameState.Menu);
-			StartCoroutine(loadSceneAsync());
-		}
-
-		private IEnumerator loadSceneAsync() {
-			AsyncOperation loadScene = SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
-
-			while (!loadScene.isDone) {
-				yield return null;
+		private void handleTimerText() {
+			if (_timer.GetMinuteCount() > 9)
+				TimerText.color = new Color(0.82f, 0.94f, 0.93f);
+			else if (_timer.GetMinuteCount() <= 9 && _timer.GetMinuteCount() > 5) {
+				TimerText.color = new Color(0.78f, 0.65f, 0.91f);
+			} else if (_timer.GetMinuteCount() <= 5 && _timer.GetMinuteCount() > 1) {
+				TimerText.color = new Color(0.89f, 0.5f, 0.84f);
+			} else if (_timer.GetMinuteCount() <= 1 && !_timerBlink) {
+				_timerBlink = true;
+				StartCoroutine(timerBlink());
 			}
+
+			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
+		}
+
+		private bool handleEndStates() {
+			bool end = false;
+
+			if (_gameManager.GetGameState() == GameState.Lost) {
+				_gameManager.SetGameState(GameState.Paused);
+				Victory.SetActive(true);
+				end = true;
+			}
+
+			if (_gameManager.GetGameState() == GameState.Won) {
+				_gameManager.SetGameState(GameState.Paused);
+				Defeat.SetActive(true);
+				end = true;
+			}
+
+			return end;
 		}
 
 		private void initializeItemPanel() {
@@ -289,30 +230,12 @@ namespace LSB.Components.UI {
 			}
 		}
 
-		private void handleVictory()
-		{
-			_gameManager.SetGameState(GameState.Paused);
-			Victory.SetActive(true);
-		}
+		private IEnumerator loadSceneAsync() {
+			AsyncOperation loadScene = SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
 
-		private void handleDefeat()
-		{
-			_gameManager.SetGameState(GameState.Paused);
-			Defeat.SetActive(true);
-		}
-
-		private void handleTimerText() {
-			if (_timer.GetMinuteCount() > 9) TimerText.color = new Color(0.82f, 0.94f, 0.93f);
-			else if (_timer.GetMinuteCount() <= 9 && _timer.GetMinuteCount() > 5) {
-				TimerText.color = new Color(0.78f, 0.65f, 0.91f);
-			} else if (_timer.GetMinuteCount() <= 5 && _timer.GetMinuteCount() > 1) {
-				TimerText.color = new Color(0.89f, 0.5f, 0.84f);
-			} else if (_timer.GetMinuteCount() <= 1 && !_timerBlink) {
-				_timerBlink = true;
-				StartCoroutine(timerBlink());
+			while (!loadScene.isDone) {
+				yield return null;
 			}
-			
-			TimerText.text = $"{_timer.GetMinuteCount():00}:{_timer.GetSecondCount():00}";
 		}
 
 		private IEnumerator timerBlink() {
@@ -323,7 +246,6 @@ namespace LSB.Components.UI {
 			_timerBlink = false;
 		}
 
-		public void PlayButtonSound() { SoundManager.Instance.PlayOneShot("Button"); }
+		#endregion
 	}
-	
 }

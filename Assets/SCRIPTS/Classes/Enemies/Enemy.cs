@@ -153,7 +153,7 @@ namespace LSB.Classes.Enemies {
         /// Moves the enemy. Depends on the type of movement attached to the enemy
         /// </summary>
         public void Move() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
+            if (_gameManager.GamePaused() || _dying) return;
             if (Vector3.Distance(_player.position, _transform.position) >= 10) {
                 die(_gameObject, false);
                 return;
@@ -167,7 +167,7 @@ namespace LSB.Classes.Enemies {
         /// Attacks the player. Depends on the type of attack attached to the enemy
         /// </summary>
         public void Attack() {
-            if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
+            if (_gameManager.GamePaused() || _dying) return;
             // Reduce the cooldown timer.
             _cooldownDelta -= Time.deltaTime;
             if(_cooldownDelta <= 0.8f && _cooldownDelta >= 0.78f) _animation.AttackAnimation();
