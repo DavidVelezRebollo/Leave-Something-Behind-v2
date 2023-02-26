@@ -1,6 +1,7 @@
 using System;
 using LSB.Classes.Enemies;
 using LSB.Classes.State;
+using LSB.Components.Audio;
 using LSB.Components.Player;
 using LSB.Interfaces;
 using LSB.Shared;
@@ -33,6 +34,7 @@ namespace LSB.Components.Enemies {
 			_enemy.SetCurrentState(new Chasing(_enemy, transform, StopDistance, GetComponent<Rigidbody2D>()));
 
 			_attack.SetDamage(CurrentStats.Damage);
+			_enemy.OnEnemyDie += (o => { if (_enemy.MakeDeadSound()) SoundManager.Instance.PlayOneShot("WizardDie"); });
 		}
 		
 		public bool Active {

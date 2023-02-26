@@ -382,6 +382,8 @@ namespace LSB.Components.Core {
 			
 			FloorTilemap.SetTile(deletePos, null);
 			DecorationTilemap.SetTile(deletePos, null);
+			CorruptionTilemap.SetTile(deletePos, null);
+			CorruptionDecorationTilemap.SetTile(deletePos, null);
 		}
 
 		private void spawnPlayer() {

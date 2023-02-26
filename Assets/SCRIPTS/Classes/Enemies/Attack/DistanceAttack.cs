@@ -1,3 +1,4 @@
+using LSB.Components.Audio;
 using LSB.Components.Combat;
 using LSB.Interfaces;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace LSB.Classes.Enemies {
 
         [Tooltip("Projectile that will be shot")]
         [SerializeField] private GameObject ProjectilePrefab;
+        [Tooltip("Attack sound name")]
+        [SerializeField] private string AttackSound;
 
         #endregion
 
@@ -53,6 +56,7 @@ namespace LSB.Classes.Enemies {
             GameObject projectile = Instantiate(ProjectilePrefab, position, rotation);
             float speed = projectile.GetComponent<ProjectileComponent>().GetSpeed();
             projectile.GetComponent<Rigidbody2D>().velocity = dir.normalized * speed;
+            SoundManager.Instance.PlayOneShot(AttackSound);
         }
 
         #endregion

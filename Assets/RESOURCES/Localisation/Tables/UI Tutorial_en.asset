@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 2919957781442560
-    m_Localized: "Press here to continue \u2192"
+    m_Localized: "Press here to skip or continue \u2192"
     m_Metadata:
       m_Items: []
   - m_Id: 2920288997240832

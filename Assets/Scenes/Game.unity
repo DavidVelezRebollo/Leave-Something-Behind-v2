@@ -2120,7 +2120,7 @@ GameObject:
   - component: {fileID: 137353747}
   - component: {fileID: 137353746}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5070,6 +5070,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 229646688}
+        m_TargetAssemblyTypeName: LSB.Components.UI.HUDManager, Project.Components.UI
+        m_MethodName: OnItemPanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11639,8 +11651,27 @@ MonoBehaviour:
   - {fileID: 8168628906027374245, guid: b40219393ad667042a3bf1012b7ce60d, type: 3}
   - {fileID: 5281264619930722995, guid: 49d0440b84607ec4e924e4e037bb27de, type: 3}
   - {fileID: 6736183350168690814, guid: 1f92a6d03284e0c40855d0a199af3354, type: 3}
-  ItemContainer: {fileID: 82591791}
-  ItemMenuGrid: {fileID: 1616650325}
+  ItemIcons:
+  - {fileID: 1072774805}
+  - {fileID: 985175780}
+  - {fileID: 1849238653}
+  - {fileID: 1565591631}
+  - {fileID: 1405548332}
+  - {fileID: 1979996710}
+  ItemMenuIcons:
+  - {fileID: 1022099404}
+  - {fileID: 137353746}
+  - {fileID: 1231421528}
+  - {fileID: 1887998120}
+  - {fileID: 1518008787}
+  - {fileID: 1868619701}
+  ItemMenuTexts:
+  - {fileID: 1607425300}
+  - {fileID: 1899106514}
+  - {fileID: 2103419645}
+  - {fileID: 2108770994}
+  - {fileID: 856569158}
+  - {fileID: 1221283925}
 --- !u!4 &848179208
 Transform:
   m_ObjectHideFlags: 0
@@ -11957,7 +11988,7 @@ GameObject:
   - component: {fileID: 856569159}
   - component: {fileID: 856569158}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13397,7 +13428,7 @@ GameObject:
   - component: {fileID: 1022099405}
   - component: {fileID: 1022099404}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16959,7 +16990,7 @@ GameObject:
   - component: {fileID: 1221283926}
   - component: {fileID: 1221283925}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17432,7 +17463,7 @@ GameObject:
   - component: {fileID: 1231421529}
   - component: {fileID: 1231421528}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17555,7 +17586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pulsa aqu\xED para adelantar / saltar \u2192"
+  m_text: "Pulsa aqu\xED para adelantar o saltar \u2192"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d6bb833742fa1b4b9bd7d4e24879153, type: 2}
   m_sharedMaterial: {fileID: 7931575467066044027, guid: 4d6bb833742fa1b4b9bd7d4e24879153, type: 2}
@@ -22077,7 +22108,7 @@ GameObject:
   - component: {fileID: 1518008788}
   - component: {fileID: 1518008787}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23343,7 +23374,7 @@ GameObject:
   - component: {fileID: 1607425301}
   - component: {fileID: 1607425300}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25866,7 +25897,7 @@ GameObject:
   - component: {fileID: 1868619702}
   - component: {fileID: 1868619701}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26269,7 +26300,7 @@ GameObject:
   - component: {fileID: 1887998121}
   - component: {fileID: 1887998120}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Item_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26386,7 +26417,7 @@ GameObject:
   - component: {fileID: 1899106515}
   - component: {fileID: 1899106514}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29709,7 +29740,7 @@ GameObject:
   - component: {fileID: 2103419646}
   - component: {fileID: 2103419645}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30133,7 +30164,7 @@ GameObject:
   - component: {fileID: 2108770995}
   - component: {fileID: 2108770994}
   m_Layer: 5
-  m_Name: TechnicalDescription
+  m_Name: TechnicalDescription_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1375048728576
-    m_Localized: Select an item to see its effect.
+    m_Localized: Select an item to see the current applied effect.
     m_Metadata:
       m_Items: []
   - m_Id: 2374673006592

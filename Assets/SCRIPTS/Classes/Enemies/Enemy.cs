@@ -30,6 +30,7 @@ namespace LSB.Classes.Enemies {
         private float _cooldownDelta; // Used on the shoot cooldown
         private bool _isStopped; // Checks if the enemy is attacking
         private bool _dying; // Checks if the enemy is dead
+        private bool _dieSound; // Checks if the enemy is going to do the die sound
 
         private const float _DROP_PROBABILITY = 0.03f; // Probability for drop a potion
 
@@ -138,6 +139,12 @@ namespace LSB.Classes.Enemies {
         /// <returns>True if its attacking. False otherwise</returns>
         public bool IsStopped() { return _isStopped; }
 
+        /// <summary>
+        /// Checks if the enemy is going to do the die sound
+        /// </summary>
+        /// <returns>True if it will do it. False otherwise</returns>
+        public bool MakeDeadSound() { return _dieSound; }
+
         #endregion
 
         #region Methods
@@ -148,7 +155,7 @@ namespace LSB.Classes.Enemies {
         public void Move() {
             if (_gameManager.GameEnded() || _gameManager.GamePaused() || _dying) return;
             if (Vector3.Distance(_player.position, _transform.position) >= 10) {
-                die(_gameObject);
+                die(_gameObject, false);
                 return;
             }
             
@@ -195,7 +202,7 @@ namespace LSB.Classes.Enemies {
             _currentHp -= amount;
 
             if (_currentHp <= 0) {
-                die(_gameObject);
+                die(_gameObject, true);
             }
         }
 
@@ -203,7 +210,8 @@ namespace LSB.Classes.Enemies {
         /// Handles what to do when the enemy dies.
         /// </summary>
         /// <param name="enemy">The enemy GameObject</param>
-        private void die(GameObject enemy) {
+        private void die(GameObject enemy, bool dieSound) {
+            _dieSound = dieSound;
             OnEnemyDie?.Invoke(enemy);
             _gameObject.GetComponentInChildren<BoxCollider2D>().enabled = false;
 

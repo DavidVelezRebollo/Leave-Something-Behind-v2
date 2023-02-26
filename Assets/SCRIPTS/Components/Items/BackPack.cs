@@ -22,8 +22,11 @@ namespace LSB.Components.Items {
 
         [Tooltip("Normal Items List")]
         [SerializeField] private List<Item> NormalItems;
-        [SerializeField] private GameObject ItemContainer;
-        [SerializeField] private GameObject ItemMenuGrid;
+        [Space(5)]
+        [Tooltip("UI Fields")]
+        [SerializeField] private List<Image> ItemIcons;
+        [SerializeField] private List<Image> ItemMenuIcons;
+        [SerializeField] private List<TextMeshProUGUI> ItemMenuTexts;
 
         public Action OnItemInitialize;
 
@@ -53,7 +56,7 @@ namespace LSB.Components.Items {
                 
                 _playerItems.Add(NormalItems[index]);
                 NormalItems[index].UseItem();
-                ItemContainer.gameObject.transform.GetChild(i).GetComponent<Image>().sprite = NormalItems[index].GetSprite();
+                ItemIcons[i].sprite = NormalItems[index].GetSprite();
                 NormalItems.RemoveAt(index);
             }
 
@@ -82,12 +85,16 @@ namespace LSB.Components.Items {
                 return;
             }
 
+            Debug.Log(index);
+
             itemToDrop.UndoItem();
-            ItemContainer.gameObject.transform.GetChild(index).GetComponent<Image>().color = Color.black;
-            ItemMenuGrid.gameObject.transform.GetChild(index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
-            ItemMenuGrid.gameObject.transform.GetChild(index).GetComponentInChildren<TextMeshProUGUI>().fontStyle =
-                FontStyles.Strikethrough;
-            _playerItems.RemoveAt(index);
+            ItemIcons[index].color = Color.black;
+            ItemMenuIcons[index].color = Color.black;
+            ItemMenuTexts[index].fontStyle = FontStyles.Strikethrough;
+            _playerItems.Remove(itemToDrop);
+            ItemIcons.RemoveAt(index);
+            ItemMenuIcons.RemoveAt(index);
+            ItemMenuTexts.RemoveAt(index);
         }
 
     }

@@ -42,7 +42,7 @@ namespace LSB.Components.Enemies {
 				gameObject, CurrentStats.MaxHp, CurrentStats.AttackCooldown, PotionPrefab, CoinPrefab);
 			
 			_attack = new MeleeAttack(transform, 0.2f, _enemy.GetAnimation());
-			_enemy.OnEnemyDie += (o => { SoundManager.Instance.Play("OrcDie"); });
+			_enemy.OnEnemyDie += (o => { if(_enemy.MakeDeadSound()) SoundManager.Instance.PlayOneShot("OrcDie"); });
 		}
 
 		private void Update() {
@@ -71,7 +71,7 @@ namespace LSB.Components.Enemies {
 			if (!collision.collider.CompareTag("Player") || _damageTimer > 0) return;
 			
 			_damageTimer = CurrentStats.AttackCooldown;
-			SoundManager.Instance.Play("OrcAttack");
+			SoundManager.Instance.PlayOneShot("OrcAttack");
 			collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
 			_enemy.GetAnimation().AttackAnimation();
 		}

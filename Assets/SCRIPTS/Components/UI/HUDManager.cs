@@ -72,7 +72,6 @@ namespace LSB.Components.UI {
 			_player = FindObjectOfType<PlayerManager>();
 			_backPack = BackPack.Instance;
 			_input = InputHandler.Instance;
-			_spanish = _gameManager.GetCurrentLanguage() == Language.Spanish;
 
 			if (!PlayerPrefs.HasKey("Tutorial")) {
 				_gameManager.SetGameState(GameState.Paused);
@@ -127,6 +126,7 @@ namespace LSB.Components.UI {
 		public void DisplayItemSelector() {
 			_gameManager.SetGameState(GameState.Paused);
 			_inItemSelection = true;
+			_spanish = _gameManager.GetCurrentLanguage() == Language.Spanish;
 			
 			ItemSelectorPanel.SetActive(true);
 			ItemContainers.SetActive(false);
@@ -279,12 +279,13 @@ namespace LSB.Components.UI {
 		}
 
 		private void initializeItemPanel() {
+			_spanish = _gameManager.GetCurrentLanguage() == Language.Spanish;
+
 			for (int i = 0; i < ItemPanelGrid.transform.childCount; i++) {
 				ItemPanelGrid.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
 					_backPack.GetItem(i).GetSprite();
 				ItemPanelGrid.transform.transform.GetChild(i).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text =
-					_gameManager.GetCurrentLanguage() == Language.Spanish ? 
-					_backPack.GetItem(i).GetTechnicalDescription() : _backPack.GetItem(i).GetEnglishTechnicalDescription();
+					_spanish ? _backPack.GetItem(i).GetTechnicalDescription() : _backPack.GetItem(i).GetEnglishTechnicalDescription();
 			}
 		}
 

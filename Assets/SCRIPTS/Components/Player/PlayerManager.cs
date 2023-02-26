@@ -80,17 +80,6 @@ namespace LSB.Components.Player {
 			
 		}
 
-		private void OnCollisionStay2D(Collision2D collision) {
-			if (!collision.collider.CompareTag("Corruption")) return;
-			
-			if (_immuneDelta <= 0) {
-				TakeDamage(_gameManager.GetCorruptionDamage());
-				_immuneDelta = 0.2f;
-			}
-
-			_immuneDelta -= Time.deltaTime;
-		}
-
 		private void OnTriggerEnter2D(Collider2D col) {
 			if (col.GetComponent<Potion>() != null) {
 				SoundManager.Instance.Play("Potion");

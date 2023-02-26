@@ -83,7 +83,7 @@ namespace LSB.Components.Menus {
             if (SoundManager.Instance.getMusicActive()) 
                 AudioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
             else 
-                AudioMixer.SetFloat("Music", 0); 
+                AudioMixer.SetFloat("Music", -50); 
             
             AudioMixer.SetFloat("SoundEffects", PlayerPrefs.GetFloat("SoundEffectsVolume"));
       

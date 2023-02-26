@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecoveryAmount: 10
+  DestroyTime: 20
 --- !u!50 &-9046851410719021324
 Rigidbody2D:
   serializedVersion: 4

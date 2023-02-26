@@ -1,5 +1,6 @@
 using System;
 using LSB.Classes.Enemies;
+using LSB.Components.Audio;
 using LSB.Components.Player;
 using LSB.Shared;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace LSB.Components.Enemies {
                 gameObject, CurrentStats.MaxHp, CurrentStats.AttackCooldown, Potion, Coin);
 
             _attack = new MeleeAttack(transform, 0.2f, _enemy.GetAnimation());
+            _enemy.OnEnemyDie += (o => { if (_enemy.MakeDeadSound()) SoundManager.Instance.PlayOneShot("GoblinDie"); });
         }
 
         private void Update() {
@@ -52,7 +54,7 @@ namespace LSB.Components.Enemies {
             if (!collision.collider.CompareTag("Player") || _damageTimer > 0) return;
 
             _damageTimer = CurrentStats.AttackCooldown;
-            // SoundManager.Instance.Play("GoblinAttack");
+            SoundManager.Instance.PlayOneShot("GoblinAttack");
             collision.collider.GetComponentInParent<PlayerManager>().TakeDamage(CurrentStats.Damage);
             _enemy.GetAnimation().AttackAnimation();
         }

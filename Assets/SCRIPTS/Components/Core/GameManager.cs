@@ -61,10 +61,17 @@ namespace LSB.Components.Core {
 			_gameState = state;
 			if (state == GameState.Paused || state == GameState.Menu) {
 				Cursor.SetCursor(HandleCursor, new Vector2(0, 0), CursorMode.Auto);
-				_soundManager.Play("MenuSong");
 				
 				if(state == GameState.Paused) _soundManager.Pause("ThemeSong");
 				else _soundManager.Stop("ThemeSong");
+
+				if (state == GameState.Menu) { 
+					_corruptionDamage = 2f;
+					_soundManager.SetMusicActive(true);
+					_soundManager.SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+				}
+
+                _soundManager.Play("MenuSong");
 			}
 			else if (state == GameState.Running) {
 				Cursor.SetCursor(TargetCursor, new Vector2(0, 0), CursorMode.Auto);

@@ -5157,7 +5157,35 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 42d8e547592904e4f9121746367eab89, type: 3}
     IsLoop: 0
     PlayOnAwake: 0
-    Volume: 0.8
+    Volume: 0.6
+    Source: {fileID: 0}
+  - ClipName: GoblinAttack
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 1ba8807e036f06a468617cd4692ebb92, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.2
+    Source: {fileID: 0}
+  - ClipName: GoblinDie
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 11e13a6ba069e5c4ca63223509797839, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.15
+    Source: {fileID: 0}
+  - ClipName: WizardAttack
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: cc964052366a9ba4b8a7fa117ae22ac6, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0
+    Source: {fileID: 0}
+  - ClipName: WizardDie
+    AudioType: 1
+    AudioClip: {fileID: 8300000, guid: 4ab3af3bb81d45a408379ede3ee64fb0, type: 3}
+    IsLoop: 0
+    PlayOnAwake: 0
+    Volume: 0.15
     Source: {fileID: 0}
 --- !u!114 &949132894
 MonoBehaviour:
